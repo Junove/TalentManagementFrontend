@@ -6,3 +6,7 @@
 .btn-dark.override-blue{
     background-color: rgb(18,28,78);
 }
+
+.btn-dark.override-red{
+    background-color: rgb(237,28,46);
+}

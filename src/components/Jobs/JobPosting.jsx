@@ -19,6 +19,8 @@ const JobPosting = (
                     <div className="col-3">
                     <Link to={`../apply`} className="btn btn-dark rounded-pill override-blue mt-2" 
                                 >Apply Here</Link>
+                    <Link to={`../jobpost`} className="btn btn-dark rounded-pill override-red mt-2" 
+                                >View Job</Link>
 
                     </div>
 
