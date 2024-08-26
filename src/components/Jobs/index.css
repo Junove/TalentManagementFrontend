@@ -1,4 +1,8 @@
-.list-group-item.override-search-light-grey{
-    background-color: rgb(220, 220, 220);
+.list-group-item.override-color{
+    border-color: rgb(237,28,46);
     border-style: solid;
+}
+
+.btn-dark.override-blue{
+    background-color: rgb(18,28,78);
 }

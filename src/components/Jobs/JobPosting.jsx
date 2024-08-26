@@ -1,11 +1,12 @@
 import {Link} from "react-router-dom";
+import './index.css'
 const JobPosting = (
 
 ) => {
     return (
 
         <div>
-            <li className = "list-group-item override-search-light-grey" >
+            <li className = "list-group-item rounded override-color" >
                 <div className="row">
                     <div className = "col-9">
                         <div className="fw-bold"> Job Title </div>
@@ -16,7 +17,7 @@ const JobPosting = (
 
                     </div>
                     <div className="col-3">
-                    <Link to={`../apply`} className="btn btn-dark rounded-pill mt-2"
+                    <Link to={`../apply`} className="btn btn-dark rounded-pill override-blue mt-2" 
                                 >Apply Here</Link>
 
                     </div>
