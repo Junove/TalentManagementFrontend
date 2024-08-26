@@ -1,10 +1,10 @@
-
+import SearchBar from "../components/Universal/SearchBar.jsx"
 
 function Search() {
 
     return (
         <div>
-            hi :D
+            <SearchBar/>
         </div>
     )
 }
