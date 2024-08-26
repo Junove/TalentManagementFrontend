@@ -45,7 +45,7 @@ const JobPostingForm = () => {
                     <textarea className="form-control" id="inputAdditionalInfo" aria-describedby="emailHelp" placeholder="Enter additional information"
                         value={additionalInfo} onChange={onAdditionalInfoChange}/>
                 </div>
-                <button className="mt-3 btn btn-primary">Create</button>
+                <button className="mt-3 btn btn-primary" style={{backgroundColor: 'rgb(18,28,78)', border: 'none'}}>Create</button>
                 <button className="mt-3 mx-3 btn btn-secondary">Cancel</button>
             </div>
         </div>
