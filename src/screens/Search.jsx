@@ -10,17 +10,14 @@ function Search() {
             <SearchBar />
             </div>
             
-            <div className = "row">
-                <div className = "col-3">
-
-                </div>
-                <div className = "col-6">
-                <ul className="list-group">
-                <JobPosting/>
-                </ul>
-                <div className = "col-3">
-
-                </div>
+            <div className = "row ps-5 pe-5"  >
+                
+                
+                <div className = "col-12">
+                    <ul className="list-group">
+                        <JobPosting/>
+                    </ul>
+                
 
                 </div>
                 
