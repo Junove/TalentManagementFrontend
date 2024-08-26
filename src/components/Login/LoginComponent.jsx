@@ -12,7 +12,6 @@ function LoginComponent() {
     logout(); 
     navigate("/home");
   }
-  
 
   function hideForLoginAndRegister() {
     let pathname = (location.pathname === "/")?"/home":location.pathname;
