@@ -1,7 +1,7 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState } from 'react';
 
-const JobPostingForm = () => {
+const JobEditingForm = () => {
     const [jobTitle, setJobTitle] = useState('');
     const onJobTitleChange = (e) => setJobTitle(e.target.value);
 
@@ -16,7 +16,6 @@ const JobPostingForm = () => {
 
     const [status, setStatus] = useState('');
     const onStatusChange = (e) => setStatus(e.target.value);
-
 
   return (
     <ul className="list-group">
@@ -45,7 +44,15 @@ const JobPostingForm = () => {
                     <textarea className="form-control" id="inputAdditionalInfo" aria-describedby="emailHelp" placeholder="Enter additional information"
                         value={additionalInfo} onChange={onAdditionalInfoChange}/>
                 </div>
-                <button className="mt-3 btn btn-primary">Create</button>
+                <div className="mt-3">
+                    <label htmlFor="inputListingStatus">Status</label>
+                    <select className="form-select" id="inputListingStatus" aria-describedby="emailHelp" placeholder="Enter additional information"
+                        value={status} onChange={onStatusChange}>
+                            <option value="active">Active</option>
+                            <option value="closed">Closed</option>
+                    </select>
+                </div>
+                <button className="mt-3 btn btn-primary">Update</button>
                 <button className="mt-3 mx-3 btn btn-secondary">Cancel</button>
             </div>
         </div>
@@ -53,4 +60,4 @@ const JobPostingForm = () => {
   )
 }
 
-export default JobPostingForm
+export default JobEditingForm
