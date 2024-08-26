@@ -16,7 +16,7 @@ const SearchBar = (
             
 
             <div className="col-1">
-                    <button className="btn float-end ps-2 override-button-go">Go</button>
+                    <button className="btn float-end ps-2 w-100 override-button-go">Go</button>
                 </div>
 
             </div>
