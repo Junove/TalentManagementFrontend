@@ -1,5 +1,5 @@
 import React from 'react'
-import JobPostingForm from '../../components/Manager/JobPostingForm'
+import JobPostingForm from '../components/JobListing/JobPostingForm'
 
 const CreateJobPosting = () => {
 

@@ -3,7 +3,7 @@ import './App.css'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import {useNavigate, seState, useEffect} from "react";
 import Search from './screens/Search';
-import CreateJobPosting from './screens/Manager/CreateJobPosting';
+import CreateJobPosting from './screens/CreateJobPosting';
 
 function App() {
   return (
