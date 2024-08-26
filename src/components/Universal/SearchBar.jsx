@@ -9,7 +9,7 @@ const SearchBar = (
                 <div className = "col-11"> 
                 <input
                     id="search" 
-                    className="ps-5 form-control rounded-pill border-1 w-100 pe-5 override-border-black"
+                    className="ps-5 form-control border-1 w-100 pe-5 override-border-black"
                     placeholder="Search by Job Title.."/>
 
                 </div>
