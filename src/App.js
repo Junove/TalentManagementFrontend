@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import {uuseNavigate, seState, useEffect} from "react";
+import {useNavigate, seState, useEffect} from "react";
 import Search from './screens/Search';
 
 function App() {
