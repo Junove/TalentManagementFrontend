@@ -14,7 +14,7 @@ import JobDetails from './components/Jobs/JobDetails';
 
 import CandidateDashboard from './screens/CandidateDashboard';
 import LoginComponent from './components/Login/LoginComponent';
-import JobApplication from './screens/Jobs/JobApplication/JobApplication';
+import JobApplication from './components/JobApplication/JobApplication.jsx';
 
 import CandidateRegister from './components/Register/CandidateRegister';
 import HiringManagerRegister from "./components/Register/HiringManagerRegister";

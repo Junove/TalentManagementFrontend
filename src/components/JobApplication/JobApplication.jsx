@@ -32,17 +32,21 @@ const JobApplication = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
+
+        formData.append('status', 'Under Review');
+        formData.append('candidate_id', 0);
         formData.append('resume', resume);
         formData.append('cover_letter', coverLetter);
         //setStatus to "Under Review"
 
         try {
-            const response = await fetch('https://localhost:8080/applications', {
+            const response = await fetch('https://localhost:8080/jobapps', {
                 method: 'POST',
                 body: formData,
+                
                 //send candidate_id, job_id, date_applied, cover_letter, custom_resume, application_status
             });
-
+            console.log(response.data);
             if (response.ok) {
                 setSubmissionStatus('Application submitted successfully!');
             } else {
@@ -101,7 +105,7 @@ const JobApplication = () => {
                         // value={additionalInfo} onChange={onAdditionalInfoChange}
                         />
                 </div>
-                <button className="mt-3 btn btn-primary"  style={{backgroundColor: 'rgb(18,28,78)', border: 'none'}}>Create</button>
+                <button className="mt-3 btn btn-primary" onClick={handleSubmit} style={{backgroundColor: 'rgb(18,28,78)', border: 'none'} }>Create</button>
                 <button className="mt-3 mx-3 btn btn-secondary">Cancel</button>
             </div>
         </div>
