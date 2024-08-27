@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Typography, MenuItem, Container, Box } from '@mui/material';
 import axios from 'axios';
+import './index.css';
 
 function UserRegister() {
   const [username, setUsername] = useState('');
@@ -28,9 +29,18 @@ function UserRegister() {
       });
 
       if (response.status === 201) {
-        const userId = response.data.id;  // Assuming the response contains the user ID
-        // Navigate to the role-specific registration form, passing the user ID
-        navigate('/register/role', { state: { role, userId } });
+        const userId = response.data.id;  
+        
+        switch (role) {
+          case 'candidate':
+            navigate('/candidate/register', { state: { userId } }); 
+            break;
+          case 'hiring_manager':
+            navigate('/manager/register', { state: { userId } }); 
+            break;
+          default:
+            navigate('/'); // Fallback to home
+        }
       } else {
         setError('Failed to register user');
       }
@@ -55,6 +65,7 @@ function UserRegister() {
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <TextField
+            className='custom-textfield'
             variant="outlined"
             margin="normal"
             required
@@ -68,6 +79,7 @@ function UserRegister() {
             onChange={(e) => setUsername(e.target.value)}
           />
           <TextField
+            className='custom-textfield'
             variant="outlined"
             margin="normal"
             required
@@ -81,6 +93,7 @@ function UserRegister() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <TextField
+            className='custom-textfield'
             select
             variant="outlined"
             margin="normal"
@@ -91,7 +104,6 @@ function UserRegister() {
             value={role}
             onChange={(e) => setRole(e.target.value)}
           >
-            <MenuItem value="admin">Admin</MenuItem>
             <MenuItem value="candidate">Candidate</MenuItem>
             <MenuItem value="hiring_manager">Hiring Manager</MenuItem>
           </TextField>
@@ -99,7 +111,7 @@ function UserRegister() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, backgroundColor:'rgb(237,28,46)' }}
           >
             Register
           </Button>
