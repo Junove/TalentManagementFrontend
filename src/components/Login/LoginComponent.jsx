@@ -13,25 +13,14 @@ function LoginComponent() {
     navigate("/home");
   }
 
-//   function hideForLoginAndRegister() {
-//     let pathname = (location.pathname === "/")?"/home":location.pathname;
-//     const page = pathname.split('/')[1];
-//     if(page.toLowerCase() === "login" || page.toLowerCase() === "register"){
-//       return "hidden"
-//     }else{
-//       return "";
-//     }
-//   }
-
   return (
     <div>
-
-      User: {(isLoggedIn) ? user.username : "guest"}
-      &nbsp;
+      User: {(isLoggedIn) ? user.username : "guest"}    
+      
       {(!isLoggedIn)
         ? <button onClick={() => navigate("/login")} >Login</button>
         : <button onClick={() => onLogoutClick()} >Logout</button>}
-      &nbsp;
+      
       {(!isLoggedIn)
         ? <button onClick={() => navigate("/register")} >Register</button>
         : "" }   

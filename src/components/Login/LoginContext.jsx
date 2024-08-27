@@ -23,6 +23,9 @@ const LoginProvider = ({ children }) => {
     setIsLoggedIn(true);
     setUsername(user.username);
     setUser(user);
+
+    console.log(user);
+    console.log("isLoggedIn: ", isLoggedIn);
     localStorage.setItem("user",JSON.stringify(user));
   };
 
