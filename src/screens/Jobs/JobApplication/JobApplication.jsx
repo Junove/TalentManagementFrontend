@@ -1,26 +1,33 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const JobApplication = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
-    //const [job, setJob] = useState(null);
-    const job = {"job_title": "Software Engineer"};
+    //const location = useLocation();
+    //const navigate = useNavigate();
+    const { jid } = useParams(); 
+    const [job, setJob] = useState(null);
     const [applicantName, setApplicantName] = useState('');
     const [applicantEmail, setApplicantEmail] = useState('');
     const [resume, setResume] = useState(null);
     const [coverLetter, setCoverLetter] = useState(null);
     const [submissionStatus, setSubmissionStatus] = useState('');
 
-    // useEffect(() => {
-    //     if (location.state && location.state.job) {
-    //         setJob(location.state.job);
-    //     } else {
-    //         // Handle missing job data
-    //         navigate('/jobpost'); // Redirect or show error
-    //     }
-    // }, [location, navigate]);
+    useEffect(() => {
+        const fetchJobDetails = async () => {
+            try {
+                console.log(`${jid}`);
+                const response = await axios.get(`http://localhost:8080/jobs/${jid}`);
+                setJob(response.data);
+                console.log("Job Listings (JSON):", JSON.stringify(response.data, null, 2));
+            } catch (error) {
+                console.error("Error fetching job details:", error);
+            }
+        };
+
+        fetchJobDetails();
+    }, [jid]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -46,49 +53,40 @@ const JobApplication = () => {
         }
     };
 
-    //if (!job) return <div>Loading...</div>;
+    if (!job) return <div>Loading...</div>;
 
     return (
-        <div className="application-container">
-            <h2>Apply for {job.job_title}</h2>
-            <div>
-                <h3>Job Details</h3>
-                <p>Date Listed: {new Date(job.date_listed).toLocaleDateString()}</p>
-                <p>Job Description: {job.job_description}</p>
-                <p>Listing Status: {job.listing_status}</p>
-            </div>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="applicantName">Name</label>
-                    <input
-                        type="text"
-                        id="applicantName"
-                        value={applicantName}
-                        onChange={(e) => setApplicantName(e.target.value)}
-                        required
-                    />
+        <>
+        <div className='row'>
+            <div className = "col-3">
+
+            </div>  
+            <div className = "col-6">
+            <h1 className='mx-auto text-start mt-3'>Application for {job.job_title}</h1>
+            </div>  
+        </div>
+        <ul className="list-group">
+        <div className='row'>
+        <div className = "col-3">
+        </div>  
+            <div className='col-6'>
+                <div className="mt-3">
+                    <p htmlFor="inputJobDescription">{job.job_description}</p>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="applicantEmail">Email</label>
-                    <input
-                        type="email"
-                        id="applicantEmail"
-                        value={applicantEmail}
-                        onChange={(e) => setApplicantEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="resume">Resume</label>
+                <div className="mt-3">
+                    
+                    <label htmlFor="resume" >Upload Resume: </label>
                     <input
                         type="file"
                         id="resume"
-                        onChange={(e) => setResume(e.target.files[0])}
+                        onChange={(e) => {
+                            setResume(e.target.files[0]); console.log(e.target.files)
+                        }}
                         required
                     />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="cover_letter">Cover Letter</label>
+                </div> 
+                <div className="mt-3">
+                    <label htmlFor="cover_letter">Upload Cover Letter: </label>
                     <input
                         type="file"
                         id="cover_letter"
@@ -96,10 +94,20 @@ const JobApplication = () => {
                         required
                     />
                 </div>
-                <button type="submit">Submit Application</button>
-            </form>
-            {submissionStatus && <p>{submissionStatus}</p>}
+                
+                <div className="mt-3">
+                    <label htmlFor="inputAdditionalInfo">Additional Information</label>
+                    <textarea className="form-control" id="inputAdditionalInfo" aria-describedby="emailHelp" placeholder="Enter additional information"
+                        // value={additionalInfo} onChange={onAdditionalInfoChange}
+                        />
+                </div>
+                <button className="mt-3 btn btn-primary"  style={{backgroundColor: 'rgb(18,28,78)', border: 'none'}}>Create</button>
+                <button className="mt-3 mx-3 btn btn-secondary">Cancel</button>
+            </div>
         </div>
+    </ul>
+    {submissionStatus && <p>{submissionStatus}</p>}
+    </>
     );
 };
 
