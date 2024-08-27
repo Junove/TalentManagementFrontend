@@ -26,6 +26,16 @@ export function GenericListComponent(parameters) {
 
     const currentItems = parameters.data.slice(startIndex, startIndex + itemsPerPage);
 
+
+    // function to check if field is a user object, if so, return the username
+    function isUserObject(field) {
+        if (field && typeof field === "object" && "username" in field) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     return (
         <div>
             <table className="item-table">            
@@ -45,7 +55,7 @@ export function GenericListComponent(parameters) {
                         >
                             {itemFields.map((field) => (
                                 <td key={field}>
-                                    {item[field] && typeof item[field] === "object" && "username" in item[field] 
+                                    {isUserObject(item[field])
                                         ? item[field].username 
                                         : item[field]}
                                 </td>

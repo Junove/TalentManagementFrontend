@@ -6,7 +6,7 @@ export function GenericEditorForm(parameters) {
 
             <tbody>
                 {Object.keys(parameters.formObject).map((field) => {
-                    if (field === "id" || field === "type") {
+                    if (field === "id" || field === "type" || field === "listing_status") {
                         return null;
                     }
 
@@ -29,6 +29,28 @@ export function GenericEditorForm(parameters) {
                         </tr>
                     );
                 })}
+
+                {/* Special Select: JOB_LISTING.LISTING_STATUS field */}
+                {parameters.formObject.hasOwnProperty("listing_status") && (
+                    <tr>
+                        
+                        <td>Listing Status:</td>
+                    
+                    <td>
+                        <select 
+                            name="listing_status"
+                            onChange={(e) => parameters.handleInputChange(e)}
+                            value={parameters.formObject.listing_status}
+                            className="role-select"
+                        >
+                            <option value="" disabled>Status</option>
+                            <option value="Open">Open</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                    </td>
+                    
+                    </tr>
+                )}
 
                 {/* Special Select: USER.TYPE field */}
                 {parameters.formObject.hasOwnProperty("type") && (
