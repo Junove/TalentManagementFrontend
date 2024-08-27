@@ -5,6 +5,7 @@ import {useNavigate, seState, useEffect} from "react";
 import Search from './screens/Search';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import NavBar from './components/Universal/NavBar';
+import JobDetails from './components/Jobs/JobDetails';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/search" element={<Search />} />
+          <Route path="/jobpost/:jid" element = {<JobDetails/>}></Route>
         </Routes>
       </div>
       </Router>
