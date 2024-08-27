@@ -7,20 +7,29 @@ import { useState, useEffect } from "react";
 function Search() {
     const REST_URL = 'http://localhost:8080/jobs';
     const [jobs, getJobs] = useState([]);
-    const [refresh, setRefresh] = useState(false); // state to trigger re-fetch
+    //const [refresh, setRefresh] = useState(false); // state to trigger re-fetch
     const [filteredJobs, setFilteredJobs] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
+    const [filters, setFilters] = useState({
+        jobTitle: "",
+        status: "",
+        department: ""
+    });
 
     useEffect(() => { 
         getJobListings(); 
       }, []);
 
     useEffect(() => {
-        const filtered = jobs.filter(job =>
-            job.job_title.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        const {jobTitle, status, department} = filters;
+        const filtered = jobs.filter(job => {
+            return (
+                (!jobTitle || job.job_title.toLowerCase().includes(jobTitle.toLowerCase())) &&
+                (!status || job.listing_status.toLowerCase().includes(status.toLowerCase())) &&
+                (!department || job.department.toLowerCase().includes(department.toLowerCase())) 
+            );
+        });
         setFilteredJobs(filtered);
-    }, [searchTerm, jobs]);
+    }, [filters, jobs]);
 
     const getJobListings = async () => {
         try {
@@ -28,6 +37,7 @@ function Search() {
           getJobs(response.data);
           //nextId = getNextId(response.data);
           setFilteredJobs(response.data);
+          console.log("Job Listings (JSON):", JSON.stringify(response.data, null, 2));
           } catch(error){
               console.error("error fetching jobs: ", error);}
         }
@@ -43,9 +53,12 @@ function Search() {
         
           var nextId;
 
-    const handleSearch = (searchValue) => {
-        setSearchTerm(searchValue);
-    }
+        const handleSearch = (newFilters) => {
+            setFilters(prevFilters => ({
+                ...prevFilters,
+                ...newFilters
+            }));
+        };
 
     return (
         <div> 
