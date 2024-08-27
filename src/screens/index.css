@@ -1,3 +1,34 @@
 .spacing {
     padding: 5px;
 }
+.card {
+    border-radius: 0.75rem; 
+    margin-top: -50px;
+    margin-left: -150px;
+    height: 500px;
+    width: 600px;
+  }
+  
+  .card-header {
+    border-bottom: 1px solid #dee2e6; 
+    border-radius: 0.75rem 0.75rem 0 0; 
+  }
+  
+  .card-footer {
+    border-top: 1px solid #dee2e6; 
+    border-radius: 0 0 0.75rem 0.75rem; }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+  
+  .text-danger {
+    font-size: 0.875rem; 
+  }
+  
