@@ -15,6 +15,7 @@ import JobDetails from './components/Jobs/JobDetails';
 import CandidateDashboard from './screens/CandidateDashboard';
 import LoginComponent from './components/Login/LoginComponent';
 import JobApplication from './components/JobApplication/JobApplication.jsx';
+import ViewSingleApplication from './screens/Applications/ViewSingleApplication';
 
 import CandidateRegister from './components/Register/CandidateRegister';
 import HiringManagerRegister from "./components/Register/HiringManagerRegister";
@@ -32,11 +33,12 @@ function App() {
           <Route path="/apply/:jid" element={<JobApplication/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
-          <Route path='/editJobPosting' element={<EditJobPosting/>}/>
+          <Route path='/editJobPosting/:jobid' element={<EditJobPosting/>}/>
+          <Route path='/candidateDashboard' element={<CandidateDashboard/>}/>
+          <Route path='/application/:applicationid' element={<ViewSingleApplication/>}/>
           <Route path='/register' element={<UserRegister />} />
           <Route path='/candidate/register' element={<CandidateRegister />} />
           <Route path='/manager/register' element={<HiringManagerRegister />} />
-          <Route path='/candidateDashboard' element={<CandidateDashboard/>}></Route>
         </Routes>
         </div>
       </Router>
