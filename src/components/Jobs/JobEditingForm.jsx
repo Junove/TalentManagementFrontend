@@ -39,7 +39,16 @@ const JobEditingForm = (props) => {
     const onAdditionalInfoChange = (e) => setAdditionalInfo(e.target.value);
 
     const [status, setStatus] = useState('');
-    const onStatusChange = (e) => setStatus(e.target.value);
+
+    const [date, setDate] = useState(new Date());
+    const onStatusChange = (e) => {
+        setStatus(e.target.value);
+        if (e.target.value === 'active'){
+            setDate(Date(Date.now()).toLocaleDateString())
+        } else {
+            setDate(null);
+        }
+    };
 
     const handlePutClick = () => {
         const updatedJob = {
@@ -48,7 +57,8 @@ const JobEditingForm = (props) => {
             department: department,
             job_description: jobDescription,
             additionl_info: additionalInfo,
-            listing_status: status
+            listing_status: status,
+            date_closed: date
         }
 
         put(updatedJob, jobId)
