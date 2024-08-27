@@ -4,7 +4,7 @@ import { LoginContext } from '../components/Login/LoginContext';
 import axios from 'axios';
 
 
-export default function LoginPage() {
+export default function Login() {
   const [usernameInput, setUsernameInput] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -14,9 +14,10 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let fullUrl = "http://localhost:8080/login";
+      let REST_URL = "http://localhost:8080/login";
       let credentials = { "username": usernameInput, "password": password }
-      const response = await axios.post(fullUrl, credentials);
+      const response = await axios.post(REST_URL, credentials);
+
       if(response.status == 200){
         let user = response.data;
         login(user);
@@ -25,8 +26,6 @@ export default function LoginPage() {
     } catch (error) {
       setError(error.message);
     }
-
-
   };
 
   return (<>
@@ -53,4 +52,5 @@ export default function LoginPage() {
   </>
   );
 
+  
 }

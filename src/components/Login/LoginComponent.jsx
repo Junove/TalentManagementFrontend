@@ -1,18 +1,17 @@
 import { useContext } from "react";
 import { LoginContext } from './LoginContext';
 import { Link, useNavigate, useLocation } from "react-router-dom"
-import './LoginComponent.css'
 
 function LoginComponent() {
   const { isLoggedIn, user, username, login, logout } = useContext(LoginContext);
-  //const location = useLocation();
+  const location = useLocation();
+  
   const navigate = useNavigate();
 
   function onLogoutClick() { 
     logout(); 
     navigate("/home");
   }
-  
 
 //   function hideForLoginAndRegister() {
 //     let pathname = (location.pathname === "/")?"/home":location.pathname;
@@ -26,6 +25,7 @@ function LoginComponent() {
 
   return (
     <div>
+
       User: {(isLoggedIn) ? user.username : "guest"}
       &nbsp;
       {(!isLoggedIn)

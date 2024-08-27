@@ -7,7 +7,10 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.5",
+<<<<<<< HEAD
     "bootstrap": "^5.3.3",
+=======
+>>>>>>> e5aeab2aadf3de37de6336b8b5d718dca4614b42
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1",
