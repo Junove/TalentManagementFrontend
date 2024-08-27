@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
-import DataManagementTable from '../../components/Admin/DataManagementTable';
+// import DataManagementTable from '../../components/Admin/DataManagementTable';
 
 const JobListingManagement = () => {
     const [users, setUsers] = useState([]);
@@ -38,7 +38,7 @@ const JobListingManagement = () => {
 
     return (
         <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '90vh' }}>
-            <Card>
+            {/* <Card>
                 <CardContent>
                     <h1>Job Listings Management Dashboard</h1>
                     {loading ? (
@@ -55,7 +55,7 @@ const JobListingManagement = () => {
                         />
                     )}
                 </CardContent>
-            </Card>
+            </Card> */}
         </div>
     );
 }

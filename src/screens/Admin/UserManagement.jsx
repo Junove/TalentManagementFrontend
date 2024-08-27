@@ -1,63 +1,151 @@
-import React, { useState, useEffect } from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Stack from '@mui/material/Stack';
-import CircularProgress from '@mui/material/CircularProgress';
-import DataManagementTable from '../../components/Admin/DataManagementTable';
+import React, { useEffect, useState } from "react";
+import "../../components/Admin/AdminStyles.css";
 
-const UserManagement = () => {
-    const [users, setUsers] = useState([]);
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [loading, setLoading] = useState(true);
+import { UserAddUpdateForm } from "../../components/Admin/UserAddUpdateForm";
+import { UserList } from "../../components/Admin/UserList";
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await fetch('http://localhost:8080/users');
-                const data = await response.json();
+function UserManagement() {
+	let blankUser = { id: -1, username: "", email: "", password: "", role: "" };
+	const [users, setUsers] = useState([]);
+	const [formObject, setFormObject] = useState(blankUser);
+	let mode = formObject.id === -1 ? "Add" : "Update";
+
+	useEffect(() => {
+		getUsers();
+	}, [formObject]);
+
+	const getUsers = function () {
+		console.log("in getUsers()");
+		fetch("http://localhost:8080/users")
+            .then((response) => response.json())
+            .then((data) => {
                 setUsers(data);
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching users:', error);
-                setLoading(false);
             }
-        };
+        );
+	};
 
-        fetchUsers();
-    }, []);
+	function rowSelectionHandler(user = null) {
+		// find entries by user-row class and set font weight to normal
+		for (
+			let i = 0;
+			i < document.getElementsByClassName("user-row").length;
+			i++
+		) {
+			document.getElementsByClassName("user-row")[
+				i
+			].style.fontWeight = "normal";
+		}
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+		if (user) {
+			const rows = document.getElementsByClassName("user-row");
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
+			for (let i = 0; i < rows.length; i++) {
+				const row = rows[i];
+				// Assuming you have the user's name or another unique attribute in the first cell of each row
+				const userName = row
+					.getElementsByTagName("td")[0]
+					.textContent.trim();
 
-    return (
-        <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '90vh' }}>
-            <Card>
-                <CardContent>
-                    <h1>User Management Dashboard</h1>
-                    {loading ? (
-                        <Stack alignItems="center" justifyContent="center" style={{ height: '100%' }}>
-                            <CircularProgress />
-                        </Stack>
-                    ) : (
-                        <DataManagementTable
-                            data={users}
-                            page={page}
-                            rowsPerPage={rowsPerPage}
-                            handleChangePage={handleChangePage}
-                            handleChangeRowsPerPage={handleChangeRowsPerPage}
-                        />
-                    )}
-                </CardContent>
-            </Card>
-        </div>
-    );
+                console.log("userName: " + userName);
+                console.log("user.username: " + user.username);
+				if (userName === user.username) {
+					row.style.fontWeight = "bold";
+				} else {
+					row.style.fontWeight = "normal"; // Reset font weight for non-selected rows
+				}
+			}
+		}
+	}
+
+	let onDeleteClick = function () {
+		console.log("in onDeleteClick()");
+		let postOpCallback = () => {
+			setFormObject(blankUser);
+		};
+
+		// if (formObject.id >= 0) {
+		// 	deleteById(formObject.id, postOpCallback);
+		// } else {
+		// 	setFormObject(blankUser);
+		// }
+
+		rowSelectionHandler();
+	};
+
+	let onSaveClick = function () {
+		console.log("in onSaveClick()");
+
+		// Require name, email, and password fields
+		if (
+			formObject.username === "" ||
+			formObject.password === ""
+		) {
+			alert("Please fill out all required fields!");
+			return;
+		}
+
+		// Default to "user" role, so inputting data in this field isn't required
+		if (formObject.role !== "user" && formObject.role !== "admin") {
+			formObject.role = "user";
+		}
+
+		let postOpCallback = () => {
+			setFormObject(blankUser);
+		};
+
+		// if (formObject.id === -1) {
+		// 	post(formObject, postOpCallback);
+		// } else {
+		// 	put(formObject, postOpCallback);
+		// }
+
+		rowSelectionHandler();
+	};
+
+	let onCancelClick = function () {
+		console.log("in onCancelClick()");
+
+		setFormObject(blankUser);
+		rowSelectionHandler();
+	};
+
+	const handleListClick = function (user) {
+		console.log("in handleListClick()");
+
+		const isAlreadySelected = formObject.id === user.id;
+
+		setFormObject(isAlreadySelected ? blankUser : user);
+		rowSelectionHandler(isAlreadySelected ? null : user);
+	};
+
+	const handleInputChange = function (event) {
+		console.log("in handleInputChange()");
+		const name = event.target.username;
+		const value = event.target.value;
+		let newFormObject = { ...formObject };
+		newFormObject[name] = value;
+		setFormObject(newFormObject);
+	};
+
+	return (
+		<div className="App">
+			<UserList
+				users={users}
+				handleListClick={handleListClick}
+			/>
+
+			<br />
+
+			<UserAddUpdateForm
+				mode={mode}
+				handleInputChange={handleInputChange}
+				formObject={formObject}
+				onDeleteClick={onDeleteClick}
+				onSaveClick={onSaveClick}
+				onCancelClick={onCancelClick}
+			/>
+		</div>
+	);
 }
 
 export default UserManagement;
