@@ -16,16 +16,13 @@ export default function Login() {
     try {
       let REST_URL = "http://localhost:8080/login";
       let credentials = { "username": usernameInput, "password": password }
-    //   const response = await axios.post(REST_URL, credentials);
+      const response = await axios.post(REST_URL, credentials);
 
-    //   if(response.status == 200){
-    //     let user = response.data;
-    //     login(user);
-    //     navigate("/");
-    //   }
-    let user = {"id":3,"username":usernameInput,"password":password,"type":"hiring_manager"};
-    login(user);
-    navigate("/");
+      if(response.status == 200){
+        let user = response.data;
+        login(user);
+        navigate("/");
+      }
     
     } catch (error) {
       setError(error.message);
