@@ -33,6 +33,7 @@ const SearchBar = ( {onSearch}
 
         <div>
             <div className="row">
+
                 <div > 
                 <input 
                     id="jobTitle" 
@@ -62,6 +63,7 @@ const SearchBar = ( {onSearch}
                     value={filters.department}
                     >
                 </input>
+
 
                 </div>
             
