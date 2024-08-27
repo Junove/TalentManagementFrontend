@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { getJobById } from '../../handlers/JobAPIHandler';
+import { getJobById, put } from '../../handlers/JobAPIHandler';
 import { useNavigate } from 'react-router-dom';
 
 const JobEditingForm = (props) => {
@@ -46,8 +46,12 @@ const JobEditingForm = (props) => {
             ...job,
             listing_title: jobTitle,
             department: department,
-
+            job_description: jobDescription,
+            additionl_info: additionalInfo,
+            listing_status: status
         }
+
+        put(updatedJob, jobId)
     }
 
 
