@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardContent, Typography, CardActions, Button, Grid } from '@mui/material';
 import { getJobById } from '../../handlers/JobAPIHandler';
 
@@ -9,7 +9,8 @@ const IndividualApplicationGridItem = (props) => {
     const [job, setJob] = useState({});
 
     useEffect(()=>{
-        getJobById(setJob);
+        getJobById(setJob, jobApp.job_id);
+
     }, []);
 
   return (
@@ -27,7 +28,7 @@ const IndividualApplicationGridItem = (props) => {
                   {job.department}
                 </Typography>
                 <Typography variant="body2">
-                  Applied on: {new Date(jobApp.date).toLocaleDateString()}
+                  Applied on: {new Date(jobApp.date_applied).toLocaleDateString()}
                 </Typography>
               </CardContent>
               <CardActions>

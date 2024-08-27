@@ -5,7 +5,8 @@ axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 export const getJobById = (setJob, jobID) => {
     axios.get(`${baseURL}/jobs/${jobID}`)
-        .then((response) => setJob(response.data))
+    .then((response) => {setJob(response.data); console.log(response.data)})
+    .catch((error) => console.error(error))
 };
 
 export const post = (job) => {
