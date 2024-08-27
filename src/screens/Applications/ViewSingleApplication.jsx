@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Container, Card, CardContent, Typography, CardActions, Button, Divider, Box } from '@mui/material';
 import { getApplicationByID } from '../../handlers/JobApplicationAPIHandler';
+import { getJobById } from '../../handlers/JobAPIHandler';
 
 
 const ViewSingleApplication = () => {
@@ -12,24 +13,13 @@ const ViewSingleApplication = () => {
     useEffect(()=>{
         getApplicationByID(setApplication, applicationid);
     }, []);
+    
+    const [job, setJob] = useState({});
 
     useEffect(()=>{
-        getApplicationByID(setApplication, applicationid);
-    }, []);
+        getJobById(setJob, application.job_id);
 
-    const jobApplication = {
-        id: '12345',
-        candidate_id: '67890',
-        job_name: 'Software Engineer',
-        date_applied: '2024-08-20',
-        cover_letter: 'I am excited to apply for the Software Engineer position at Tech Corp. My experience with developing scalable applications aligns well with your needs.',
-        custom_resume: 'Link to resume', // This could be a URL or file path in a real application
-        application_status: 'Under Review'
-      };
-
-    useEffect(() => {
-
-    }, [])
+    }, [application]);
 
 
 
@@ -42,7 +32,7 @@ const ViewSingleApplication = () => {
         </Typography>
         <Divider sx={{ marginY: 2 }} />
         <Typography variant="h6" component="div" color="text.secondary" gutterBottom>
-          <strong>Job Name:</strong> {jobApplication.job_name}
+          <strong>Job Name:</strong> {job.listing_title}
         </Typography>
         <Typography variant="body1" paragraph>
           <strong>Application ID:</strong> {application.id}
@@ -51,16 +41,16 @@ const ViewSingleApplication = () => {
           <strong>Candidate ID:</strong> {application.candidate_id}
         </Typography>
         <Typography variant="body1" paragraph>
-          <strong>Date Applied:</strong> {new Date(jobApplication.date_applied).toLocaleDateString()}
+          <strong>Date Applied:</strong> {new Date(application.date_applied).toLocaleDateString()}
         </Typography>
         <Typography variant="body1" paragraph>
-          <strong>Cover Letter:</strong> {jobApplication.cover_letter}
+          <strong>Cover Letter:</strong> {application.cover_letter}
         </Typography>
         <Typography variant="body1" paragraph>
-          <strong>Custom Resume:</strong> <a href={jobApplication.custom_resume} target="_blank" rel="noopener noreferrer">{jobApplication.custom_resume}</a>
-        </Typography>
+          <strong>Custom Resume:</strong> {application.custom_resume}
+          </Typography>
         <Typography variant="body1" paragraph>
-          <strong>Application Status:</strong> {jobApplication.application_status}
+          <strong>Application Status:</strong> {application.application_status}
         </Typography>
       </CardContent>
       <CardActions>

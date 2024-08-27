@@ -7,9 +7,8 @@ const ViewApplications = () => {
     const [jobApplications, setJobApplications] = useState([]);
 
     useEffect(()=>{
-        getAllApplications(setJobApplications);
+      getAllApplications(setJobApplications);
     }, []);
-
 
   return (
     <Container
