@@ -17,7 +17,7 @@ function RoleSpecificRegister() {
         navigate('/candidate/register', { state: { userId } }); // Replace with actual path for candidate registration
         break;
       case 'hiring_manager':
-        navigate('/hiring-manager/register', { state: { userId } }); // Replace with actual path for hiring manager registration
+        navigate('/manager/register', { state: { userId } }); // Replace with actual path for hiring manager registration
         break;
       default:
         navigate('/'); // Fallback to home

@@ -28,17 +28,16 @@ function App() {
         <div className="App">
           <LoginComponent/>
         <Routes>
-            <Route path="/search" element={<Search />} />
-            <Route path="/jobpost/:jid" element = {<JobDetails/>}></Route>
+          <Route path="/search" element={<Search />} />
+          <Route path="/jobpost/:jid" element = {<JobDetails/>}></Route>
           <Route path="/login" element={<Login />} />
           <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
-            <Route path='/editJobPosting' element={<EditJobPosting/>}/>
-            <Route path='/register' element={<UserRegister />} />
-            <Route path='/register/role' element={<RoleSpecificRegister />} />
-            <Route path='/candidate/register' element={<CandidateRegister />} />
-            <Route path='/hiring-manager/register' element={<HiringManagerRegister />} />
-            <Route path='/candidateDashboard' element={<CandidateDashboard/>}></Route>
-
+          <Route path='/editJobPosting' element={<EditJobPosting/>}/>
+          <Route path='/register' element={<UserRegister />} />
+          <Route path='/register/role' element={<RoleSpecificRegister />} />
+          <Route path='/candidate/register' element={<CandidateRegister />} />
+          <Route path='/manager/register' element={<HiringManagerRegister />} />
+          <Route path='/candidateDashboard' element={<CandidateDashboard/>}></Route>
         </Routes>
         </div>
       </Router>
