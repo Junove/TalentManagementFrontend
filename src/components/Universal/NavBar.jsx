@@ -30,7 +30,7 @@ const NavBar = () => {
                         {isLoggedIn ? (
                             <>
                                 <li className="nav-item">
-                                    <Link to="/dashboard" className="nav-link">
+                                    <Link to="/candidatedashboard" className="nav-link">
                                         {username}
                                     </Link>
                                 </li>
