@@ -1,7 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
+import { post } from '../../handlers/JobAPIHandler'
 
 const JobPostingForm = () => {
+    const managerID = 1
+
+
     const [jobTitle, setJobTitle] = useState('');
     const onJobTitleChange = (e) => setJobTitle(e.target.value);
 
@@ -14,9 +18,17 @@ const JobPostingForm = () => {
     const [additionalInfo, setAdditionalInfo] = useState('');
     const onAdditionalInfoChange = (e) => setAdditionalInfo(e.target.value);
 
-    const [status, setStatus] = useState('');
-    const onStatusChange = (e) => setStatus(e.target.value);
+    const formSubmissionHandler = () => {
+        const job = {
+            manager_id: managerID,
+            job_title: jobTitle,
+            department: department,
+            job_description: jobDescription,
+            additional_information: additionalInfo
+        }
 
+        post(job)
+    }
 
   return (
     <ul className="list-group">
@@ -45,7 +57,7 @@ const JobPostingForm = () => {
                     <textarea className="form-control" id="inputAdditionalInfo" aria-describedby="emailHelp" placeholder="Enter additional information"
                         value={additionalInfo} onChange={onAdditionalInfoChange}/>
                 </div>
-                <button className="mt-3 btn btn-primary">Create</button>
+                <button className="mt-3 btn btn-primary" onClick={formSubmissionHandler} style={{backgroundColor: 'rgb(18,28,78)', border: 'none'}}>Create</button>
                 <button className="mt-3 mx-3 btn btn-secondary">Cancel</button>
             </div>
         </div>
