@@ -20,7 +20,7 @@ const JobPostingForm = () => {
 
     const formSubmissionHandler = () => {
         const job = {
-            managerID: managerID,
+            manager_id: managerID,
             job_title: jobTitle,
             department: department,
             job_description: jobDescription,
