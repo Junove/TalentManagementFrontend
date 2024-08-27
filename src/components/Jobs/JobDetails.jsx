@@ -1,5 +1,5 @@
 // JobDetails.jsx
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import './index.css';
@@ -33,11 +33,99 @@ const JobDetails = () => {
 
     return (
         <div>
+            <div className="row pt-4">
+                <div className ="col-9">
+
+                <div className="fw-bold h2"> {job.job_title} </div>
+
+                </div>
+                <div className="col-3 d-flex flex-column align-items-start">
+                        <Link to={`../apply`} className="btn btn-dark override-blue mt-2" 
+                                >Apply Here</Link>
+                        
+
+                    </div>
+
+        <div className = "row">
+                <div className = "col-3">
+                   <div className="h6 fw-bold">
+                   Date Listed:
+                    </div>
+                        </div>
+                <div className = "col-9">
+                {formatDate(job.date_listed) || "N/A"}
+                </div>
+
+            </div>
+
+            <div className = "row">
+                <div className = "col-3">
+                   <div className="h6 fw-bold">
+                   Department:
+                    </div>
+                        </div>
+                <div className = "col-9">
+                {job.department|| "N/A"}
+                </div>    
+            </div>
+
+            <div className = "row">
+                <div className = "col-3">
+                   <div className="h6 fw-bold">
+                   Additional Information:
+                    </div>
+                        </div>
+                <div className = "col-9">
+                {job.additional_information|| "N/A"}
+                </div>    
+            </div>
+
+            <div className = "row">
+                <div className = "col-3">
+                   <div className="h6 fw-bold">
+                   Job Description:
+                    </div>
+                        </div>
+                <div className = "col-9">
+                {job.job_description || "N/A"}
+                </div>
+
+            </div>
+
+            <div className = "row">
+                <div className = "col-3">
+                   <div className="h6 fw-bold">
+                   Listing Status:
+                    </div>
+                        </div>
+                <div className = "col-9 text-left">
+                {job.listing_status || "N/A"}
+                </div>
+
+            </div>
+
+            <div className = "row">
+                <div className = "col-3">
+                   <div className="h6 fw-bold">
+                   Date Closed:
+                    </div>
+                        </div>
+                <div className = "col-9">
+                {job.date_closed|| "N/A"}
+                </div>    
+            </div>
+
+            
+                                
+
+            </div>
+
+            
         
-            <div className="fw-bold"> {job.job_title} </div>
-            <div>Date Listed: {formatDate(job.date_listed) || "N/A"}</div>
-            <div>Job Description: {job.job_description || "N/A"}</div>
-            <div>Listing Status: {job.listing_status || "N/A"}</div>
+            
+            
+            
+            
         </div>
     );
 };
