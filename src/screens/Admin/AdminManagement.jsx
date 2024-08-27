@@ -1,33 +1,117 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import "../../components/Admin/AdminStyles.css";
 
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Stack from '@mui/material/Stack';
+import { GenericEditorForm } from "../../components/Admin/GenericEditorForm";
+import { GenericListComponent } from "../../components/Admin/GenericListComponent";
+import { rowSelectionHandler } from "../../components/Admin/RowSelectionHandler";
 
-const AdminManagement = () => {
-    return (
-        <div className="container" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '90vh'}}>
-            <Card>
-                <CardContent>
-                    <h1>Admin Dashboard</h1>
+function AdminManagement() {
+	let blankListing = { id: -1, user_id: "", full_name: "", email: "" };
+	const [applications, setHiringManagers] = useState([]);
+	const [formObject, setFormObject] = useState(blankListing);
+	let mode = formObject.id === -1 ? "Add" : "Update";
 
-                    <p>
-                        Welcome to the Admin Dashboard page! From this page, you can manage the following all of the data contained within this application. This includes but is not limited to the creation, deletion and updating of job postings, job applications, users, hiring managers, and administrators.
-                    </p>
+	useEffect(() => {
+		getHiringManagers();
+	}, [formObject]);
 
-                    <Stack direction="row" spacing={2}>
-                        <Link to="/admin/administrator">Administrator</Link>
-                        <Link to="/admin/candidates">Candidates</Link>
-                        <Link to="/admin/hiringManagers">Hiring Managers</Link>
-                        <Link to="/admin/jobApplications">Job Applications</Link>
-                        <Link to="/admin/jobListings">Job Listings</Link>
-                        <Link to="/admin/users">Users</Link>
-                    </Stack>
-                </CardContent>
-            </Card>
-        </div>
-    );
+	const getHiringManagers = function () {
+		console.log("in getHiringManagers()");
+		fetch("http://localhost:8080/admins")
+            .then((response) => response.json())
+            .then((data) => {
+                setHiringManagers(data);
+            }
+        );
+	};
+
+	let onDeleteClick = function () {
+		console.log("in onDeleteClick()");
+		let postOpCallback = () => {
+			setFormObject(blankListing);
+		};
+
+		// if (formObject.id >= 0) {
+		// 	deleteById(formObject.id, postOpCallback);
+		// } else {
+		// 	setFormObject(blankListing);
+		// }
+
+		rowSelectionHandler("user_id");
+	};
+
+	let onSaveClick = function () {
+		console.log("in onSaveClick()");
+
+		// Require name, email, and password fields
+		if (
+			formObject.username === "" ||
+			formObject.password === ""
+		) {
+			alert("Please fill out all required fields!");
+			return;
+		}
+
+		// Default to "user" type, so inputting data in this field isn't required
+		if (formObject.type !== "user" && formObject.type !== "admin") {
+			formObject.type = "user";
+		}
+
+		let postOpCallback = () => {
+			setFormObject(blankListing);
+		};
+
+		// if (formObject.id === -1) {
+		// 	post(formObject, postOpCallback);
+		// } else {
+		// 	put(formObject, postOpCallback);
+		// }
+
+		rowSelectionHandler("user_id");
+	};
+
+	let onCancelClick = function () {
+		console.log("in onCancelClick()");
+
+		setFormObject(blankListing);
+		rowSelectionHandler("user_id");
+	};
+
+	const handleListClick = function (user) {
+		console.log("in handleListClick()");
+
+		const isAlreadySelected = formObject.id === user.id;
+
+		setFormObject(isAlreadySelected ? blankListing : user);
+		rowSelectionHandler("user_id", isAlreadySelected ? null : user);
+	};
+
+	const handleInputChange = function (event) {
+		console.log("in handleInputChange()");
+		const { name, value } = event.target;
+		
+		setFormObject({ ...formObject, [name]: value });
+	};
+
+	return (
+		<div className="App">
+			<GenericListComponent
+				data={applications}
+				handleListClick={handleListClick}
+			/>
+
+			<br />
+
+			<GenericEditorForm
+				mode={mode}
+				handleInputChange={handleInputChange}
+				formObject={formObject}
+				onDeleteClick={onDeleteClick}
+				onSaveClick={onSaveClick}
+				onCancelClick={onCancelClick}
+			/>
+		</div>
+	);
 }
 
 export default AdminManagement;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Pagination } from './Pagination';
 
-export function UserList(parameters) {
+export function GenericListComponent(parameters) {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(5);
 
@@ -16,35 +16,42 @@ export function UserList(parameters) {
     };
 
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const currentUsers = parameters.users.slice(startIndex, startIndex + itemsPerPage);
+
+    if (parameters.data.length === 0) {
+        return <p>No data available</p>;
+    }
+
+    const itemFields = Object.keys(parameters.data[0]);
+
+    const currentItems = parameters.data.slice(startIndex, startIndex + itemsPerPage);
 
     return (
         <div>
-            <table className="user-table">            
+            <table className="item-table">            
                 <thead>
                     <tr>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th>Role Type</th>
+                        {itemFields.map((field) => (
+                            <th key={field}>{field.split("_").map((word) => word.charAt(0).toUpperCase() + word.slice(1).toUpperCase()).join(" ")}</th>
+                        ))}
                     </tr>
                 </thead>
                 
                 <tbody>
-                    {currentUsers.map((user, index) => (
+                    {currentItems.map((item, index) => (
                         <tr 
-                            key={index} onClick={() => parameters.handleListClick(user)}
-                            className="user-row"
+                            key={index} onClick={() => parameters.handleListClick(item)}
+                            className="item-row"
                         >
-                            <td>{user.username}</td>
-                            <td>{user.password}</td>
-                            <td>{user.type}</td>
+                            {itemFields.map((field) => (
+                                <td key={field}>{item[field]}</td>
+                            ))}
                         </tr>
                     ))}
                 </tbody>
             </table>
             
             <Pagination
-                totalItems={parameters.users.length}
+                totalItems={parameters.data.length}
                 itemsPerPage={itemsPerPage}
                 currentPage={currentPage}
                 onPageChange={handlePageChange}

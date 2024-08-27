@@ -4,7 +4,7 @@
 	user-select: none;
 }
 
-.user-table {
+.item-table {
 	border-collapse: collapse;
 	width: 95%;
 	margin: 0 auto;
@@ -15,7 +15,7 @@
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 
 	thead tr {
-		background-color: #009879;
+		background-color: #d04646;
 		color: #ffffff;
 		text-align: left;
 	}
@@ -48,24 +48,24 @@
 	}
 
 	tbody tr:last-of-type {
-		border-bottom: 2px solid #009879;
+		border-bottom: 2px solid #d04646;
 	}
 
 	tbody tr.active-row {
 		font-weight: bold;
-		color: #009879;
+		color: #d04646;
 	}
 
 	tbody tr:hover {
-		color: #009879;
-		background-color: #f8fff7e3;
+		color: #d04646;
+		background-color: #fff7f7e3;
 		cursor: pointer;
 	}
 }
 
-.user-table-editor {
+.item-table-editor {
 	border-collapse: collapse;
-	border-color: #009879;
+	border-color: #d04646;
 	border-style: solid;
 	border-radius: 10px;
 	overflow: hidden;
@@ -166,7 +166,7 @@
 
 .role-select {
 	padding: 5px;
-	border: 2px solid #009879;
+	border: 2px solid #d04646;
 	border-radius: 5px;
 	cursor: pointer;
 	width: 50%;
@@ -179,8 +179,8 @@
 }
 
 .login-button {
-	background-color: #009879;
-	border: 1px solid #009879;
+	background-color: #d04646;
+	border: 1px solid #d04646;
 	width: 250px;
 	align-self: center;
 }
@@ -197,16 +197,16 @@
 	.page-input {
 		width: fit-content;
 		padding: 5px;
-		border: 1px solid #009879;
+		border: 1px solid #d04646;
 		border-radius: 5px;
 		text-align: center;
 	}
 
 	button {
 		padding: 5px 10px;
-		border: 1px solid #009879;
+		border: 1px solid #d04646;
 		border-radius: 30px;
-		background-color: #009879;
+		background-color: #d04646;
 		color: white;
 		cursor: pointer;
 	}
@@ -234,7 +234,7 @@
 
 .select-items-per-page {
 	padding: 5px;
-	border: 1px solid #009879;
+	border: 1px solid #d04646;
 	border-radius: 5px;
 	text-align: center;
 	cursor: pointer;
