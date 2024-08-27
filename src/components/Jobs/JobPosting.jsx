@@ -1,5 +1,7 @@
-import {Link} from "react-router-dom";
 import './index.css'
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import JobDetails from "./JobDetails.jsx";
+
 const JobPosting = ( {job}
 
 ) => {
@@ -13,6 +15,7 @@ const JobPosting = ( {job}
     return (
 
         <div>
+            <div className="pb-2"> 
             <li className = "list-group-item rounded override-color" >
                 <div className="row">
                     <div className = "col-9">
@@ -24,12 +27,14 @@ const JobPosting = ( {job}
 
                     </div>
                     <div className="col-3 d-flex flex-column align-items-start">
-                    <Link to={`../apply`} className="btn btn-dark override-blue mt-2" 
+                        <Link to={`../apply`} className="btn btn-dark override-blue mt-2" 
                                 >Apply Here</Link>
-
-                    <Link to={`../jobpost`} className="btn btn-dark  override-red mt-2" 
+                        
+                        <Link to={`../jobpost/${job.id}`} className="btn btn-dark  override-red mt-2" 
 
                                 >View Job</Link>
+                 
+                    
 
                     </div>
 
@@ -39,7 +44,7 @@ const JobPosting = ( {job}
 
             </li>
             
-            
+            </div>
         </div>
     )
 
