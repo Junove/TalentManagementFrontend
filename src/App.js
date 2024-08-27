@@ -26,7 +26,7 @@ function App() {
       <Router>
         <NavBar/>
         <div className="App">
-          <LoginComponent/>
+          
         <Routes>
           <Route path="/search" element={<Search />} />
           <Route path="/jobpost/:jid" element = {<JobDetails/>}></Route>
