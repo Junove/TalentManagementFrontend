@@ -6,9 +6,9 @@ import { GenericListComponent } from "../../components/Admin/GenericListComponen
 import { rowSelectionHandler } from "../../components/Admin/RowSelectionHandler";
 
 function JobApplicationManagement() {
-	let blankListing = { id: -1, candidate_id: "", job_id: "", date_applied: "", cover_letter: "", "custom_resume": "", application_status: "" };
-	const [applications, setApplications] = useState([]);
-	const [formObject, setFormObject] = useState(blankListing);
+	let blankItem = { id: -1, candidate_id: "", job_id: "", date_applied: "", cover_letter: "", "custom_resume": "", application_status: "" };
+	const [items, setApplications] = useState([]);
+	const [formObject, setFormObject] = useState(blankItem);
 	let mode = formObject.id === -1 ? "Add" : "Update";
 
 	useEffect(() => {
@@ -28,13 +28,13 @@ function JobApplicationManagement() {
 	let onDeleteClick = function () {
 		console.log("in onDeleteClick()");
 		let postOpCallback = () => {
-			setFormObject(blankListing);
+			setFormObject(blankItem);
 		};
 
 		// if (formObject.id >= 0) {
 		// 	deleteById(formObject.id, postOpCallback);
 		// } else {
-		// 	setFormObject(blankListing);
+		// 	setFormObject(blankItem);
 		// }
 
 		rowSelectionHandler("job_description");
@@ -58,7 +58,7 @@ function JobApplicationManagement() {
 		}
 
 		let postOpCallback = () => {
-			setFormObject(blankListing);
+			setFormObject(blankItem);
 		};
 
 		// if (formObject.id === -1) {
@@ -73,7 +73,7 @@ function JobApplicationManagement() {
 	let onCancelClick = function () {
 		console.log("in onCancelClick()");
 
-		setFormObject(blankListing);
+		setFormObject(blankItem);
 		rowSelectionHandler("job_description");
 	};
 
@@ -82,7 +82,7 @@ function JobApplicationManagement() {
 
 		const isAlreadySelected = formObject.id === user.id;
 
-		setFormObject(isAlreadySelected ? blankListing : user);
+		setFormObject(isAlreadySelected ? blankItem : user);
 		rowSelectionHandler("job_description", isAlreadySelected ? null : user);
 	};
 
@@ -96,7 +96,7 @@ function JobApplicationManagement() {
 	return (
 		<div className="App">
 			<GenericListComponent
-				data={applications}
+				data={items}
 				handleListClick={handleListClick}
 			/>
 

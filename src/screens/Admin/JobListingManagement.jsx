@@ -6,9 +6,9 @@ import { GenericListComponent } from "../../components/Admin/GenericListComponen
 import { rowSelectionHandler } from "../../components/Admin/RowSelectionHandler";
 
 function JobListingManagement() {
-	let blankListing = { id: -1, manager_id: "", department: "", listing_title: "", date_listed: "", date_closed: "", job_title: "", job_description: "", additional_information: "", listing_status: ""};
-	const [users, setListings] = useState([]);
-	const [formObject, setFormObject] = useState(blankListing);
+	let blankItem = { id: -1, manager_id: "", department: "", listing_title: "", date_listed: "", date_closed: "", job_title: "", job_description: "", additional_information: "", listing_status: ""};
+	const [items, setListings] = useState([]);
+	const [formObject, setFormObject] = useState(blankItem);
 	let mode = formObject.id === -1 ? "Add" : "Update";
 
 	useEffect(() => {
@@ -28,13 +28,13 @@ function JobListingManagement() {
 	let onDeleteClick = function () {
 		console.log("in onDeleteClick()");
 		let postOpCallback = () => {
-			setFormObject(blankListing);
+			setFormObject(blankItem);
 		};
 
 		// if (formObject.id >= 0) {
 		// 	deleteById(formObject.id, postOpCallback);
 		// } else {
-		// 	setFormObject(blankListing);
+		// 	setFormObject(blankItem);
 		// }
 
 		rowSelectionHandler("job_description");
@@ -43,22 +43,8 @@ function JobListingManagement() {
 	let onSaveClick = function () {
 		console.log("in onSaveClick()");
 
-		// Require name, email, and password fields
-		if (
-			formObject.username === "" ||
-			formObject.password === ""
-		) {
-			alert("Please fill out all required fields!");
-			return;
-		}
-
-		// Default to "user" type, so inputting data in this field isn't required
-		if (formObject.type !== "user" && formObject.type !== "admin") {
-			formObject.type = "user";
-		}
-
 		let postOpCallback = () => {
-			setFormObject(blankListing);
+			setFormObject(blankItem);
 		};
 
 		// if (formObject.id === -1) {
@@ -73,7 +59,7 @@ function JobListingManagement() {
 	let onCancelClick = function () {
 		console.log("in onCancelClick()");
 
-		setFormObject(blankListing);
+		setFormObject(blankItem);
 		rowSelectionHandler("job_description");
 	};
 
@@ -82,7 +68,7 @@ function JobListingManagement() {
 
 		const isAlreadySelected = formObject.id === user.id;
 
-		setFormObject(isAlreadySelected ? blankListing : user);
+		setFormObject(isAlreadySelected ? blankItem : user);
 		rowSelectionHandler("job_description", isAlreadySelected ? null : user);
 	};
 
@@ -96,7 +82,7 @@ function JobListingManagement() {
 	return (
 		<div className="App">
 			<GenericListComponent
-				data={users}
+				data={items}
 				handleListClick={handleListClick}
 			/>
 

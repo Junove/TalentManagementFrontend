@@ -6,9 +6,9 @@ import { GenericListComponent } from "../../components/Admin/GenericListComponen
 import { rowSelectionHandler } from "../../components/Admin/RowSelectionHandler";
 
 function UserManagement() {
-	let blankUser = { id: -1, username: "", password: "", type: "" };
-	const [users, setUsers] = useState([]);
-	const [formObject, setFormObject] = useState(blankUser);
+	let blankItem = { id: -1, username: "", password: "", type: "" };
+	const [items, setUsers] = useState([]);
+	const [formObject, setFormObject] = useState(blankItem);
 	let mode = formObject.id === -1 ? "Add" : "Update";
 
 	useEffect(() => {
@@ -28,13 +28,13 @@ function UserManagement() {
 	let onDeleteClick = function () {
 		console.log("in onDeleteClick()");
 		let postOpCallback = () => {
-			setFormObject(blankUser);
+			setFormObject(blankItem);
 		};
 
 		// if (formObject.id >= 0) {
 		// 	deleteById(formObject.id, postOpCallback);
 		// } else {
-		// 	setFormObject(blankUser);
+		// 	setFormObject(blankItem);
 		// }
 
 		rowSelectionHandler("username");
@@ -43,22 +43,19 @@ function UserManagement() {
 	let onSaveClick = function () {
 		console.log("in onSaveClick()");
 
-		// Require name, email, and password fields
-		if (
-			formObject.username === "" ||
-			formObject.password === ""
-		) {
-			alert("Please fill out all required fields!");
-			return;
-		}
-
 		// Default to "user" type, so inputting data in this field isn't required
-		if (formObject.type !== "user" && formObject.type !== "admin") {
+		// user, admin, candidate, hiring_manager
+		if (
+			formObject.type !== "user" && 
+			formObject.type !== "admin" && 
+			formObject.type !== "candidate" && 
+			formObject.type !== "hiring_manager") 
+		{
 			formObject.type = "user";
 		}
 
 		let postOpCallback = () => {
-			setFormObject(blankUser);
+			setFormObject(blankItem);
 		};
 
 		// if (formObject.id === -1) {
@@ -73,17 +70,17 @@ function UserManagement() {
 	let onCancelClick = function () {
 		console.log("in onCancelClick()");
 
-		setFormObject(blankUser);
+		setFormObject(blankItem);
 		rowSelectionHandler("username");
 	};
 
-	const handleListClick = function (user) {
+	const handleListClick = function (item) {
 		console.log("in handleListClick()");
 
-		const isAlreadySelected = formObject.id === user.id;
+		const isAlreadySelected = formObject.id === item.id;
 
-		setFormObject(isAlreadySelected ? blankUser : user);
-		rowSelectionHandler("username", isAlreadySelected ? null : user);
+		setFormObject(isAlreadySelected ? blankItem : item);
+		rowSelectionHandler("username", isAlreadySelected ? null : item);
 	};
 
 	const handleInputChange = function (event) {
@@ -96,7 +93,7 @@ function UserManagement() {
 	return (
 		<div className="App">
 			<GenericListComponent
-				data={users}
+				data={items}
 				handleListClick={handleListClick}
 			/>
 
