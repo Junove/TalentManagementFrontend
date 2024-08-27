@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, CardContent, Typography, CardActions, Button, Grid, Container } from '@mui/material';
+import { Grid, Container } from '@mui/material';
 import { getAllApplications } from '../../handlers/JobApplicationAPIHandler';
 import IndividualApplicationGridItem from './IndividualApplicationGridItem';
 
