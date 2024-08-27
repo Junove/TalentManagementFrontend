@@ -8,3 +8,9 @@ export const post = (job) => {
         .then((response) => console.log(response))
         .catch((error) => console.error(error))
 };
+
+export const put = (job,id) => {
+    axios.put(`${baseURL}/jobs/${id}`, job)
+        .then((response) => console.log(response))
+        .catch((error) => console.error(error))
+};

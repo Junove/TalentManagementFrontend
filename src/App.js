@@ -7,6 +7,7 @@ import CreateJobPosting from './screens/Jobs/CreateJobPosting';
 import EditJobPosting from './screens/Jobs/EditJobPosting';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import NavBar from './components/Universal/NavBar';
+import CandidateDashboard from './screens/CandidateDashboard';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
           <Route path='/editJobPosting' element={<EditJobPosting/>}/>
+          <Route path='/candidateDashboard' element={<CandidateDashboard/>}></Route>
         </Routes>
       </div>
       </Router>
