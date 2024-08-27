@@ -52,7 +52,7 @@ const JobEditingForm = () => {
                             <option value="closed">Closed</option>
                     </select>
                 </div>
-                <button className="mt-3 btn btn-primary">Update</button>
+                <button className="mt-3 btn btn-primary" style={{backgroundColor: 'rgb(18,28,78)', border: 'none'}}>Update</button>
                 <button className="mt-3 mx-3 btn btn-secondary">Cancel</button>
             </div>
         </div>
