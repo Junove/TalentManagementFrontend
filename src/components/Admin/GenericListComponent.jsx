@@ -22,6 +22,7 @@ export function GenericListComponent(parameters) {
     }
 
     const itemFields = Object.keys(parameters.data[0]);
+    console.log(itemFields);
 
     const currentItems = parameters.data.slice(startIndex, startIndex + itemsPerPage);
 
@@ -43,7 +44,7 @@ export function GenericListComponent(parameters) {
                             className="item-row"
                         >
                             {itemFields.map((field) => (
-                                <td key={field}>{item[field]}</td>
+                                <td key={field}>{typeof item[field] === "object" ? item[field].username : item[field]}</td>
                             ))}
                         </tr>
                     ))}

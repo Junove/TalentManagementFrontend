@@ -6,7 +6,18 @@ import { GenericListComponent } from "../../components/Admin/GenericListComponen
 import { rowSelectionHandler } from "../../components/Admin/RowSelectionHandler";
 
 function AdminManagement() {
-	let blankItem = { id: -1, user_id: "", full_name: "", email: "" };
+	let blankItem = { 
+		id: -1, 
+		user: {
+			id: "",
+			username: "",
+			password: "",
+			type: ""
+		}, 
+		full_name: "", 
+		email: ""
+	};
+
 	const [items, setAdministrators] = useState([]);
 	const [formObject, setFormObject] = useState(blankItem);
 	let mode = formObject.id === -1 ? "Add" : "Update";
@@ -63,13 +74,13 @@ function AdminManagement() {
 		rowSelectionHandler("user_id");
 	};
 
-	const handleListClick = function (user) {
+	const handleListClick = function (item) {
 		console.log("in handleListClick()");
 
-		const isAlreadySelected = formObject.id === user.id;
+		const isAlreadySelected = formObject.id === item.id;
 
-		setFormObject(isAlreadySelected ? blankItem : user);
-		rowSelectionHandler("user_id", isAlreadySelected ? null : user);
+		setFormObject(isAlreadySelected ? blankItem : item);
+		rowSelectionHandler("user_id", isAlreadySelected ? null : item);
 	};
 
 	const handleInputChange = function (event) {

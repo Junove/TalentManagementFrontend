@@ -6,7 +6,16 @@ import { GenericListComponent } from "../../components/Admin/GenericListComponen
 import { rowSelectionHandler } from "../../components/Admin/RowSelectionHandler";
 
 function JobApplicationManagement() {
-	let blankItem = { id: -1, candidate_id: "", job_id: "", date_applied: "", cover_letter: "", "custom_resume": "", application_status: "" };
+	let blankItem = { 
+		id: -1, 
+		candidate_id: "", 
+		job_id: "", 
+		date_applied: "", 
+		cover_letter: "", 
+		custom_resume: "", 
+		application_status: "" 
+	};
+
 	const [items, setApplications] = useState([]);
 	const [formObject, setFormObject] = useState(blankItem);
 	let mode = formObject.id === -1 ? "Add" : "Update";
@@ -43,20 +52,6 @@ function JobApplicationManagement() {
 	let onSaveClick = function () {
 		console.log("in onSaveClick()");
 
-		// Require name, email, and password fields
-		if (
-			formObject.username === "" ||
-			formObject.password === ""
-		) {
-			alert("Please fill out all required fields!");
-			return;
-		}
-
-		// Default to "user" type, so inputting data in this field isn't required
-		if (formObject.type !== "user" && formObject.type !== "admin") {
-			formObject.type = "user";
-		}
-
 		let postOpCallback = () => {
 			setFormObject(blankItem);
 		};
@@ -77,13 +72,13 @@ function JobApplicationManagement() {
 		rowSelectionHandler("job_description");
 	};
 
-	const handleListClick = function (user) {
+	const handleListClick = function (item) {
 		console.log("in handleListClick()");
 
-		const isAlreadySelected = formObject.id === user.id;
+		const isAlreadySelected = formObject.id === item.id;
 
-		setFormObject(isAlreadySelected ? blankItem : user);
-		rowSelectionHandler("job_description", isAlreadySelected ? null : user);
+		setFormObject(isAlreadySelected ? blankItem : item);
+		rowSelectionHandler("job_description", isAlreadySelected ? null : item);
 	};
 
 	const handleInputChange = function (event) {

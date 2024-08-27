@@ -6,7 +6,19 @@ import { GenericListComponent } from "../../components/Admin/GenericListComponen
 import { rowSelectionHandler } from "../../components/Admin/RowSelectionHandler";
 
 function JobListingManagement() {
-	let blankItem = { id: -1, manager_id: "", department: "", listing_title: "", date_listed: "", date_closed: "", job_title: "", job_description: "", additional_information: "", listing_status: ""};
+	let blankItem = { 
+		id: -1, 
+		manager_id: "", 
+		department: "", 
+		listing_title: "", 
+		date_listed: "", 
+		date_closed: "", 
+		job_title: "", 
+		job_description: "", 
+		additional_information: "", 
+		listing_status: ""
+	};
+
 	const [items, setListings] = useState([]);
 	const [formObject, setFormObject] = useState(blankItem);
 	let mode = formObject.id === -1 ? "Add" : "Update";
@@ -63,13 +75,13 @@ function JobListingManagement() {
 		rowSelectionHandler("job_description");
 	};
 
-	const handleListClick = function (user) {
+	const handleListClick = function (item) {
 		console.log("in handleListClick()");
 
-		const isAlreadySelected = formObject.id === user.id;
+		const isAlreadySelected = formObject.id === item.id;
 
-		setFormObject(isAlreadySelected ? blankItem : user);
-		rowSelectionHandler("job_description", isAlreadySelected ? null : user);
+		setFormObject(isAlreadySelected ? blankItem : item);
+		rowSelectionHandler("job_description", isAlreadySelected ? null : item);
 	};
 
 	const handleInputChange = function (event) {
