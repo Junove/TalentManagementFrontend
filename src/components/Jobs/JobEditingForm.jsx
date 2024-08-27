@@ -40,12 +40,18 @@ const JobEditingForm = (props) => {
 
     const [status, setStatus] = useState('');
 
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState('');
     const onStatusChange = (e) => {
         setStatus(e.target.value);
-        if (e.target.value === 'active'){
-            setDate(Date(Date.now()).toLocaleDateString())
+        if (e.target.value === 'closed'){
+            
+            const date = new Date(Date.now()).toISOString();
+            const dateArray = date.split('T');
+            const time = dateArray[1].substring(0,8)
+            console.log(`${dateArray[0]} ${time}`);
+            setDate(`${dateArray[0]} ${time}`)
         } else {
+            console.log(null);
             setDate(null);
         }
     };
