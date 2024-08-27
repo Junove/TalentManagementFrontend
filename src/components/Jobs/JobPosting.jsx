@@ -15,6 +15,7 @@ const JobPosting = ( {job}
     return (
 
         <div>
+            <div className="pb-2"> 
             <li className = "list-group-item rounded override-color" >
                 <div className="row">
                     <div className = "col-9">
@@ -42,7 +43,7 @@ const JobPosting = ( {job}
 
             </li>
             
-            
+            </div>
         </div>
     )
 

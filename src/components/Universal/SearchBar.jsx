@@ -34,17 +34,21 @@ const SearchBar = ( {onSearch}
         <div>
             <div className="row">
                 <div > 
-                <input 
+                    <div className = "pb-2">
+                    <input 
                     id="jobTitle" 
-                    className=" col-4 ps-5 form-control  border-1 w-100 pe-5 override-border-black"
+                    className=" col-4 ps-5 form-control border-1 w-100 pe-5 override-border-black"
                     placeholder="Job Title"
                     onChange={handleInputChange}
                     value={filters.jobTitle}
                     >
                 </input>
-                <select 
+                    </div>
+
+                    <div className="pb-2">
+                    <select 
                     id="status" 
-                    className=" col-4 ps-5 form-control  border-1 w-100 pe-5 override-border-black"
+                    className=" col-4 ps-5 form-control border-1 w-100 pe-5 override-border-black"
                     placeholder="Listing Status"
                     onChange={handleInputChange}
                     value={filters.status}
@@ -54,14 +58,22 @@ const SearchBar = ( {onSearch}
                         <option value="Open">Open</option>
                         <option value="Closed">Closed</option>
                 </select>
+
+                    </div>
+                
+                <div className="pb-2">
                 <input 
                     id="department" 
-                    className=" col-4 ps-5 form-control  border-1 w-100 pe-5 override-border-black"
+                    className=" col-4 ps-5 form-control border-1 w-100 pe-5 override-border-black"
                     placeholder="Department"
                     onChange={handleInputChange}
                     value={filters.department}
                     >
                 </input>
+
+                </div>
+               
+               
 
                 </div>
             
