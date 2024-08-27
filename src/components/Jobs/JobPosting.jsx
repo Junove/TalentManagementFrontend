@@ -31,6 +31,7 @@ const JobPosting = ( {job}
                                 >Apply Here</Link>
                         
                         <Link to={`../jobpost/${job.id}`} className="btn btn-dark  override-red mt-2" 
+
                                 >View Job</Link>
                  
                     
