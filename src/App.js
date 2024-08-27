@@ -25,7 +25,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/login" element={<Login />} />
           <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
-          <Route path='/editJobPosting' element={<EditJobPosting/>}/>
+          <Route path='/editJobPosting/:jobid' element={<EditJobPosting/>}/>
           <Route path='/candidateDashboard' element={<CandidateDashboard/>}/>
           <Route path='/application/:applicationid' element={<ViewSingleApplication/>}/>
         </Routes>

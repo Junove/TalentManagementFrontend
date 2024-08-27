@@ -1,7 +1,31 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getJobById } from '../../handlers/JobAPIHandler';
+import { useNavigate } from 'react-router-dom';
 
-const JobEditingForm = () => {
+const JobEditingForm = (props) => {
+    const navigate = useNavigate();
+
+    const {
+        jobId
+    } = props
+
+    const [job, setJob] = useState({});
+
+    useEffect(()=>{
+        console.log(jobId);
+        getJobById(setJob, jobId);
+        
+    }, []);
+
+    useEffect(() => {
+        setJobTitle(job.listing_title);
+        setDepartment(job.department);
+        setJobDescription(job.job_description);
+        setAdditionalInfo(job.additionl_info);
+        setStatus(job.listing_status);
+    }, [job])
+
     const [jobTitle, setJobTitle] = useState('');
     const onJobTitleChange = (e) => setJobTitle(e.target.value);
 
@@ -16,6 +40,17 @@ const JobEditingForm = () => {
 
     const [status, setStatus] = useState('');
     const onStatusChange = (e) => setStatus(e.target.value);
+
+    const handlePutClick = () => {
+        const updatedJob = {
+            ...job,
+            listing_title: jobTitle,
+            department: department,
+
+        }
+    }
+
+
 
   return (
     <ul className="list-group">
@@ -52,8 +87,8 @@ const JobEditingForm = () => {
                             <option value="closed">Closed</option>
                     </select>
                 </div>
-                <button className="mt-3 btn btn-primary" style={{backgroundColor: 'rgb(18,28,78)', border: 'none'}}>Update</button>
-                <button className="mt-3 mx-3 btn btn-secondary">Cancel</button>
+                <button className="mt-3 btn btn-primary" onClick={handlePutClick} style={{backgroundColor: 'rgb(18,28,78)', border: 'none'}}>Update</button>
+                <button className="mt-3 mx-3 btn btn-secondary" onClick={()=> navigate('/')}>Cancel</button>
             </div>
         </div>
     </ul>

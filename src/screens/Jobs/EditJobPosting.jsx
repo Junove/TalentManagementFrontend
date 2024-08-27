@@ -1,7 +1,10 @@
 import React from 'react'
 import JobEditingForm from '../../components/Jobs/JobEditingForm'
+import { useParams } from 'react-router-dom';
 
 const EditJobPosting = () => {
+  const { jobid } = useParams();
+
   return (
     <>
         <div className='row'>
@@ -13,7 +16,7 @@ const EditJobPosting = () => {
             </div>  
         </div>
         
-        <JobEditingForm/>
+        <JobEditingForm jobId={jobid}/>
     </>
   )
 }
