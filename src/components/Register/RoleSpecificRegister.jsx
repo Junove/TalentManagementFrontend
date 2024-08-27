@@ -6,6 +6,7 @@ function RoleSpecificRegister() {
   const location = useLocation();
   const navigate = useNavigate();
   const { role, userId } = location.state || { role: 'candidate', userId: null }; // Ensure userId is passed
+  // const { role, userId } = location.state || { role: 'hiring_manager', userId: null }; // Ensure userId is passed
 
   const handleFormNavigation = () => {
     switch (role) {

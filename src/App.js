@@ -8,6 +8,7 @@ import RoleSpecificRegister from './components/Register/RoleSpecificRegister';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/Universal/NavBar';
 import CandidateRegister from './components/Register/CandidateRegister';
+import HiringManagerRegister from "./components/Register/HiringManagerRegister";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path='/register' element={<UserRegister />} />
             <Route path='/register/role' element={<RoleSpecificRegister />} />
             <Route path='/candidate/register' element={<CandidateRegister />} />
+            <Route path='/hiring-manager/register' element={<HiringManagerRegister />} />
           </Routes>
         </div>
       </Router>
