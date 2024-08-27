@@ -69,7 +69,7 @@ export function GenericEditorForm(parameters) {
                             <option value="user">Default User</option>
                             <option value="admin">Administrator</option>
                             <option value="candidate">Candidate</option>
-                            <option value="hiring_manager">Hiring Manaager</option>
+                            <option value="hiring_manager">Hiring Manager</option>
                         </select>
                     </td>
                     
