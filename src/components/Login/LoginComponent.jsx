@@ -1,32 +1,52 @@
 import { useContext } from "react";
 import { LoginContext } from './LoginContext';
-import { Link, useNavigate, useLocation } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
 function LoginComponent() {
-  const { isLoggedIn, user, username, login, logout } = useContext(LoginContext);
-  const location = useLocation();
-  
+  const { isLoggedIn, user, logout } = useContext(LoginContext);
   const navigate = useNavigate();
 
-  function onLogoutClick() { 
-    logout(); 
+  const onLogoutClick = () => {
+    logout();
     navigate("/home");
-  }
+  };
 
   return (
-    <div>
-      User: {(isLoggedIn) ? user.username : "guest"}    
-      
-      {(!isLoggedIn)
-        ? <button onClick={() => navigate("/login")} >Login</button>
-        : <button onClick={() => onLogoutClick()} >Logout</button>}
-      
-      {(!isLoggedIn)
-        ? <button onClick={() => navigate("/register")} >Register</button>
-        : "" }   
-      
+    <div className="container">
+      <div className="d-flex justify-content-end align-items-center mt-3">
+        <div className="d-flex align-items-center">
+          <span className="me-3">
+            User: {isLoggedIn ? user.username : "Guest"}
+          </span>
+
+          {!isLoggedIn ? (
+            <>
+              <button 
+                className="btn btn-primary me-2"
+                onClick={() => navigate("/login")}
+              >
+                Login
+              </button>
+              <button 
+                className="btn btn-secondary"
+                onClick={() => navigate("/register")}
+              >
+                Register
+              </button>
+            </>
+          ) : (
+            <button 
+              className="btn btn-danger"
+              onClick={onLogoutClick}
+            >
+              Logout
+            </button>
+          )}
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default LoginComponent
+export default LoginComponent;
