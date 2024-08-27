@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 
 import './App.css'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
@@ -16,6 +15,7 @@ import JobDetails from './components/Jobs/JobDetails';
 
 import CandidateDashboard from './screens/CandidateDashboard';
 import LoginComponent from './components/Login/LoginComponent';
+import JobApplication from './screens/Jobs/JobApplication/JobApplication';
 
 import CandidateRegister from './components/Register/CandidateRegister';
 import HiringManagerRegister from "./components/Register/HiringManagerRegister";
@@ -30,6 +30,7 @@ function App() {
         <Routes>
           <Route path="/search" element={<Search />} />
           <Route path="/jobpost/:jid" element = {<JobDetails/>}></Route>
+          <Route path="/apply" element={<JobApplication />} />
           <Route path="/login" element={<Login />} />
           <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
           <Route path='/editJobPosting' element={<EditJobPosting/>}/>
@@ -45,4 +46,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
