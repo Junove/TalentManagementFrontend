@@ -42,6 +42,14 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
           <Route path='/editJobPosting' element={<EditJobPosting/>}/>
+
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/administrator" element={<AdminManagement />} />
+          <Route path="/admin/candidates" element={<CandidateManagement />} />
+          <Route path="/admin/hiringManagers" element={<HiringManagerment />} />
+          <Route path="/admin/jobApplications" element={<JobApplicationManagement />} />
+          <Route path="/admin/jobListings" element={<JobListingManagement />} />
+          <Route path="/admin/users" element={<UserManagement />} />
         </Routes>
         </div>
       </Router>
