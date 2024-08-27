@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TextField, Button, Typography, Container, Box } from '@mui/material';
 import axios from 'axios';
+import './index.css';
 
 function HiringManagerRegister() {
     const location = useLocation();
@@ -66,6 +67,7 @@ function HiringManagerRegister() {
                 </Typography>
                 <Box component="form" onSubmit={registerHiringManager} sx={{ mt: 3 }}>
                     <TextField
+                        className='custom-textfield'
                         variant="outlined"
                         margin="normal"
                         required
@@ -77,6 +79,7 @@ function HiringManagerRegister() {
                         onChange={(e) => setFullName(e.target.value)}
                     />
                     <TextField
+                        className='custom-textfield'
                         variant="outlined"
                         margin="normal"
                         required
@@ -88,6 +91,7 @@ function HiringManagerRegister() {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <TextField
+                        className='custom-textfield'
                         variant="outlined"
                         margin="normal"
                         required
@@ -99,6 +103,7 @@ function HiringManagerRegister() {
                         onChange={(e) => setDepartment(e.target.value)}
                     />
                     <TextField
+                        className='custom-textfield'
                         variant="outlined"
                         margin="normal"
                         required
@@ -113,7 +118,7 @@ function HiringManagerRegister() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 3, mb: 2, backgroundColor:'rgb(237,28,46)' }}
                     >
                         Register
                     </Button>
