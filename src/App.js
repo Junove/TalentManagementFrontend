@@ -37,23 +37,9 @@ function App() {
           <Route path='/application/:applicationid' element={<ViewSingleApplication/>}/>
           <Route path='/register' element={<UserRegister />} />
           <Route path='/candidate/register' element={<CandidateRegister />} />
-          <Route path='/manager/register' element={<HiringManagerRegister />} />
+          <Route path='/manager/register' element={<HiringManagerRegister />} />  
+          <Route path='/managerDashboard' element={<ManagerDashboard />} />
         </Routes>
-          {/* <LoginComponent /> */}
-          <Routes>
-            <Route path="/search" element={<Search />} />
-            <Route path="/jobpost/:jid" element={<JobDetails />} />
-            <Route path="/apply" element={<JobApplication />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/createJobPosting" element={<CreateJobPosting />} />
-            <Route path='/editJobPosting' element={<EditJobPosting />} />
-            <Route path='/register' element={<UserRegister />} />
-            <Route path='/register/role' element={<RoleSpecificRegister />} />
-            <Route path='/candidate/register' element={<CandidateRegister />} />
-            <Route path='/manager/register' element={<HiringManagerRegister />} />
-            <Route path='/candidateDashboard' element={<CandidateDashboard />} />
-            <Route path='/managerDashboard' element={<ManagerDashboard />} />
-          </Routes>
         </div>
       </Router>
     </div>
