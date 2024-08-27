@@ -11,6 +11,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import NavBar from './components/Universal/NavBar';
 import LoginComponent from './components/Login/LoginComponent';
 
+import AdminDashboard from './screens/AdminDashboard';
+
 function App() {
   return (
     <div className = "container-fluid mb-5">
@@ -24,6 +26,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
           <Route path='/editJobPosting' element={<EditJobPosting/>}/>
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </div>
       </Router>
