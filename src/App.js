@@ -12,6 +12,12 @@ import NavBar from './components/Universal/NavBar';
 import LoginComponent from './components/Login/LoginComponent';
 
 import AdminDashboard from './screens/AdminDashboard';
+import AdminManagement from './screens/Admin/AdminManagement';
+import CandidateManagement from './screens/Admin/CandidateManagement';
+import HiringManagerment from './screens/Admin/HiringManagerment';
+import JobApplicationManagement from './screens/Admin/JobApplicationManagement';
+import JobListingManagement from './screens/Admin/JobListingManagement';
+import UserManagement from './screens/Admin/UserManagement';
 
 function App() {
   return (
@@ -26,7 +32,15 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
           <Route path='/editJobPosting' element={<EditJobPosting/>}/>
+          
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/administrator" element={<AdminManagement />} />
+          <Route path="/admin/candidates" element={<CandidateManagement />} />
+          <Route path="/admin/hiringManagers" element={<HiringManagerment />} />
+          <Route path="/admin/jobApplications" element={<JobApplicationManagement />} />
+          <Route path="/admin/jobListings" element={<JobListingManagement />} />
+          <Route path="/admin/users" element={<UserManagement />} />
+
         </Routes>
       </div>
       </Router>
