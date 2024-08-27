@@ -8,6 +8,7 @@ import EditJobPosting from './screens/Jobs/EditJobPosting';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import NavBar from './components/Universal/NavBar';
 import CandidateDashboard from './screens/CandidateDashboard';
+import ViewSingleApplication from './screens/Applications/ViewSingleApplication';
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
           <Route path='/editJobPosting' element={<EditJobPosting/>}/>
-          <Route path='/candidateDashboard' element={<CandidateDashboard/>}></Route>
+          <Route path='/candidateDashboard' element={<CandidateDashboard/>}/>
+          <Route path='/application/:applicationid' element={<ViewSingleApplication/>}/>
         </Routes>
       </div>
       </Router>
