@@ -5,7 +5,7 @@ import { LoginContext } from '../Login/LoginContext';
 import React, { useContext } from 'react';
 
 const NavBar = () => {
-    const { isLoggedIn, username, logout } = useContext(LoginContext);
+    const { isLoggedIn, username, logout, user } = useContext(LoginContext);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
@@ -29,11 +29,15 @@ const NavBar = () => {
                         
                         {isLoggedIn ? (
                             <>
+                            {user.type === "candidate" && (
                                 <li className="nav-item">
                                     <Link to="/candidatedashboard" className="nav-link">
-                                        {username}
+                                       {username}
                                     </Link>
                                 </li>
+                                )
+                            }
+                            
                                 <li className="nav-item">
                                     <span className="nav-link" onClick={logout}>
                                         Logout
