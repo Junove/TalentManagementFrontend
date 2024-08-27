@@ -74,7 +74,7 @@ function ManagerDashboard() {
   };
 
   return (
-    <Container component="main" maxWidth="md">
+    <Container component="main" maxWidth="md" sx={{ mt: 1}} >
       <Box marginBottom={3}>
         <Typography variant="h4" component="h1">
           Manager Dashboard
