@@ -10,6 +10,7 @@ import EditJobPosting from './screens/Jobs/EditJobPosting';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import NavBar from './components/Universal/NavBar';
 import LoginComponent from './components/Login/LoginComponent';
+import JobApplication from './screens/Jobs/JobApplication/JobApplication';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <LoginComponent/>
         <Routes>
           <Route path="/search" element={<Search />} />
+          <Route path="/apply" element={<JobApplication />} />
           <Route path="/login" element={<Login />} />
           <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
           <Route path='/editJobPosting' element={<EditJobPosting/>}/>
