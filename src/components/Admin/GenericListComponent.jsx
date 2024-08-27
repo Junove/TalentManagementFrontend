@@ -44,7 +44,11 @@ export function GenericListComponent(parameters) {
                             className="item-row"
                         >
                             {itemFields.map((field) => (
-                                <td key={field}>{typeof item[field] === "object" ? item[field].username : item[field]}</td>
+                                <td key={field}>
+                                    {item[field] && typeof item[field] === "object" && "username" in item[field] 
+                                        ? item[field].username 
+                                        : item[field]}
+                                </td>
                             ))}
                         </tr>
                     ))}

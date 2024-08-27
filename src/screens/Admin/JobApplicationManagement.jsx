@@ -26,7 +26,7 @@ function JobApplicationManagement() {
 
 	const getApplications = function () {
 		console.log("in getApplications()");
-		fetch("http://localhost:8080/applications")
+		fetch("http://localhost:8080/jobapps")
             .then((response) => response.json())
             .then((data) => {
                 setApplications(data);

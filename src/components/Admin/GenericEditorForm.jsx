@@ -19,7 +19,11 @@ export function GenericEditorForm(parameters) {
                                     name={field}
                                     placeholder={field} 
                                     onChange={ (e) => parameters.handleInputChange(e) }
-                                    value={typeof parameters.formObject[field] === "object" ? parameters.formObject[field].username : parameters.formObject[field]}
+                                    value={
+                                        parameters.formObject[field] && typeof parameters.formObject[field] === "object" && "username" in parameters.formObject[field]
+                                        ? parameters.formObject[field].username
+                                        : parameters.formObject[field]
+                                    }
                                 />
                             </td>
                         </tr>
