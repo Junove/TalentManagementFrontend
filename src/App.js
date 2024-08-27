@@ -7,7 +7,6 @@ import Login from './screens/Login';
 import CreateJobPosting from './screens/Jobs/CreateJobPosting';
 import EditJobPosting from './screens/Jobs/EditJobPosting';
 import UserRegister from './components/Register/UserRegister.jsx';
-import RoleSpecificRegister from './components/Register/RoleSpecificRegister';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/Universal/NavBar';
 
@@ -26,7 +25,7 @@ function App() {
       <Router>
         <NavBar/>
         <div className="App">
-          <LoginComponent/>
+          
         <Routes>
           <Route path="/search" element={<Search />} />
           <Route path="/jobpost/:jid" element = {<JobDetails/>}></Route>
@@ -35,7 +34,6 @@ function App() {
           <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
           <Route path='/editJobPosting' element={<EditJobPosting/>}/>
           <Route path='/register' element={<UserRegister />} />
-          <Route path='/register/role' element={<RoleSpecificRegister />} />
           <Route path='/candidate/register' element={<CandidateRegister />} />
           <Route path='/manager/register' element={<HiringManagerRegister />} />
           <Route path='/candidateDashboard' element={<CandidateDashboard/>}></Route>
