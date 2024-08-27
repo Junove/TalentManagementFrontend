@@ -23,6 +23,7 @@ const LoginProvider = ({ children }) => {
     setIsLoggedIn(true);
     setUsername(user.username);
     setUser(user);
+
     localStorage.setItem("user",JSON.stringify(user));
   };
 
@@ -36,7 +37,9 @@ const LoginProvider = ({ children }) => {
   // restore from localStorage
   const value = { isLoggedIn, user, username, login, logout };
 
-
+  console.log(user);
+  console.log("isLoggedIn: ", isLoggedIn);
+  
   return (
     <LoginContext.Provider value={value}>  
       {children}
@@ -45,4 +48,3 @@ const LoginProvider = ({ children }) => {
 };
 
 export { LoginContext, LoginProvider };
-

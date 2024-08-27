@@ -17,11 +17,13 @@ export default function Login() {
       let REST_URL = "http://localhost:8080/login";
       let credentials = { "username": usernameInput, "password": password }
       const response = await axios.post(REST_URL, credentials);
+
       if(response.status == 200){
         let user = response.data;
         login(user);
         navigate("/");
       }
+    
     } catch (error) {
       setError(error.message);
     }
@@ -51,4 +53,5 @@ export default function Login() {
   </>
   );
 
+  
 }
