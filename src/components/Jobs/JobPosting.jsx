@@ -1,10 +1,15 @@
 import './index.css'
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import JobDetails from "./JobDetails.jsx";
+import { LoginContext } from '../Login/LoginContext.jsx';
+import React, { useContext } from 'react';
+
 
 const JobPosting = ( {job}
 
 ) => {
+
+    const { isLoggedIn, username, logout } = useContext(LoginContext);
 
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
@@ -27,8 +32,22 @@ const JobPosting = ( {job}
 
                     </div>
                     <div className="col-3 d-flex flex-column align-items-start">
-                        <Link to={`../apply`} className="btn btn-dark override-blue mt-2" 
-                                >Apply Here</Link>
+                        {isLoggedIn ? (
+                            <div>
+                                <Link to={`../apply`} className="btn btn-dark override-blue mt-2" 
+                                >Apply Here
+                                </Link>
+                            </div>) : 
+                            (
+                                <div>
+                                        <button className="btn btn-dark override-blue mt-2" 
+                                            onClick={function handleClick() { alert ('Login first to apply')}}>
+                                            Apply
+                                        </button>
+                                </div>
+                            )
+                            }
+                        
                         
                         <Link to={`../jobpost/${job.id}`} className="btn btn-dark  override-red mt-2" 
 
