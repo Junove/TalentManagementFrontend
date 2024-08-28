@@ -1,4 +1,5 @@
 import "../../components/Admin/AdminStyles.css";
+import withAdminAuth from "../../components/Admin/AdminAuthentication";
 
 import { Box, Grid2 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -133,4 +134,4 @@ function HiringManagerment() {
 	);
 }
 
-export default HiringManagerment;
+export default withAdminAuth(HiringManagerment);

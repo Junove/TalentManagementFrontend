@@ -1,4 +1,5 @@
 import { Box, Grid2 } from "@mui/material";
+import withAdminAuth from "../../components/Admin/AdminAuthentication";
 import React, { useEffect, useState } from "react";
 
 import { getAllUsers, post, put, deleteById } from "../../handlers/UserAPIHandler";
@@ -116,4 +117,4 @@ function UserManagement() {
 	);
 }
 
-export default UserManagement;
+export default withAdminAuth(UserManagement);
