@@ -20,24 +20,22 @@ const NavBar = () => {
     };
 
     const searchButton = () => {
-console.log("ive entered");
         if (user.type === 'hiring_manager') {
-            console.log("im here1");
             return false;
         } else if (user.type === 'candidate') {
-            console.log("im here2");
-
             return true;
-        } else if (!isLoggedIn){
-            console.log("im here3");
-
+        }
+        else if (!isLoggedIn) {
             return true;
         }
     };
+    
+    
+    
 
     const handleLogout = () => {
         logout(); // Perform logout
-        navigate('/home'); // Redirect to home page
+        navigate('/'); // Redirect to home page
     };
 
     const handleProfileClick = () => {
@@ -59,12 +57,10 @@ console.log("ive entered");
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                        {searchButton && (
-                            <Link to="/search" className="nav-link">
+                          {searchButton() && <Link to="/search" className="nav-link">
                                 Search
-                            </Link>
-                        )}
-                            
+                            </Link>}
+                        
                         </li>
                         {isLoggedIn ? (
                             <div className="d-flex ms-auto align-items-right">
