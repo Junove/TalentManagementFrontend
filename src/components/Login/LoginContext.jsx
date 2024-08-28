@@ -3,7 +3,7 @@ import React, { createContext, useState, useContext } from 'react';
 const LoginContext = createContext(null);
 
 const LoginProvider = ({ children }) => {
-  
+
   let tempLoggedIn = false;
   let tempUser = {}
   let tempUsername = "";
