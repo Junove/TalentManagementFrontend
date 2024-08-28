@@ -102,6 +102,13 @@ function HiringManagerment() {
 	const handleInputChange = function (event) {
 		console.log("in handleInputChange()");
 		const { name, value } = event.target;
+
+		if (name === "user") {
+			const userId = parseInt(value);
+			const selectedUser = users.find(user => user.id === userId);
+			setFormObject({ ...formObject, [name]: selectedUser });
+			return;
+		}
 		
 		setFormObject({ ...formObject, [name]: value });
 	};

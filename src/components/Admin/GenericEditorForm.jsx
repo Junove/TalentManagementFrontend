@@ -20,7 +20,12 @@ export function GenericEditorForm({
 }) {
     return (
         <Box sx={{ p: 3, border: '3px solid #d04646', borderRadius: 5 }}>
-            <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }} gutterBottom>
+            <Typography 
+                variant="h5" 
+                component="div" 
+                sx={{ fontWeight: 'bold' }} 
+                gutterBottom
+            >
                 {mode}
             </Typography>
             
@@ -32,7 +37,7 @@ export function GenericEditorForm({
                     
                     // <SOMETHING>.USER (Containers user object USER.ID, USER.USERNAME, USER.PASSWORD, USER.TYPE)
                     if (field === "user") {
-                        return (
+                        return (       
                             <FormControl fullWidth sx={{ minWidth: 300 }}>
                                 <InputLabel id="select-user-label">User</InputLabel>
                                 <Select
@@ -41,11 +46,15 @@ export function GenericEditorForm({
                                     labelId="select-user-label"
                                     id="select-user"
                                     onChange={handleInputChange}
-                                    value={formObject.user.username}
+                                    value={formObject.user.id || ""}
+                                    defaultValue=""
                                     sx={{ textAlign: 'left' }}
                                 >
                                     {users.map((user) => (
-                                        <MenuItem key={user.id} value={user.username}>
+                                        <MenuItem 
+                                            key={user.id} 
+                                            value={user.id}
+                                        >
                                             {user.username}
                                         </MenuItem>
                                     ))}
@@ -102,7 +111,7 @@ export function GenericEditorForm({
                         <Grid2 item xs={12} key={field}>
                             <TextField
                                 fullWidth
-                                multiline="true"
+                                multiline
                                 label={field.split("_").map((word) => 
                                     word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
                                 ).join(" ")}

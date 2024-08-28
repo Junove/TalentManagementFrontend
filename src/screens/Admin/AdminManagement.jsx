@@ -101,7 +101,14 @@ function AdminManagement() {
 		console.log("in handleInputChange()");
 		const { name, value } = event.target;
 		
-		setFormObject({ ...formObject, [name]: value });
+		if (name === "user") {
+			const userId = parseInt(value);
+			const selectedUser = users.find(user => user.id === userId);
+			setFormObject({ ...formObject, [name]: selectedUser });
+			return;
+		}
+
+        setFormObject({ ...formObject, [name]: value });
 	};
 
 	return (
