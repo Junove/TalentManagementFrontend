@@ -21,7 +21,8 @@ export function GenericEditorForm({
     onDeleteClick,
     onSaveClick,
     onCancelClick,
-    users
+    users,
+    jobs
 }) {
     return (
         <Box sx={{ p: 3, border: '3px solid #d04646', borderRadius: 5 }}>
@@ -71,6 +72,80 @@ export function GenericEditorForm({
                                     renderInput={(params) => <TextField {...params} />}
                                 />
                             </LocalizationProvider>
+                        );
+                    }
+
+                    // DATE_APPLIED
+                    if (field === "date_applied" ) {
+                        return (
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="Date Applied"
+                                    value={formObject.date_applied ? dayjs(formObject.date_applied) : null}
+                                    onChange={(date) => {
+                                        const formattedDate = date ? dayjs(date).format("YYYY-MM-DD HH:mm:ss") : null;
+                                        handleInputChange({ target: { name: "date_applied", value: formattedDate } });
+                                    }}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </LocalizationProvider>
+                        );
+                    }
+                    
+                    // JOB_ID
+                    if (field === "job_id" ) {
+                        return (
+                            <FormControl fullWidth sx={{ minWidth: 300 }}>
+                                <InputLabel id="select-job-label">Job ID</InputLabel>
+                                <Select
+                                    label="Job ID"
+                                    name="job_id"
+                                    labelId="select-job_id-label"
+                                    id="select-job_id"
+                                    onChange={handleInputChange}
+                                    value={formObject.job_id || ""}
+                                    defaultValue=""
+                                    sx={{ textAlign: 'left' }}
+                                >
+                                    {jobs.map((job) => (
+                                        <MenuItem 
+                                            key={job.id} 
+                                            value={job.id}
+                                        >
+                                            {job.id} ({job.job_title})
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        );
+                    }
+
+
+                    // CANDIDATE_ID
+                    if (field === "candidate_id" ) {
+                        return (       
+                            <FormControl fullWidth sx={{ minWidth: 300 }}>
+                                <InputLabel id="select-candidate-label">Candidate ID</InputLabel>
+                                <Select
+                                    label="Candidate ID"
+                                    name="candidate_id"
+                                    labelId="select-candidate_id-label"
+                                    id="select-candidate_id"
+                                    onChange={handleInputChange}
+                                    value={formObject.candidate_id || ""}
+                                    defaultValue=""
+                                    sx={{ textAlign: 'left' }}
+                                >
+                                    {users.map((user) => (
+                                        <MenuItem 
+                                            key={user.id} 
+                                            value={user.id}
+                                        >
+                                            {user.id} ({user.fullName})
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         );
                     }
                     
@@ -169,6 +244,28 @@ export function GenericEditorForm({
                                 >
                                     <MenuItem value="Active">Active</MenuItem>
                                     <MenuItem value="Closed">Closed</MenuItem>
+                                </Select>
+                            </FormControl>
+                        );
+                    }
+
+                    // JOB_APPLICATION.APPLICATION_STATUS
+                    if (field === "application_status") {
+                        return (
+                            <FormControl fullWidth sx={{ minWidth: 300 }}>
+                                <InputLabel id="select-status-label">Application Status</InputLabel>
+                                <Select
+                                    label="Application Status"
+                                    name="application_status"
+                                    labelId="select-status-label"
+                                    id="select-status"
+                                    onChange={handleInputChange}
+                                    value={formObject.application_status}
+                                    sx={{ textAlign: 'left' }}
+                                >
+                                    <MenuItem value="Pending">Pending</MenuItem>
+                                    <MenuItem value="Accepted">Accepted</MenuItem>
+                                    <MenuItem value="Rejected">Rejected</MenuItem>
                                 </Select>
                             </FormControl>
                         );
