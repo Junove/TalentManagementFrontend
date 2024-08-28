@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Container, Card, CardContent, Typography, CardActions, Button, Divider, Box } from '@mui/material';
 import { getApplicationByID } from '../../handlers/JobApplicationAPIHandler';
 import { getJobById } from '../../handlers/JobAPIHandler';
+import { getCandidateById } from '../../handlers/CandidateAPIHandler';
 
 
 const ViewSingleApplication = () => {
@@ -15,10 +16,11 @@ const ViewSingleApplication = () => {
     }, []);
     
     const [job, setJob] = useState({});
+    const [candidate, setCandidate] = useState({});
 
     useEffect(()=>{
         getJobById(setJob, application.job_id);
-
+        getCandidateById(setCandidate, application.candidate_id);
     }, [application]);
 
 
@@ -38,7 +40,7 @@ const ViewSingleApplication = () => {
           <strong>Application ID:</strong> {application.id}
         </Typography>
         <Typography variant="body1" paragraph>
-          <strong>Candidate ID:</strong> {application.candidate_id}
+          <strong>Candidate Name:</strong> {candidate.full_name}
         </Typography>
         <Typography variant="body1" paragraph>
           <strong>Date Applied:</strong> {new Date(application.date_applied).toLocaleDateString()}
