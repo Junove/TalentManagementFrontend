@@ -6,6 +6,7 @@ import { getAllUsers, post, put, deleteById } from "../../handlers/UserAPIHandle
 import { GenericEditorForm } from "../../components/Admin/GenericEditorForm";
 import { GenericListComponent } from "../../components/Admin/GenericListComponent";
 import { rowSelectionHandler } from "../../components/Admin/RowSelectionHandler";
+import { GoBackButton } from "../../components/Admin/GoBackButton";
 
 function UserManagement() {
 	let blankItem = { id: -1, username: "", password: "", type: "" };
@@ -84,6 +85,13 @@ function UserManagement() {
         <Box sx={{ p: 2 }}>
             <Grid2 container spacing={2}>
                 <Grid2 item xs={12} md={9}>
+					<div style={{ 
+						marginBottom: "15px", 
+						float: "left"
+					}}>
+						<GoBackButton />
+					</div>
+					
                     <GenericListComponent
                         data={items}
                         handleListClick={handleListClick}
