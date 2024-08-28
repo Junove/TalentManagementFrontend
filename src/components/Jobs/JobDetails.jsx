@@ -44,7 +44,7 @@ const JobDetails = () => {
                 <div className="col-3 d-flex flex-column align-items-start">
                 {isLoggedIn ? 
                 (
-                        <Link to={`../apply`} className="btn btn-dark override-blue mt-2" 
+                        <Link to={`/apply/${jid}`} className="btn btn-dark override-blue mt-2" 
                                 >Apply Here
                         </Link>
                 ) : (

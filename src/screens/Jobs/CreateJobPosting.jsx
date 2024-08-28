@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import JobPostingForm from '../../components/Jobs/JobPostingForm'
 import { useContext } from 'react';
 import { LoginContext } from '../../components/Login/LoginContext';
@@ -6,7 +6,6 @@ import Snackbar from '@mui/material/Snackbar';
 import { Button } from '@mui/material';
 
 const CreateJobPosting = () => {
-  const { isLoggedIn, user, username, login, logout } = useContext(LoginContext);
 
   const [open, setOpen] = React.useState(false);
 

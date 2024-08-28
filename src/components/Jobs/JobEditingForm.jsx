@@ -104,7 +104,7 @@ const JobEditingForm = (props) => {
                     <label htmlFor="inputListingStatus">Status</label>
                     <select className="form-select" id="inputListingStatus" aria-describedby="emailHelp" placeholder="Enter additional information"
                         value={status} onChange={onStatusChange}>
-                            <option value="active">Active</option>
+                            <option value="open">Open</option>
                             <option value="closed">Closed</option>
                     </select>
                 </div>
