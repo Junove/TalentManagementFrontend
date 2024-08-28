@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, Typography, CardActions, Button, Grid } from '@mui/material';
 import { getJobById } from '../../handlers/JobAPIHandler';
+import { Link } from 'react-router-dom';
 
 const IndividualApplicationGridItem = (props) => {
     const {
@@ -32,7 +33,7 @@ const IndividualApplicationGridItem = (props) => {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">View Details</Button>
+                <Link to={`/application/${jobApp.id}`}><Button size="small">View Details</Button></Link>
                 <Button size="small">Edit</Button>
               </CardActions>
             </Card>

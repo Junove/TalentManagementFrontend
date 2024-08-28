@@ -1,7 +1,31 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getJobById, put } from '../../handlers/JobAPIHandler';
+import { useNavigate } from 'react-router-dom';
 
-const JobEditingForm = () => {
+const JobEditingForm = (props) => {
+    const navigate = useNavigate();
+
+    const {
+        jobId
+    } = props
+
+    const [job, setJob] = useState({});
+
+    useEffect(()=>{
+        console.log(jobId);
+        getJobById(setJob, jobId);
+        
+    }, []);
+
+    useEffect(() => {
+        setJobTitle(job.listing_title);
+        setDepartment(job.department);
+        setJobDescription(job.job_description);
+        setAdditionalInfo(job.additionl_info);
+        setStatus(job.listing_status);
+    }, [job])
+
     const [jobTitle, setJobTitle] = useState('');
     const onJobTitleChange = (e) => setJobTitle(e.target.value);
 
@@ -15,7 +39,38 @@ const JobEditingForm = () => {
     const onAdditionalInfoChange = (e) => setAdditionalInfo(e.target.value);
 
     const [status, setStatus] = useState('');
-    const onStatusChange = (e) => setStatus(e.target.value);
+
+    const [date, setDate] = useState('');
+    const onStatusChange = (e) => {
+        setStatus(e.target.value);
+        if (e.target.value === 'closed'){
+            
+            const date = new Date(Date.now()).toISOString();
+            const dateArray = date.split('T');
+            const time = dateArray[1].substring(0,8)
+            console.log(`${dateArray[0]} ${time}`);
+            setDate(`${dateArray[0]} ${time}`)
+        } else {
+            console.log(null);
+            setDate(null);
+        }
+    };
+
+    const handlePutClick = () => {
+        const updatedJob = {
+            ...job,
+            listing_title: jobTitle,
+            department: department,
+            job_description: jobDescription,
+            additionl_info: additionalInfo,
+            listing_status: status,
+            date_closed: date
+        }
+
+        put(updatedJob, jobId)
+    }
+
+
 
   return (
     <ul className="list-group">
@@ -52,8 +107,8 @@ const JobEditingForm = () => {
                             <option value="closed">Closed</option>
                     </select>
                 </div>
-                <button className="mt-3 btn btn-primary" style={{backgroundColor: 'rgb(18,28,78)', border: 'none'}}>Update</button>
-                <button className="mt-3 mx-3 btn btn-secondary">Cancel</button>
+                <button className="mt-3 btn btn-primary" onClick={handlePutClick} style={{backgroundColor: 'rgb(18,28,78)', border: 'none'}}>Update</button>
+                <button className="mt-3 mx-3 btn btn-secondary" onClick={()=> navigate('/')}>Cancel</button>
             </div>
         </div>
     </ul>
