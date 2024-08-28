@@ -1,10 +1,6 @@
-
-
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Box, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Button, MenuItem, Select, IconButton } from '@mui/material';
-import SortIcon from '@mui/icons-material/Sort';
+import { Container, Box, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Button, MenuItem, Select } from '@mui/material';
 import axios from 'axios';
 
 function JobDetailView() {
@@ -13,8 +9,8 @@ function JobDetailView() {
   const [applications, setApplications] = useState([]);
   const [candidatesMap, setCandidatesMap] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState('All'); // State for status filter
   const [editingStatusId, setEditingStatusId] = useState(null);
-  const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {
     fetchJobDetail();
@@ -70,26 +66,19 @@ function JobDetailView() {
     }
   };
 
-  const handleSortByDateApplied = () => {
-    const sortedApplications = [...applications].sort((a, b) => {
-      return sortOrder === 'asc'
-        ? new Date(a.date_applied) - new Date(b.date_applied)
-        : new Date(b.date_applied) - new Date(a.date_applied);
-    });
-    setApplications(sortedApplications);
-    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-  };
-
   const filteredApplications = applications.filter(application => {
     const candidate = candidatesMap[application.candidate_id];
     const fullName = candidate?.fullName || '';
     const email = candidate?.email || '';
     const applicationStatus = application.application_status || '';
-    return (
-      fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+
+    const matchesSearchQuery = fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      applicationStatus.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+      applicationStatus.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesStatusFilter = statusFilter === 'All' || applicationStatus === statusFilter;
+
+    return matchesSearchQuery && matchesStatusFilter;
   });
 
   return (
@@ -111,15 +100,28 @@ function JobDetailView() {
         </Box>
       )}
 
-      <Box display="flex" justifyContent="space-between" alignItems="center" marginBottom={3}>
+      <Box display="flex" alignItems="center" marginBottom={3}>
         <TextField
           label="Search Applicants"
           variant="outlined"
           size="small"
-          style={{ width: '50%' }}
+          style={{ width: '40%', marginRight: 16 }}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
+        <Select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          variant="outlined"
+          size="small"
+          style={{ width: '20%' }}
+        >
+          <MenuItem value="All">All Statuses</MenuItem>
+          <MenuItem value="Under Review">Under Review</MenuItem>
+          <MenuItem value="Interview Scheduled">Interview Scheduled</MenuItem>
+          <MenuItem value="Rejected">Rejected</MenuItem>
+          <MenuItem value="Hired">Hired</MenuItem>
+        </Select>
       </Box>
 
       <TableContainer component={Paper}>
@@ -128,14 +130,7 @@ function JobDetailView() {
             <TableRow>
               <TableCell>Applicant Name</TableCell>
               <TableCell>Email</TableCell>
-              <TableCell>
-                <Box display="flex" alignItems="center">
-                  Date Applied
-                  <IconButton size="small" onClick={handleSortByDateApplied}>
-                    <SortIcon />
-                  </IconButton>
-                </Box>
-              </TableCell>
+              <TableCell>Date Applied</TableCell>
               <TableCell>Resume</TableCell>
               <TableCell>Cover Letter</TableCell>
               <TableCell>Status</TableCell>
@@ -195,4 +190,3 @@ function JobDetailView() {
 }
 
 export default JobDetailView;
-

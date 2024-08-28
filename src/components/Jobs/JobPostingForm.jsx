@@ -1,9 +1,21 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { post } from '../../handlers/JobAPIHandler'
+import { LoginContext } from '../Login/LoginContext'
+import { getHiringManagerByUserId } from '../../handlers/HiringManagerAPIHandler'
 
-const JobPostingForm = () => {
-    const managerID = 1
+
+const JobPostingForm = (props) => {
+    const {
+        snackBarOpenHandler
+    } = props
+
+    const { isLoggedIn, user, username, login, logout } = useContext(LoginContext);
+    const [manager, setHiringManager] = useState({});
+    useEffect(() => {
+        console.log(`user id: ${user.id}`)
+        getHiringManagerByUserId(setHiringManager,user.id);
+      }, []);  
 
 
     const [jobTitle, setJobTitle] = useState('');
@@ -20,7 +32,7 @@ const JobPostingForm = () => {
 
     const formSubmissionHandler = () => {
         const job = {
-            manager_id: managerID,
+            manager_id: manager.id,
             job_title: jobTitle,
             department: department,
             job_description: jobDescription,
@@ -28,6 +40,7 @@ const JobPostingForm = () => {
         }
 
         post(job)
+        snackBarOpenHandler();
     }
 
   return (

@@ -1,35 +1,34 @@
 import axios from 'axios';
 
 import baseURL from '../constants/baseURL';
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
-export const getJobById = (setJob, jobID) => {
-    axios.get(`${baseURL}/jobs/${jobID}`)
-    .then((response) => {setJob(response.data); console.log(response.data)})
-    .catch((error) => console.error(error))
-};
-
-export const getAllJobs = (setJobs) => {
-    axios.get(`${baseURL}/jobs`)
-    .then((response) => {setJobs(response.data)})
+export const getAllUsers = (setUsers, role_type = null) => {
+    axios.get(`${baseURL}/users`)
+    .then(
+        (response) => 
+        {setUsers(
+            response.data.filter(
+                (user) => role_type === null || user.type === role_type
+            )
+        )})
     .catch((error) => console.error(error))
 }
 
 export const deleteById = (id, postOpCallback) => {
-    axios.delete(`${baseURL}/jobs/${id}`)
+    axios.delete(`${baseURL}/users/${id}`)
     .then((response) => postOpCallback())
     .catch((error) => console.error(error))
 }
 
 export const post = (item, postOpCallback) => {
     delete item.id;
-    axios.post(`${baseURL}/jobs`, item)
+    axios.post(`${baseURL}/users`, item)
     .then((response) => postOpCallback())
     .catch((error) => console.error(error))
 }
 
 export const put = (item, postOpCallback) => {
-    axios.put(`${baseURL}/jobs/${item.id}`, item)
+    axios.put(`${baseURL}/users/${item.id}`, item)
     .then((response) => postOpCallback())
     .catch((error) => console.error(error))
 }
