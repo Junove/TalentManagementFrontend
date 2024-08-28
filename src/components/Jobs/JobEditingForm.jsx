@@ -23,7 +23,7 @@ const JobEditingForm = (props) => {
         setJobTitle(job.job_title);
         setDepartment(job.department);
         setJobDescription(job.job_description);
-        setAdditionalInfo(job.additionl_info);
+        setAdditionalInfo(job.additional_information);
         setStatus(job.listing_status);
     }, [job])
 
@@ -63,7 +63,7 @@ const JobEditingForm = (props) => {
             listing_title: jobTitle,
             department: department,
             job_description: jobDescription,
-            additionl_info: additionalInfo,
+            additional_information: additionalInfo,
             listing_status: status,
             date_closed: date
         }
