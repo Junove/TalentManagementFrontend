@@ -8,12 +8,11 @@ import EditJobPosting from './screens/Jobs/EditJobPosting';
 import UserRegister from './components/Register/UserRegister.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/Universal/NavBar';
-
+import ProfileWrapper from './components/Universal/ProfileWrapper.jsx';
 import JobDetails from './components/Jobs/JobDetails';
 import CandidateDashboard from './screens/CandidateDashboard';
 import ViewSingleApplication from './screens/Applications/ViewSingleApplication';
 import JobApplication from './screens/Applications/JobApplication';
-import EditProfile from './components/Manager/EditProfile.jsx';
 import CandidateRegister from './components/Register/CandidateRegister';
 import HiringManagerRegister from "./components/Register/HiringManagerRegister";
 import ManagerDashboard from './components/Manager/ManagerDashboard';
@@ -40,7 +39,7 @@ function App() {
             <Route path='/candidate/register' element={<CandidateRegister />} />
             <Route path='/manager/register' element={<HiringManagerRegister />} />  
             <Route path='/managerDashboard/:id' element={<ManagerDashboard />} />
-            <Route path="/profile" element={<EditProfile />} />
+            <Route path="/profile" element={<ProfileWrapper />} />
             <Route path='/managerDashboard' element={<ManagerDashboard />} />
             <Route path="/job/:jobId" element={<JobDetailView/>} />
             <Route path='error' element={<PageNotFound/>}/>
