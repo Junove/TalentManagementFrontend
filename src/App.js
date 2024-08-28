@@ -50,7 +50,7 @@ function App() {
             <Route path="/profile" element={<ProfileWrapper />} />
             <Route path='/managerDashboard' element={<ManagerDashboard />} />
             <Route path="/job/:jobId" element={<JobDetailView/>} />
-            <Route path='error' element={<PageNotFound/>}/>
+            <Route path='/error' element={<PageNotFound/>}/>
 
             {/* Admin Dashboard Page Routing */}
             <Route path="/admin" element={<AdminDashboard />} />
