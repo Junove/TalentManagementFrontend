@@ -56,13 +56,17 @@ function ManagerDashboard() {
 
   const handleSortByStatus = () => {
     const sortedJobs = [...jobs].sort((a, b) => {
+      const statusA = a.listing_status || ''; // Fallback to empty string if null
+      const statusB = b.listing_status || ''; // Fallback to empty string if null
+  
       return sortByStatus === 'asc'
-        ? a.listing_status.localeCompare(b.listing_status)
-        : b.listing_status.localeCompare(a.listing_status);
+        ? statusA.localeCompare(statusB)
+        : statusB.localeCompare(statusA);
     });
     setJobs(sortedJobs);
     setSortByStatus(sortByStatus === 'asc' ? 'desc' : 'asc');
   };
+  
 
   const filteredJobs = jobs.filter(job => 
     job.job_title.toLowerCase().includes(searchQuery.toLowerCase())
