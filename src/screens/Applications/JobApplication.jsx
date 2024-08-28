@@ -33,24 +33,40 @@ const JobApplication = () => {
 
         fetchJobDetails();
         getCandidateByUserId(setCandId, user.id);
-        console.log("userId: ", user.id)
     }, [jid]);
 
     // const [jobTitle, setJobTitle] = useState('');
     // const onJobTitleChange = (e) => setJobTitle(e.target.value);
+    const handleFileUpload = async (file, type) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('type', type);
 
-    console.log(resume);
-    console.log(coverLetter);
+        try {
+            const response = await axios.post('http://localhost:8080/upload', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+            return response.data.path; // Assumes backend returns the file path
+        } catch (error) {
+            console.error("Error uploading file:", error);
+            return null;
+        }
+    };
 
     const formSubmissionHandler = () => {
+        setSubmissionStatus("Under Review");
+
+        const resumePath = async () => resume ? await handleFileUpload(resume, 'resume') : null;
+        const coverLetterPath = async () => coverLetter ? await handleFileUpload(coverLetter, 'coverLetter') : null;
+
         const app = {
-            cover_letter: coverLetter,
-            custom_resume: resume,
+            cover_letter: coverLetterPath,
+            custom_resume: resumePath,
             application_status: submissionStatus,
             candidate_id: candId.id,
             job_id: jid
         }
-        console.log("App: ", app)
+        console.log("App: ", JSON.stringify(app))
 
         postApp(app)
     }
@@ -83,7 +99,7 @@ const JobApplication = () => {
                         type="file"
                         id="resume"
                         onChange={(e) => {
-                            setResume(e.target.files[0].name); console.log(e.target.files[0]);
+                            setResume(e.target.files[0]?.path); console.log(e.target.files[0]?.path);
                         }}
                         required
                     />
