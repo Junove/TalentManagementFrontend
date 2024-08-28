@@ -12,6 +12,14 @@ import ProfileWrapper from './components/Universal/ProfileWrapper.jsx';
 import JobDetails from './components/Jobs/JobDetails';
 import CandidateDashboard from './screens/CandidateDashboard';
 import ViewSingleApplication from './screens/Applications/ViewSingleApplication';
+
+import AdminDashboard from './screens/AdminDashboard';
+import AdminManagement from './screens/Admin/AdminManagement';
+import CandidateManagement from './screens/Admin/CandidateManagement';
+import HiringManagerment from './screens/Admin/HiringManagerment';
+import JobApplicationManagement from './screens/Admin/JobApplicationManagement';
+import JobListingManagement from './screens/Admin/JobListingManagement';
+import UserManagement from './screens/Admin/UserManagement';
 import JobApplication from './screens/Applications/JobApplication';
 import CandidateRegister from './components/Register/CandidateRegister';
 import HiringManagerRegister from "./components/Register/HiringManagerRegister";
@@ -43,6 +51,15 @@ function App() {
             <Route path='/managerDashboard' element={<ManagerDashboard />} />
             <Route path="/job/:jobId" element={<JobDetailView/>} />
             <Route path='error' element={<PageNotFound/>}/>
+
+            {/* Admin Dashboard Page Routing */}
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/administrator" element={<AdminManagement />} />
+            <Route path="/admin/candidates" element={<CandidateManagement />} />
+            <Route path="/admin/hiringManagers" element={<HiringManagerment />} />
+            <Route path="/admin/jobApplications" element={<JobApplicationManagement />} />
+            <Route path="/admin/jobListings" element={<JobListingManagement />} />
+            <Route path="/admin/users" element={<UserManagement />} />
           </Routes>
         </div>
       </Router>
