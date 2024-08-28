@@ -34,7 +34,7 @@ const JobPosting = ( {job}
                     <div className="col-3 d-flex flex-column align-items-start">
                         {isLoggedIn ? (
                             <div>
-                                <Link to={`../apply`} className="btn btn-dark override-blue mt-2" 
+                                <Link to={`../apply/${job.id}`} className="btn btn-dark override-blue mt-2" 
                                 >Apply Here
                                 </Link>
                             </div>) : 
