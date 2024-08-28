@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import { Box, Grid2, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import { getAllJobs, post, put, deleteById } from "../../handlers/JobAPIHandler";
+import { getAllJobs, post, putAdmin, deleteById } from "../../handlers/JobAPIHandler";
 import { getAllHiringManagers } from "../../handlers/HiringManagerAPIHandler"
 
 import { GenericEditorForm } from "../../components/Admin/GenericEditorForm";
@@ -62,7 +62,7 @@ function JobListingManagement() {
 		if (formObject.id === -1) {
 			post(formObject, postOpCallback);
 		} else {
-			put(formObject, postOpCallback);
+			putAdmin(formObject, postOpCallback);
 		}
 
 		rowSelectionHandler();
