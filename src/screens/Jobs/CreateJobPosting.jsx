@@ -40,7 +40,7 @@ const CreateJobPosting = () => {
         open={open}
         autoHideDuration={6000}
         onClose={handleClose}
-        message="Job Posting Edited"
+        message="Job Posting Created"
         action={action}
       />
     </>

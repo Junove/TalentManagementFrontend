@@ -44,10 +44,16 @@ const ViewSingleApplication = () => {
           <strong>Date Applied:</strong> {new Date(application.date_applied).toLocaleDateString()}
         </Typography>
         <Typography variant="body1" paragraph>
-          <strong>Cover Letter:</strong> {application.cover_letter}
+          <strong>Cover Letter: </strong>
+          <a href={application.cover_letter} target="_blank" rel="noopener noreferrer">
+            {application.cover_letter}
+          </a>
         </Typography>
         <Typography variant="body1" paragraph>
-          <strong>Custom Resume:</strong> {application.custom_resume}
+          <strong>Custom Resume: </strong>
+          <a href={application.custom_resume} target="_blank" rel="noopener noreferrer">
+            {application.custom_resume}
+          </a>
           </Typography>
         <Typography variant="body1" paragraph>
           <strong>Application Status:</strong> {application.application_status}
