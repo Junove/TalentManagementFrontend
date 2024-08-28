@@ -20,11 +20,11 @@ const ViewApplications = () => {
       style={{
         display: 'flex',
         justifyContent: 'center',
+        alignItems:'center',
         maxWidth: '100vw',
-        minHeight: '100vh',
       }}
     >
-      <Grid container spacing={2} justifyContent="center">
+      <Grid container spacing={2} justifyContent="center" sx={{ marginY: 1 }}>
         {jobApplications.map((jobApp) => (
           <IndividualApplicationGridItem jobApp={jobApp}/>
         ))}

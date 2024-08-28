@@ -33,7 +33,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
             <Route path='/editJobPosting/:jobid' element={<EditJobPosting/>}/>
-            <Route path='/candidateDashboard/:id' element={<CandidateDashboard/>}/>
+            <Route path='/candidateDashboard' element={<CandidateDashboard/>}/>
             <Route path='/application/:applicationid' element={<ViewSingleApplication/>}/>
             <Route path='/register' element={<UserRegister />} />
             <Route path='/candidate/register' element={<CandidateRegister />} />
