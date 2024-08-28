@@ -12,12 +12,28 @@ const NavBar = () => {
 
     const dashboardUrl = () => {
         if (user.type === 'hiring_manager') {
-          return `/managerdashboard/${user.id}`;
+            return `/managerdashboard/${user.id}`;
         } else if (user.type === 'candidate') {
-          return `/candidatedashboard/${user.id}`;
+            return `/candidatedashboard/${user.id}`;
         }
         return '/'; // Default or fallback route
-      };
+    };
+
+    const searchButton = () => {
+console.log("ive entered");
+        if (user.type === 'hiring_manager') {
+            console.log("im here1");
+            return false;
+        } else if (user.type === 'candidate') {
+            console.log("im here2");
+
+            return true;
+        } else if (!isLoggedIn){
+            console.log("im here3");
+
+            return true;
+        }
+    };
 
     const handleLogout = () => {
         logout(); // Perform logout
@@ -26,12 +42,12 @@ const NavBar = () => {
 
     const handleProfileClick = () => {
         navigate('/profile');
-      };
+    };
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
             <div className="container">
-                <Link to={'/'}>
+                <Link to={dashboardUrl()}>
                     <img src={adplogo} alt="Logo" width="80px" height="40px" />
                 </Link>
                 <Link to="/" className="navbar-brand">
@@ -41,30 +57,23 @@ const NavBar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav ms-3">
+                    <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
+                        {searchButton && (
                             <Link to="/search" className="nav-link">
                                 Search
                             </Link>
-                        </li>
-                        
-                        {isLoggedIn ? (
-                            <>
-                            {user.type === "candidate" && (
-                                <li className="nav-item">
-                                    <Link to={dashboardUrl()} className="nav-link">
-                                        {user.username}
-                                    </Link>
-                                </li>
-                                )
-                            }
+                        )}
                             
-                                <li className="nav-item">
+                        </li>
+                        {isLoggedIn ? (
+                            <div className="d-flex ms-auto align-items-right">
+                                <li className="nav-item me-2">
                                     <span className="nav-link" onClick={handleLogout}>
                                         Logout
                                     </span>
                                 </li>
-                                <li>
+                                <li className="nav-item">
                                     <IconButton
                                         edge="end"
                                         color="inherit"
@@ -73,8 +82,7 @@ const NavBar = () => {
                                         <AccountCircle />
                                     </IconButton>
                                 </li>
-                                
-                            </>
+                            </div>
                         ) : (
                             <>
                                 <li className="nav-item me-2">

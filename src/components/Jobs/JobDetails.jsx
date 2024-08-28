@@ -1,6 +1,7 @@
 // JobDetails.jsx
 import { useParams, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { LoginContext } from "../Login/LoginContext";
 import axios from 'axios';
 import './index.css';
 
