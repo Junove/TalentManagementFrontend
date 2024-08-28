@@ -54,7 +54,6 @@ const NavBar = () => {
                                 <li className="nav-item">
                                     <Link to={dashboardUrl()} className="nav-link">
                                         {user.username}
-
                                     </Link>
                                 </li>
                                 )
