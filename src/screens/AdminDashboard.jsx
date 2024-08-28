@@ -1,4 +1,5 @@
 import { Button, ButtonGroup, Typography } from "@mui/material";
+import withAdminAuth from "../components/Admin/AdminAuthentication";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -97,4 +98,4 @@ const AdminDashboard = () => {
 	);
 };
 
-export default AdminDashboard;
+export default withAdminAuth(AdminDashboard);

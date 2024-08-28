@@ -1,20 +1,25 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect , useContext} from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { postApp } from '../../handlers/JobAPIHandler'
 import axios from 'axios';
+import { getCandidateByUserId } from '../../handlers/CandidateAPIHandler';
+import { LoginContext } from "../../components/Login/LoginContext";
 
 const JobApplication = () => {
     //const location = useLocation();
     //const navigate = useNavigate();
+
+    const { user } = useContext(LoginContext);
     const { jid } = useParams(); 
     const [job, setJob] = useState(null);
-    const [applicantName, setApplicantName] = useState('');
-    const [applicantEmail, setApplicantEmail] = useState('');
+    const [candId, setCandId] = useState(null);
     const [resume, setResume] = useState(null);
     const [coverLetter, setCoverLetter] = useState(null);
     const [submissionStatus, setSubmissionStatus] = useState('');
 
     useEffect(() => {
+
         const fetchJobDetails = async () => {
             try {
                 console.log(`${jid}`);
@@ -27,35 +32,54 @@ const JobApplication = () => {
         };
 
         fetchJobDetails();
+        getCandidateByUserId(setCandId, user.id);
     }, [jid]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData();
+    // const [jobTitle, setJobTitle] = useState('');
+    // const onJobTitleChange = (e) => setJobTitle(e.target.value);
+    // const handleFileUpload = async (file, type) => {
 
-        formData.append('status', 'Under Review');
-        formData.append('candidate_id', 0);
-        formData.append('resume', resume);
+    //     const formData = new FormData();
+    //     formData.append('file', file);
+    //     formData.append('type', type);
+
+    //     try {
+    //         const response = await axios.post('http://localhost:8080/jobapps', formData, {
+    //             headers: { 'Content-Type': 'multipart/form-data' },
+    //         });
+    //         return response.data.path; // Assumes backend returns the file path
+    //     } catch (error) {
+    //         console.error("Error uploading file:", error);
+    //         return null;
+    //     }
+    // };
+
+    const formSubmissionHandler = async () => {
+        
+        const formData = new FormData();
         formData.append('cover_letter', coverLetter);
-        //setStatus to "Under Review"
+        formData.append('custom_resume', resume);
+        formData.append('application_status', "Under Review");
+        formData.append('candidate_id', candId.id);
+        formData.append('job_id', jid);
+
+        // Log FormData contents
+        for (const [key, value] of formData.entries()) {
+            console.log(`${key}: ${value}`);
+        }
 
         try {
-            const response = await fetch('http://localhost:8080/jobapps', {
-                method: 'POST',
-                body: formData,
-                
-                //send candidate_id, job_id, date_applied, cover_letter, custom_resume, application_status
+            const response = await axios.post('http://localhost:8080/jobapps', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
             });
-            console.log(response.data);
-            if (response.ok) {
-                setSubmissionStatus('Application submitted successfully!');
-            } else {
-                setSubmissionStatus('Error submitting application, .');
-            }
+            console.log("Application submitted successfully:", response.data);
+            alert('Application submitted successfully!');
         } catch (error) {
-            setSubmissionStatus('Error submitting application.');
+            console.error("Error submitting application:", error);
+            alert('Error submitting application.');
         }
-    };
+    }
+
 
     if (!job) return <div>Loading...</div>;
 
@@ -84,7 +108,7 @@ const JobApplication = () => {
                         type="file"
                         id="resume"
                         onChange={(e) => {
-                            setResume(e.target.files[0]); console.log(e.target.files)
+                            setResume(e.target.files[0])
                         }}
                         required
                     />
@@ -102,10 +126,10 @@ const JobApplication = () => {
                 <div className="mt-3">
                     <label htmlFor="inputAdditionalInfo">Additional Information</label>
                     <textarea className="form-control" id="inputAdditionalInfo" aria-describedby="emailHelp" placeholder="Enter additional information"
-                        // value={additionalInfo} onChange={onAdditionalInfoChange}
+                        // value={additionalInfo} onChange={setAdditionalInfo}
                         />
                 </div>
-                <button className="mt-3 btn btn-primary" onClick={handleSubmit} style={{backgroundColor: 'rgb(18,28,78)', border: 'none'} }>Create</button>
+                <button className="mt-3 btn btn-primary" onClick={formSubmissionHandler} style={{backgroundColor: 'rgb(18,28,78)', border: 'none'} }>Create</button>
                 <button className="mt-3 mx-3 btn btn-secondary">Cancel</button>
             </div>
         </div>
