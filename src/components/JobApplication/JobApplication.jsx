@@ -40,7 +40,7 @@ const JobApplication = () => {
         //setStatus to "Under Review"
 
         try {
-            const response = await fetch('https://localhost:8080/jobapps', {
+            const response = await fetch('http://localhost:8080/jobapps', {
                 method: 'POST',
                 body: formData,
                 
