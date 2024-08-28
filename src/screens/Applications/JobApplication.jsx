@@ -37,38 +37,47 @@ const JobApplication = () => {
 
     // const [jobTitle, setJobTitle] = useState('');
     // const onJobTitleChange = (e) => setJobTitle(e.target.value);
-    const handleFileUpload = async (file, type) => {
+    // const handleFileUpload = async (file, type) => {
+
+    //     const formData = new FormData();
+    //     formData.append('file', file);
+    //     formData.append('type', type);
+
+    //     try {
+    //         const response = await axios.post('http://localhost:8080/jobapps', formData, {
+    //             headers: { 'Content-Type': 'multipart/form-data' },
+    //         });
+    //         return response.data.path; // Assumes backend returns the file path
+    //     } catch (error) {
+    //         console.error("Error uploading file:", error);
+    //         return null;
+    //     }
+    // };
+
+    const formSubmissionHandler = async () => {
+        
         const formData = new FormData();
-        formData.append('file', file);
-        formData.append('type', type);
+        formData.append('cover_letter', coverLetter);
+        formData.append('custom_resume', resume);
+        formData.append('application_status', "Under Review");
+        formData.append('candidate_id', candId.id);
+        formData.append('job_id', jid);
+
+        // Log FormData contents
+        for (const [key, value] of formData.entries()) {
+            console.log(`${key}: ${value}`);
+        }
 
         try {
-            const response = await axios.post('http://localhost:8080/upload', formData, {
+            const response = await axios.post('http://localhost:8080/jobapps', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
-            return response.data.path; // Assumes backend returns the file path
+            console.log("Application submitted successfully:", response.data);
+            alert('Application submitted successfully!');
         } catch (error) {
-            console.error("Error uploading file:", error);
-            return null;
+            console.error("Error submitting application:", error);
+            alert('Error submitting application.');
         }
-    };
-
-    const formSubmissionHandler = () => {
-        setSubmissionStatus("Under Review");
-
-        const resumePath = async () => resume ? await handleFileUpload(resume, 'resume') : null;
-        const coverLetterPath = async () => coverLetter ? await handleFileUpload(coverLetter, 'coverLetter') : null;
-
-        const app = {
-            cover_letter: coverLetterPath,
-            custom_resume: resumePath,
-            application_status: submissionStatus,
-            candidate_id: candId.id,
-            job_id: jid
-        }
-        console.log("App: ", JSON.stringify(app))
-
-        postApp(app)
     }
 
 
@@ -99,7 +108,7 @@ const JobApplication = () => {
                         type="file"
                         id="resume"
                         onChange={(e) => {
-                            setResume(e.target.files[0]?.path); console.log(e.target.files[0]?.path);
+                            setResume(e.target.files[0])
                         }}
                         required
                     />
@@ -109,7 +118,7 @@ const JobApplication = () => {
                     <input
                         type="file"
                         id="cover_letter"
-                        onChange={(e) => setCoverLetter(e.target.files[0].name)}
+                        onChange={(e) => setCoverLetter(e.target.files[0])}
                         required
                     />
                 </div>
