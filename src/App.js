@@ -42,6 +42,7 @@ function App() {
             <Route path="/profile" element={<EditProfile />} />
             <Route path='/managerDashboard' element={<ManagerDashboard />} />
             <Route path="/job/:jobId" element={<JobDetailView/>} />
+            
           </Routes>
         </div>
       </Router>
