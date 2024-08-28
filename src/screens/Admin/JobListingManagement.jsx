@@ -1,6 +1,7 @@
 import "../../components/Admin/AdminStyles.css";
 import withAdminAuth from "../../components/Admin/AdminAuthentication";
 
+import dayjs from "dayjs";
 import { Box, Grid2 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
@@ -18,8 +19,8 @@ function JobListingManagement() {
 		manager_id: "", 
 		department: "", 
 		listing_title: "", 
-		date_listed: "", 
-		date_closed: "", 
+		date_listed: null, 
+		date_closed: null, 
 		job_title: "", 
 		job_description: "", 
 		additional_information: "", 
@@ -86,8 +87,11 @@ function JobListingManagement() {
 	const handleInputChange = function (event) {
 		console.log("in handleInputChange()");
 		const { name, value } = event.target;
-		
-		setFormObject({ ...formObject, [name]: value });
+	
+		// Handle the case where the value might be a dayjs object (for date fields)
+		const processedValue = dayjs.isDayjs(value) ? value.format("YYYY-MM-DD HH:mm:ss") : value;
+	
+		setFormObject({ ...formObject, [name]: processedValue });
 	};
 
 	return (

@@ -16,7 +16,7 @@ function JobApplicationManagement() {
 		id: -1, 
 		candidate_id: "", 
 		job_id: "", 
-		date_applied: "", 
+		date_applied: null, 
 		cover_letter: "", 
 		custom_resume: "", 
 		application_status: "" 

@@ -9,6 +9,11 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
+import dayjs from 'dayjs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 export function GenericEditorForm({
     mode,
     formObject,
@@ -35,6 +40,41 @@ export function GenericEditorForm({
                         return null;
                     }
 
+                    // DATE_LISTED
+                    if (field === "date_listed" ) {
+                        return (
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="Date Listed"
+                                    value={formObject.date_listed ? dayjs(formObject.date_listed) : null}
+                                    onChange={(date) => {
+                                        const formattedDate = date ? dayjs(date).format("YYYY-MM-DD HH:mm:ss") : null;
+                                        handleInputChange({ target: { name: "date_listed", value: formattedDate } });
+                                    }}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </LocalizationProvider>
+                        );
+                    }
+                    
+                    // DATE_CLOSED
+                    if (field === "date_closed" ) {
+                        return (
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="Date Closed"
+                                    value={formObject.date_closed ? dayjs(formObject.date_closed) : null}
+                                    onChange={(date) => {
+                                        const formattedDate = date ? dayjs(date).format("YYYY-MM-DD HH:mm:ss") : null;
+                                        handleInputChange({ target: { name: "date_closed", value: formattedDate } });
+                                    }}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </LocalizationProvider>
+                        );
+                    }
+                    
+                    // MANAGER_ID
                     if (field === "manager_id" ) {
                         return (       
                             <FormControl fullWidth sx={{ minWidth: 300 }}>
@@ -127,7 +167,7 @@ export function GenericEditorForm({
                                     value={formObject.listing_status}
                                     sx={{ textAlign: 'left' }}
                                 >
-                                    <MenuItem value="Open">Open</MenuItem>
+                                    <MenuItem value="Active">Active</MenuItem>
                                     <MenuItem value="Closed">Closed</MenuItem>
                                 </Select>
                             </FormControl>
