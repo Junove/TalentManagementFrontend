@@ -1,3 +1,7 @@
+import React, { useEffect, useState } from 'react'
+import { Grid, Container } from '@mui/material';
+import { getApplicationByUserID } from '../../handlers/JobApplicationAPIHandler';
+import { useContext } from 'react';
 import { LoginContext } from '../../components/Login/LoginContext';
 import IndividualApplicationGridItem from './IndividualApplicationGridItem';
 
