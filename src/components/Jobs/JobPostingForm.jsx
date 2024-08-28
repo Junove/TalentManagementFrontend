@@ -3,12 +3,15 @@ import { useState, useContext, useEffect } from 'react'
 import { post } from '../../handlers/JobAPIHandler'
 import { LoginContext } from '../Login/LoginContext'
 import { getHiringManagerByUserId } from '../../handlers/HiringManagerAPIHandler'
+import { useNavigate } from 'react-router-dom'
 
 
 const JobPostingForm = (props) => {
     const {
         snackBarOpenHandler
     } = props
+
+    const navigate = useNavigate();
 
     const { isLoggedIn, user, username, login, logout } = useContext(LoginContext);
     const [manager, setHiringManager] = useState({});
@@ -125,7 +128,7 @@ A positive attitude and enthusiasm for HR are key to succeeding here.`);
                         value={additionalInfo} onChange={onAdditionalInfoChange}/>
                 </div>
                 <button className="mt-3 btn btn-primary" onClick={formSubmissionHandler} style={{backgroundColor: 'rgb(18,28,78)', border: 'none'}}>Create</button>
-                <button className="mt-3 mx-3 btn btn-secondary">Cancel</button>
+                <button className="mt-3 mx-3 btn btn-secondary" onClick={()=> navigate('/')}>Cancel</button>
             </div>
         </div>
     </ul>

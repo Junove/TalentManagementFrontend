@@ -27,7 +27,7 @@ export default function Login() {
         } else if (user.type === 'candidate') {
           dashboardUrl = `/candidatedashboard/${user.id}`;
         } else if (user.type === 'admin') {
-          dashboardUrl = `/admindashboard/${user.id}`;
+          dashboardUrl = `/admin`;
         }
     
         navigate(dashboardUrl);
