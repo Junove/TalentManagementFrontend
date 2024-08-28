@@ -12,6 +12,9 @@ const JobPostingForm = (props) => {
 
     const { isLoggedIn, user, username, login, logout } = useContext(LoginContext);
     const [manager, setHiringManager] = useState({});
+
+    const [autofill, setAutofill] = useState(false);
+
     useEffect(() => {
         console.log(`user id: ${user.id}`)
         getHiringManagerByUserId(setHiringManager,user.id);
@@ -22,7 +25,30 @@ const JobPostingForm = (props) => {
     const onJobTitleChange = (e) => setJobTitle(e.target.value);
 
     const [department, setDepartment] = useState('');
-    const onDepartmentChange = (e) => setDepartment(e.target.value);
+    const onDepartmentChange = (e) => {
+        const departmentName = e.target.value
+        setDepartment(departmentName);
+        if (autofill) {
+            if (departmentName === 'Software'){
+                setJobDescription(`Develop, test, and maintain software applications and systems. Collaborate with cross-functional teams to design and implement new features. Troubleshoot and resolve software issues, and ensure the performance, quality, and responsiveness of applications.
+
+                Requirements:
+                
+                Proficiency in at least one programming language (e.g., Java, Python, JavaScript).
+                Experience with software development frameworks and tools.
+                Understanding of algorithms and data structures.
+                Strong problem-solving skills and ability to work in a team.
+                Familiarity with version control systems like Git.`);
+                setAdditionalInfo(`Knowledge of both frontend and backend technologies is a plus.
+                Experience with cloud platforms (AWS, Azure) is beneficial.
+                Familiarity with Agile methodologies and CI/CD processes can be advantageous.`);
+            }
+            if (departmentName === 'HR'){
+                setJobDescription('');
+                setAdditionalInfo('');
+            }
+        }
+    }
 
     const [jobDescription, setJobDescription] = useState('');
     const onJobDescriptionChange = (e) => setJobDescription(e.target.value);
@@ -45,6 +71,24 @@ const JobPostingForm = (props) => {
 
   return (
     <ul className="list-group">
+        <div className='row'>
+            <div className='col-3'></div>
+            <div className="col-6">
+            {
+                autofill ? (
+                    <button className='mt-3 btn btn-primary' onClick={() => setAutofill(false)}>
+                        Enabled
+                    </button>
+                ) : (
+                    <button className='mt-3 btn btn-danger' onClick={() => setAutofill(true)}>
+                        Disabled
+                    </button>
+                )
+
+            }
+            </div>
+            
+        </div>
         <div className='row'>
         <div className = "col-3">
 
