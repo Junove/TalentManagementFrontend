@@ -21,7 +21,16 @@ export default function Login() {
       if(response.status === 200){
         const user = response.data;
         login(user);
-        navigate("/");
+        let dashboardUrl = '/'; // Default or fallback route
+        if (user.type === 'hiring_manager') {
+          dashboardUrl = `/managerdashboard/${user.id}`;
+        } else if (user.type === 'candidate') {
+          dashboardUrl = `/candidatedashboard/${user.id}`;
+        } else if (user.type === 'admin') {
+          dashboardUrl = `/admindashboard/${user.id}`;
+        }
+    
+        navigate(dashboardUrl);
       }
     
     } catch (error) {
