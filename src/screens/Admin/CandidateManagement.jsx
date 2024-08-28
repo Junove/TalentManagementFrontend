@@ -53,12 +53,40 @@ function CandidateManagement() {
 		rowSelectionHandler();
 	};
 
+	const validateFormObject = (formObject) => {
+		const errors = [];
+	
+		if (!formObject.user.username) errors.push("User Username cannot be null.");
+		if (!["admin", "candidate", "hiring_manager"].includes(formObject.user.type)) {
+			errors.push("User type must be either 'admin', 'candidate', or 'hiring_manager'.");
+		}
+	
+		if (!formObject.user.password) errors.push("User Password cannot be empty.");
+		
+		if (!formObject.fullName) errors.push("Full Name cannot be empty.");
+    	if (!formObject.email || !/\S+@\S+\.\S+/.test(formObject.email)) errors.push("Email must be a valid email address.");
+    	if (!formObject.address) errors.push("Address cannot be empty.");
+    	if (!formObject.phone || !/^\d+$/.test(formObject.phone)) errors.push("Phone must contain only digits.");
+    	if (!formObject.resume) errors.push("Resume cannot be empty.");
+	
+		return errors;
+	};
+
 	let onSaveClick = function () {
 		console.log("in onSaveClick()");
 
 		let postOpCallback = () => {
 			setFormObject(blankItem);
 		};
+
+		// add validation ofr formObject to fit the schema
+		const validationErrors = validateFormObject(formObject);
+
+		if (validationErrors.length > 0) {
+			// console.log("Validation Errors:", validationErrors);
+			alert("Validation Errors:\n" + validationErrors.join("\n"));
+			return; 
+		}
 
 		if (formObject.id === -1) {
 			post(formObject, postOpCallback);
