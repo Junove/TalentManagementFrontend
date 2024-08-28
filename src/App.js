@@ -43,7 +43,7 @@ function App() {
             <Route path="/profile" element={<EditProfile />} />
             <Route path='/managerDashboard' element={<ManagerDashboard />} />
             <Route path="/job/:jobId" element={<JobDetailView/>} />
-            <Route path='error' element={<PageNotFound/>}/>
+            <Route path='/error' element={<PageNotFound/>}/>
           </Routes>
         </div>
       </Router>
