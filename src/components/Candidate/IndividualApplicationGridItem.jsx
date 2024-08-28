@@ -61,7 +61,7 @@ const IndividualApplicationGridItem = (props) => {
     <Paper elevation={1} sx={{ display: 'flex', alignItems: 'center', marginX: 'auto', padding: 2, maxWidth: '60%' }}>
       <Box flexGrow={1}>
         {/* Wrap the job title in a Link component */}
-        <Typography variant="subtitle1" fontWeight="bold" component={Link} to={`/jobpost/${job.id}`} sx={{ textDecoration: 'none', color: 'inherit' }}>
+        <Typography variant="subtitle1" fontWeight="bold"  sx={{ textDecoration: 'none', color: 'inherit' }}>
           {job.listing_title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
