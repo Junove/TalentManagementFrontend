@@ -84,6 +84,7 @@ const Routing = (props) => {
 
     return (
         <Routes>
+            <Route exact path="/" element={<Navigate to="/search" />}/>
             <Route path="/search" element={<Search />} />
             <Route path="/login" element={<Login />} />
             <Route path='/register' element={<UserRegister />} />
