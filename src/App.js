@@ -18,6 +18,7 @@ import CandidateRegister from './components/Register/CandidateRegister';
 import HiringManagerRegister from "./components/Register/HiringManagerRegister";
 import ManagerDashboard from './components/Manager/ManagerDashboard';
 import JobDetailView from './components/Manager/JobDetailView.jsx';
+import PageNotFound from './screens/PageNotFound';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             <Route path="/profile" element={<EditProfile />} />
             <Route path='/managerDashboard' element={<ManagerDashboard />} />
             <Route path="/job/:jobId" element={<JobDetailView/>} />
+            <Route path='error' element={<PageNotFound/>}/>
           </Routes>
         </div>
       </Router>
