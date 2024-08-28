@@ -28,7 +28,7 @@ const ViewApplications = () => {
     >
       <Grid container spacing={2} justifyContent="center" sx={{ marginY: 1 }}>
         {jobApplications.map((jobApp) => (
-          <IndividualApplicationGridItem jobApp={jobApp}/>
+          <IndividualApplicationGridItem jobApp={jobApp} userID={user.id} getApplicationByUserID={getApplicationByUserID} setJobApplications={setJobApplications}/>
         ))}
       </Grid>
     </Container>
