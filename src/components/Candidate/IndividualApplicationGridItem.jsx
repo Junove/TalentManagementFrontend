@@ -3,8 +3,13 @@ import { Card, CardContent, Typography, CardActions, Button, Grid } from '@mui/m
 import { getJobById } from '../../handlers/JobAPIHandler';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import {useNavigate} from "react-router-dom";
+
+
 
 const IndividualApplicationGridItem = (props) => {
+    const navigate = useNavigate();
+
     const {
         jobApp,
         userID,
@@ -19,8 +24,9 @@ const IndividualApplicationGridItem = (props) => {
         getJobById(setJob, jobApp.job_id);
         
 
-    }, []);
+    }, [jobApp.job_id]);
    
+  
 
     const handleDelete = async(e) => {
       try{
@@ -30,12 +36,13 @@ const IndividualApplicationGridItem = (props) => {
 
       });
       if(response.ok){
-        getApplicationByUserID(setJobApplications,userID);
+        //getApplicationByUserID(setJobApplications,userID);
         
         // if(onDelete){
         //   //onDelete(jobApp.id);
         //   console.log("ok")
         // } 
+        await getApplicationByUserID(setJobApplications,userID);
         console.log("ok");
         //navigate("/jobapps");
         //return null;
