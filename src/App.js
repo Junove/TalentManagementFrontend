@@ -12,11 +12,12 @@ import NavBar from './components/Universal/NavBar';
 import JobDetails from './components/Jobs/JobDetails';
 import CandidateDashboard from './screens/CandidateDashboard';
 import ViewSingleApplication from './screens/Applications/ViewSingleApplication';
-import JobApplication from './screens/Jobs/JobApplication/JobApplication';
+import JobApplication from './screens/Applications/JobApplication';
 import EditProfile from './components/Manager/EditProfile.jsx';
 import CandidateRegister from './components/Register/CandidateRegister';
 import HiringManagerRegister from "./components/Register/HiringManagerRegister";
 import ManagerDashboard from './components/Manager/ManagerDashboard';
+import JobDetailView from './components/Manager/JobDetailView.jsx';
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
           <Routes>
             <Route path="/search" element={<Search />} />
             <Route path="/jobpost/:jid" element = {<JobDetails/>}></Route>
-            <Route path="/apply" element={<JobApplication />} />
+            <Route path="/apply/:jid" element={<JobApplication />} />
             <Route path="/login" element={<Login />} />
             <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
             <Route path='/editJobPosting/:jobid' element={<EditJobPosting/>}/>
@@ -39,6 +40,8 @@ function App() {
             <Route path='/manager/register' element={<HiringManagerRegister />} />  
             <Route path='/managerDashboard/:id' element={<ManagerDashboard />} />
             <Route path="/profile" element={<EditProfile />} />
+            <Route path='/managerDashboard' element={<ManagerDashboard />} />
+            <Route path="/job/:jobId" element={<JobDetailView/>} />
           </Routes>
         </div>
       </Router>

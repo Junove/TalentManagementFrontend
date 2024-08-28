@@ -7,7 +7,8 @@ const JobEditingForm = (props) => {
     const navigate = useNavigate();
 
     const {
-        jobId
+        jobId,
+        snackBarOpenHandler
     } = props
 
     const [job, setJob] = useState({});
@@ -67,7 +68,7 @@ const JobEditingForm = (props) => {
             date_closed: date
         }
 
-        put(updatedJob, jobId)
+        put(updatedJob, snackBarOpenHandler, jobId);
     }
 
 
