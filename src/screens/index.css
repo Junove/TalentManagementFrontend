@@ -31,4 +31,8 @@
   .text-danger {
     font-size: 0.875rem; 
   }
+
+  .btn-dark.override-blue{
+    background-color: rgb(18,28,78);
+}
   

@@ -1,0 +1,19 @@
+.custom-textfield .MuiInputLabel-root {
+    color:rgb(18,28,78);
+}
+
+.custom-textfield .MuiInputLabel-root.Mui-focused {
+    color:rgb(18,28,78);
+}
+
+.custom-textfield .MuiOutlinedInput-root {
+    fieldset {
+        border-color:rgb(18,28,78);
+    }
+    &:hover fieldset {
+        border-color:rgb(18,28,78);
+    }
+    &.Mui-focused fieldset {
+        border-color:rgb(18,28,78);
+    }
+}

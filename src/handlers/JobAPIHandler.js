@@ -15,9 +15,9 @@ export const post = (job) => {
         .catch((error) => console.error(error))
 };
 
-export const put = (job,id) => {
+export const put = (job,snackBarOpenHandler,id) => {
     axios.put(`${baseURL}/jobs/${id}`, job)
-        .then((response) => console.log(response))
+        .then((response) => {console.log(response); snackBarOpenHandler()})
         .catch((error) => console.error(error))
 };
 

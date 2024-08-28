@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TextField, Button, Typography, Container, Box } from '@mui/material';
 import axios from 'axios';
+import './index.css';
 
 function CandidateRegister() {
   const location = useLocation();
@@ -9,6 +10,7 @@ function CandidateRegister() {
   const [userId, setUserId] = useState(null);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [resume, setResume] = useState(null);
@@ -66,6 +68,7 @@ function CandidateRegister() {
         </Typography>
         <Box component="form" onSubmit={registerCandidate} sx={{ mt: 3 }}>
           <TextField
+            className='custom-textfield'
             variant="outlined"
             margin="normal"
             required
@@ -77,6 +80,7 @@ function CandidateRegister() {
             onChange={(e) => setFullName(e.target.value)}
           />
           <TextField
+            className='custom-textfield'
             variant="outlined"
             margin="normal"
             required
@@ -88,6 +92,7 @@ function CandidateRegister() {
             onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
+            className='custom-textfield'
             variant="outlined"
             margin="normal"
             required
@@ -99,6 +104,7 @@ function CandidateRegister() {
             onChange={(e) => setAddress(e.target.value)}
           />
           <TextField
+            className='custom-textfield'
             variant="outlined"
             margin="normal"
             required
@@ -120,7 +126,7 @@ function CandidateRegister() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, backgroundColor:'rgb(237,28,46)' }}
           >
             Register
           </Button>
