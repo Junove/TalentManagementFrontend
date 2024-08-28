@@ -60,7 +60,7 @@ function CandidateManagement() {
 			setFormObject(blankItem);
 		};
 
-		if (items.some(item => item.user.id === formObject.user.id)) {
+		if (items.some(item => item.user.id === formObject.user.id && item.id !== formObject.id)) {
 			alert("A candidate with the same user id already exists!");
 			return;
 		}
