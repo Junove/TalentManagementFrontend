@@ -51,7 +51,7 @@ function JobListingManagement() {
 		// 	setFormObject(blankItem);
 		// }
 
-		rowSelectionHandler("job_description");
+		rowSelectionHandler();
 	};
 
 	let onSaveClick = function () {
@@ -67,14 +67,14 @@ function JobListingManagement() {
 		// 	put(formObject, postOpCallback);
 		// }
 
-		rowSelectionHandler("job_description");
+		rowSelectionHandler();
 	};
 
 	let onCancelClick = function () {
 		console.log("in onCancelClick()");
 
 		setFormObject(blankItem);
-		rowSelectionHandler("job_description");
+		rowSelectionHandler();
 	};
 
 	const handleListClick = function (item) {
@@ -83,7 +83,7 @@ function JobListingManagement() {
 		const isAlreadySelected = formObject.id === item.id;
 
 		setFormObject(isAlreadySelected ? blankItem : item);
-		rowSelectionHandler("job_description", isAlreadySelected ? null : item);
+		rowSelectionHandler(isAlreadySelected ? null : item);
 	};
 
 	const handleInputChange = function (event) {

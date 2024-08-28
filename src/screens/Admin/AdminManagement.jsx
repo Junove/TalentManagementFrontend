@@ -62,7 +62,7 @@ function AdminManagement() {
 		// 	setFormObject(blankItem);
 		// }
 
-		rowSelectionHandler("user_id");
+		rowSelectionHandler();
 	};
 
 	let onSaveClick = function () {
@@ -78,14 +78,14 @@ function AdminManagement() {
 		// 	put(formObject, postOpCallback);
 		// }
 
-		rowSelectionHandler("user_id");
+		rowSelectionHandler();
 	};
 
 	let onCancelClick = function () {
 		console.log("in onCancelClick()");
 
 		setFormObject(blankItem);
-		rowSelectionHandler("user_id");
+		rowSelectionHandler();
 	};
 
 	const handleListClick = function (item) {
@@ -94,7 +94,7 @@ function AdminManagement() {
 		const isAlreadySelected = formObject.id === item.id;
 
 		setFormObject(isAlreadySelected ? blankItem : item);
-		rowSelectionHandler("user_id", isAlreadySelected ? null : item);
+		rowSelectionHandler(isAlreadySelected ? null : item);
 	};
 
 	const handleInputChange = function (event) {
