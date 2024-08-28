@@ -1,11 +1,33 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './NavBar.css'; 
 import adplogo from './adplogo.png';
 import { LoginContext } from '../Login/LoginContext';
 import React, { useContext } from 'react';
+import { IconButton } from '@mui/material';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 const NavBar = () => {
-    const { isLoggedIn, username, logout, user } = useContext(LoginContext);
+    const { user, isLoggedIn, logout } = useContext(LoginContext);
+    const navigate = useNavigate();
+
+    const dashboardUrl = () => {
+        if (user.type === 'hiring_manager') {
+          return `/managerdashboard/${user.id}`;
+        } else if (user.type === 'candidate') {
+          return `/candidatedashboard/${user.id}`;
+        }
+        return '/'; // Default or fallback route
+      };
+
+    const handleLogout = () => {
+        logout(); // Perform logout
+        navigate('/home'); // Redirect to home page
+    };
+
+    const handleProfileClick = () => {
+        navigate('/profile');
+      };
+
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
@@ -31,17 +53,26 @@ const NavBar = () => {
                             <>
                             {user.type === "candidate" && (
                                 <li className="nav-item">
-                                    <Link to="/candidatedashboard" className="nav-link">
-                                       {username}
+                                    <Link to={dashboardUrl()} className="nav-link">
+                                        {user.username}
                                     </Link>
                                 </li>
                                 )
                             }
                             
                                 <li className="nav-item">
-                                    <span className="nav-link" onClick={logout}>
+                                    <span className="nav-link" onClick={handleLogout}>
                                         Logout
                                     </span>
+                                </li>
+                                <li>
+                                    <IconButton
+                                        edge="end"
+                                        color="inherit"
+                                        onClick={handleProfileClick}
+                                    >
+                                        <AccountCircle />
+                                    </IconButton>
                                 </li>
                                 
                             </>

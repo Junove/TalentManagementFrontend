@@ -11,10 +11,9 @@ import NavBar from './components/Universal/NavBar';
 
 import JobDetails from './components/Jobs/JobDetails';
 import CandidateDashboard from './screens/CandidateDashboard';
-import LoginComponent from './components/Login/LoginComponent';
 import ViewSingleApplication from './screens/Applications/ViewSingleApplication';
 import JobApplication from './screens/Jobs/JobApplication/JobApplication';
-
+import EditProfile from './components/Manager/EditProfile.jsx';
 import CandidateRegister from './components/Register/CandidateRegister';
 import HiringManagerRegister from "./components/Register/HiringManagerRegister";
 import ManagerDashboard from './components/Manager/ManagerDashboard';
@@ -25,21 +24,22 @@ function App() {
       <Router>
         <NavBar />
         <div className="App">
-          
-        <Routes>
-          <Route path="/search" element={<Search />} />
-          <Route path="/jobpost/:jid" element = {<JobDetails/>}></Route>
-          <Route path="/apply" element={<JobApplication />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
-          <Route path='/editJobPosting/:jobid' element={<EditJobPosting/>}/>
-          <Route path='/candidateDashboard' element={<CandidateDashboard/>}/>
-          <Route path='/application/:applicationid' element={<ViewSingleApplication/>}/>
-          <Route path='/register' element={<UserRegister />} />
-          <Route path='/candidate/register' element={<CandidateRegister />} />
-          <Route path='/manager/register' element={<HiringManagerRegister />} />  
-          <Route path='/managerDashboard' element={<ManagerDashboard />} />
-        </Routes>
+                   
+          <Routes>
+            <Route path="/search" element={<Search />} />
+            <Route path="/jobpost/:jid" element = {<JobDetails/>}></Route>
+            <Route path="/apply" element={<JobApplication />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
+            <Route path='/editJobPosting/:jobid' element={<EditJobPosting/>}/>
+            <Route path='/candidateDashboard/:id' element={<CandidateDashboard/>}/>
+            <Route path='/application/:applicationid' element={<ViewSingleApplication/>}/>
+            <Route path='/register' element={<UserRegister />} />
+            <Route path='/candidate/register' element={<CandidateRegister />} />
+            <Route path='/manager/register' element={<HiringManagerRegister />} />  
+            <Route path='/managerDashboard/:id' element={<ManagerDashboard />} />
+            <Route path="/profile" element={<EditProfile />} />
+          </Routes>
         </div>
       </Router>
     </div>
