@@ -1,35 +1,28 @@
 import axios from 'axios';
 
 import baseURL from '../constants/baseURL';
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
-export const getJobById = (setJob, jobID) => {
-    axios.get(`${baseURL}/jobs/${jobID}`)
-    .then((response) => {setJob(response.data); console.log(response.data)})
-    .catch((error) => console.error(error))
-};
-
-export const getAllJobs = (setJobs) => {
-    axios.get(`${baseURL}/jobs`)
-    .then((response) => {setJobs(response.data)})
+export const getAllAdministrators = (setAdministrators) => {
+    axios.get(`${baseURL}/admins`)
+    .then((response) => {setAdministrators(response.data)})
     .catch((error) => console.error(error))
 }
 
 export const deleteById = (id, postOpCallback) => {
-    axios.delete(`${baseURL}/jobs/${id}`)
+    axios.delete(`${baseURL}/admins/${id}`)
     .then((response) => postOpCallback())
     .catch((error) => console.error(error))
 }
 
 export const post = (item, postOpCallback) => {
     delete item.id;
-    axios.post(`${baseURL}/jobs`, item)
+    axios.post(`${baseURL}/admins`, item)
     .then((response) => postOpCallback())
     .catch((error) => console.error(error))
 }
 
 export const put = (item, postOpCallback) => {
-    axios.put(`${baseURL}/jobs/${item.id}`, item)
+    axios.put(`${baseURL}/admins/${item.id}`, item)
     .then((response) => postOpCallback())
     .catch((error) => console.error(error))
 }
