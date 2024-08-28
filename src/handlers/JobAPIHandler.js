@@ -15,6 +15,12 @@ export const post = (job) => {
         .catch((error) => console.error(error))
 };
 
+export const postApp = (app) => {
+    axios.post(`${baseURL}/jobapps`, app)
+        .then((response) => console.log(response))
+        .catch((error) => console.error(error))
+};
+
 export const put = (job,snackBarOpenHandler,id) => {
     axios.put(`${baseURL}/jobs/${id}`, job)
         .then((response) => {console.log(response); snackBarOpenHandler()})
