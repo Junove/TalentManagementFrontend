@@ -2,7 +2,7 @@ import "../../components/Admin/AdminStyles.css";
 import withAdminAuth from "../../components/Admin/AdminAuthentication";
 
 import dayjs from "dayjs";
-import { Box, Grid2 } from "@mui/material";
+import { Box, Grid2, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import { getAllJobs, post, put, deleteById } from "../../handlers/JobAPIHandler";
@@ -105,6 +105,7 @@ function JobListingManagement() {
 						display: 'flex'
 					}}>
 						<GoBackButton />
+						<Typography variant="h6" style={{ marginLeft: "15px" }}>Job Listing Management Page</Typography>
 					</div>
 
                     <GenericListComponent

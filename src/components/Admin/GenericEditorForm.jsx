@@ -8,11 +8,13 @@ import React from 'react';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
 
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { useNavigate } from 'react-router-dom';
 
 export function GenericEditorForm({
     mode,
@@ -24,6 +26,18 @@ export function GenericEditorForm({
     users,
     jobs
 }) {
+    const navigate = useNavigate();
+
+    const handleUserChange = (event) => {
+        const selectedValue = event.target.value;
+        
+        if (selectedValue === 'create-user') {
+            navigate('/admin/users');
+        } else {
+            handleInputChange(event);
+        }
+    };
+
     return (
         <Box sx={{ p: 3, border: '3px solid #d04646', borderRadius: 5 }}>
             <Typography 
@@ -144,6 +158,19 @@ export function GenericEditorForm({
                                             {user.id} ({user.fullName})
                                         </MenuItem>
                                     ))}
+
+                                    <Tooltip value="create-user" title="If you wish to assign this role to a user that isn't shown, create a user with the specified role type first!">
+                                        <MenuItem 
+                                            sx={{ 
+                                                fontStyle: 'italic',
+                                                fontWeight: 'bold',
+                                                justifyContent: 'center',
+                                                color: 'gray'
+                                            }}
+                                        >
+                                                Create User
+                                        </MenuItem>
+                                    </Tooltip>
                                 </Select>
                             </FormControl>
                         );
@@ -172,6 +199,19 @@ export function GenericEditorForm({
                                             {user.id} ({user.name})
                                         </MenuItem>
                                     ))}
+
+                                    <Tooltip value="create-user" title="If you wish to assign this role to a user that isn't shown, create a user with the specified role type first!">
+                                        <MenuItem 
+                                            sx={{ 
+                                                fontStyle: 'italic',
+                                                fontWeight: 'bold',
+                                                justifyContent: 'center',
+                                                color: 'gray'
+                                            }}
+                                        >
+                                                Create User
+                                        </MenuItem>
+                                    </Tooltip>
                                 </Select>
                             </FormControl>
                         );
@@ -187,7 +227,7 @@ export function GenericEditorForm({
                                     name="user"
                                     labelId="select-user-label"
                                     id="select-user"
-                                    onChange={handleInputChange}
+                                    onChange={handleUserChange}
                                     value={formObject.user.id || ""}
                                     defaultValue=""
                                     sx={{ textAlign: 'left' }}
@@ -200,6 +240,19 @@ export function GenericEditorForm({
                                             {user.username}
                                         </MenuItem>
                                     ))}
+
+                                    <Tooltip value="create-user" title="If you wish to assign this role to a user that isn't shown, create a user with the specified role type first!">
+                                        <MenuItem 
+                                            sx={{ 
+                                                fontStyle: 'italic',
+                                                fontWeight: 'bold',
+                                                justifyContent: 'center',
+                                                color: 'gray'
+                                            }}
+                                        >
+                                                Create User
+                                        </MenuItem>
+                                    </Tooltip>
                                 </Select>
                             </FormControl>
                         );
