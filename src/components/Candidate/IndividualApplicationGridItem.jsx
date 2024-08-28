@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, Typography, CardActions, Button, Grid, Paper, Box } from '@mui/material';
 import { getJobById } from '../../handlers/JobAPIHandler';
+import { Link } from 'react-router-dom';
 
 const IndividualApplicationGridItem = (props) => {
     const {
