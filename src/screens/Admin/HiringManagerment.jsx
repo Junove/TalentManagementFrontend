@@ -59,6 +59,11 @@ function HiringManagerment() {
 			setFormObject(blankItem);
 		};
 
+		if (items.some(item => item.user.id === formObject.user.id)) {
+			alert("Hiring manager with the same user id already exists!");
+			return;
+		}
+
 		if (formObject.id === -1) {
 			post(formObject, postOpCallback);
 		} else {
