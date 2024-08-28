@@ -9,7 +9,7 @@ export const getAllApplications = (setApplications) => {
 
 export const getApplicationByUserID = (setApplications, userID) => {
     axios.get(`${baseURL}/jobapps/candidatespec/${userID}`)
-        .then((response) => setApplications(response.data))
+        .then((response) => {setApplications(response.data); console.log(response.data)})
         .catch((error) => console.error(error))
 };
 export const getApplicationByID = (setApplication, id) => {

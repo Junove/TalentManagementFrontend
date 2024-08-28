@@ -8,7 +8,7 @@ import EditJobPosting from './screens/Jobs/EditJobPosting';
 import UserRegister from './components/Register/UserRegister.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/Universal/NavBar';
-
+import ProfileWrapper from './components/Universal/ProfileWrapper.jsx';
 import JobDetails from './components/Jobs/JobDetails';
 import CandidateDashboard from './screens/CandidateDashboard';
 import ViewSingleApplication from './screens/Applications/ViewSingleApplication';
@@ -21,11 +21,11 @@ import JobApplicationManagement from './screens/Admin/JobApplicationManagement';
 import JobListingManagement from './screens/Admin/JobListingManagement';
 import UserManagement from './screens/Admin/UserManagement';
 import JobApplication from './screens/Applications/JobApplication';
-import EditProfile from './components/Manager/EditProfile.jsx';
 import CandidateRegister from './components/Register/CandidateRegister';
 import HiringManagerRegister from "./components/Register/HiringManagerRegister";
 import ManagerDashboard from './components/Manager/ManagerDashboard';
 import JobDetailView from './components/Manager/JobDetailView.jsx';
+import PageNotFound from './screens/PageNotFound';
 
 function App() {
   return (
@@ -47,9 +47,10 @@ function App() {
             <Route path='/candidate/register' element={<CandidateRegister />} />
             <Route path='/manager/register' element={<HiringManagerRegister />} />  
             <Route path='/managerDashboard/:id' element={<ManagerDashboard />} />
-            <Route path="/profile" element={<EditProfile />} />
+            <Route path="/profile" element={<ProfileWrapper />} />
             <Route path='/managerDashboard' element={<ManagerDashboard />} />
             <Route path="/job/:jobId" element={<JobDetailView/>} />
+            <Route path='error' element={<PageNotFound/>}/>
 
             {/* Admin Dashboard Page Routing */}
             <Route path="/admin" element={<AdminDashboard />} />
