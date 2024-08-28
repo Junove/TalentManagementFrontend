@@ -34,6 +34,33 @@ export function GenericEditorForm({
                     if (field === "id" ) {
                         return null;
                     }
+
+                    if (field === "manager_id" ) {
+                        return (       
+                            <FormControl fullWidth sx={{ minWidth: 300 }}>
+                                <InputLabel id="select-manager-label">Manager ID</InputLabel>
+                                <Select
+                                    label="Manager ID"
+                                    name="manager_id"
+                                    labelId="select-manager_id-label"
+                                    id="select-manager_id"
+                                    onChange={handleInputChange}
+                                    value={formObject.manager_id || ""}
+                                    defaultValue=""
+                                    sx={{ textAlign: 'left' }}
+                                >
+                                    {users.map((user) => (
+                                        <MenuItem 
+                                            key={user.id} 
+                                            value={user.id}
+                                        >
+                                            {user.id} ({user.name})
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        );
+                    }
                     
                     // <SOMETHING>.USER (Containers user object USER.ID, USER.USERNAME, USER.PASSWORD, USER.TYPE)
                     if (field === "user") {

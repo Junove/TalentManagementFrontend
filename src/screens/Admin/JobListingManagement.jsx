@@ -4,6 +4,7 @@ import { Box, Grid2 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import { getAllJobs, post, put, deleteById } from "../../handlers/JobAPIHandler";
+import { getAllHiringManagers } from "../../handlers/HiringManagerAPIHandler"
 
 import { GenericEditorForm } from "../../components/Admin/GenericEditorForm";
 import { GenericListComponent } from "../../components/Admin/GenericListComponent";
@@ -26,10 +27,12 @@ function JobListingManagement() {
 
 	const [items, setListings] = useState([]);
 	const [formObject, setFormObject] = useState(blankItem);
+	const [users, setUsers] = useState([]);
 	let mode = formObject.id === -1 ? "Add" : "Update";
 
 	useEffect(() => {
 		getAllJobs(setListings);
+		getAllHiringManagers(setUsers)
 	}, [formObject]);
 
 	let onDeleteClick = function () {
@@ -112,6 +115,7 @@ function JobListingManagement() {
                         onDeleteClick={onDeleteClick}
                         onSaveClick={onSaveClick}
                         onCancelClick={onCancelClick}
+						users={users}
                     />
                 </Grid2>
             </Grid2>
