@@ -17,6 +17,7 @@ import EditProfile from './components/Manager/EditProfile.jsx';
 import CandidateRegister from './components/Register/CandidateRegister';
 import HiringManagerRegister from "./components/Register/HiringManagerRegister";
 import ManagerDashboard from './components/Manager/ManagerDashboard';
+import JobDetailView from './components/Manager/JobDetailView.jsx';
 
 function App() {
   return (
@@ -39,6 +40,10 @@ function App() {
             <Route path='/manager/register' element={<HiringManagerRegister />} />  
             <Route path='/managerDashboard/:id' element={<ManagerDashboard />} />
             <Route path="/profile" element={<EditProfile />} />
+            <Route path='/managerDashboard' element={<ManagerDashboard />} />
+            <Route path="/job/:jobId" element={<JobDetailView/>} />
+       
+
           </Routes>
         </div>
       </Router>
