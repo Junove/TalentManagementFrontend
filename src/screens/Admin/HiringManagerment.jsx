@@ -3,6 +3,9 @@ import "../../components/Admin/AdminStyles.css";
 import { Box, Grid2 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
+import { getAllHiringManagers, post, put, deleteById } from "../../handlers/HiringManagerAPIHandler";
+import { getAllUsers } from "../../handlers/UserAPIHandler";
+
 import { GenericEditorForm } from "../../components/Admin/GenericEditorForm";
 import { GenericListComponent } from "../../components/Admin/GenericListComponent";
 import { rowSelectionHandler } from "../../components/Admin/RowSelectionHandler";
@@ -16,7 +19,7 @@ function HiringManagerment() {
 			password: "",
 			type: ""
 		}, 
-		full_name: "", 
+		name: "", 
 		email: "", 
 		department: "",
 		phone: "" 
@@ -28,29 +31,9 @@ function HiringManagerment() {
 	let mode = formObject.id === -1 ? "Add" : "Update";
 
 	useEffect(() => {
-		getHiringManagers();
-        getAllUsers();
+		getAllHiringManagers(setHiringManagers);
+        getAllUsers(setUsers);
 	}, [formObject]);
-
-    const getAllUsers = function () {
-        console.log("in getAllUsers()");
-        fetch("http://localhost:8080/users")
-            .then((response) => response.json())
-            .then((data) => {
-                setUsers(data); // Store users data in state
-            })
-            .catch((error) => console.error("Error fetching users:", error));
-    };
-
-	const getHiringManagers = function () {
-		console.log("in getHiringManagers()");
-		fetch("http://localhost:8080/managers")
-            .then((response) => response.json())
-            .then((data) => {
-                setHiringManagers(data);
-            }
-        );
-	};
 
 	let onDeleteClick = function () {
 		console.log("in onDeleteClick()");
@@ -58,11 +41,11 @@ function HiringManagerment() {
 			setFormObject(blankItem);
 		};
 
-		// if (formObject.id >= 0) {
-		// 	deleteById(formObject.id, postOpCallback);
-		// } else {
-		// 	setFormObject(blankItem);
-		// }
+		if (formObject.id >= 0) {
+			deleteById(formObject.id, postOpCallback);
+		} else {
+			setFormObject(blankItem);
+		}
 
 		rowSelectionHandler();
 	};
@@ -74,11 +57,11 @@ function HiringManagerment() {
 			setFormObject(blankItem);
 		};
 
-		// if (formObject.id === -1) {
-		// 	post(formObject, postOpCallback);
-		// } else {
-		// 	put(formObject, postOpCallback);
-		// }
+		if (formObject.id === -1) {
+			post(formObject, postOpCallback);
+		} else {
+			put(formObject, postOpCallback);
+		}
 
 		rowSelectionHandler();
 	};

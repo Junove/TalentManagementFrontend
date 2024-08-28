@@ -3,6 +3,8 @@ import "../../components/Admin/AdminStyles.css";
 import { Box, Grid2 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
+import { getAllApplications, post, put, deleteById } from "../../handlers/JobApplicationAPIHandler";
+
 import { GenericEditorForm } from "../../components/Admin/GenericEditorForm";
 import { GenericListComponent } from "../../components/Admin/GenericListComponent";
 import { rowSelectionHandler } from "../../components/Admin/RowSelectionHandler";
@@ -23,18 +25,8 @@ function JobApplicationManagement() {
 	let mode = formObject.id === -1 ? "Add" : "Update";
 
 	useEffect(() => {
-		getApplications();
+		getAllApplications(setApplications);
 	}, [formObject]);
-
-	const getApplications = function () {
-		console.log("in getApplications()");
-		fetch("http://localhost:8080/jobapps")
-            .then((response) => response.json())
-            .then((data) => {
-                setApplications(data);
-            }
-        );
-	};
 
 	let onDeleteClick = function () {
 		console.log("in onDeleteClick()");
@@ -42,11 +34,11 @@ function JobApplicationManagement() {
 			setFormObject(blankItem);
 		};
 
-		// if (formObject.id >= 0) {
-		// 	deleteById(formObject.id, postOpCallback);
-		// } else {
-		// 	setFormObject(blankItem);
-		// }
+		if (formObject.id >= 0) {
+			deleteById(formObject.id, postOpCallback);
+		} else {
+			setFormObject(blankItem);
+		}
 
 		rowSelectionHandler();
 	};
@@ -58,11 +50,11 @@ function JobApplicationManagement() {
 			setFormObject(blankItem);
 		};
 
-		// if (formObject.id === -1) {
-		// 	post(formObject, postOpCallback);
-		// } else {
-		// 	put(formObject, postOpCallback);
-		// }
+		if (formObject.id === -1) {
+			post(formObject, postOpCallback);
+		} else {
+			put(formObject, postOpCallback);
+		}
 
 		rowSelectionHandler();
 	};

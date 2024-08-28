@@ -3,6 +3,9 @@ import "../../components/Admin/AdminStyles.css";
 import { Box, Grid2 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
+import { getAllCandidates, post, put, deleteById } from "../../handlers/CandidateAPIHandler";
+import { getAllUsers } from "../../handlers/UserAPIHandler";
+
 import { GenericEditorForm } from "../../components/Admin/GenericEditorForm";
 import { GenericListComponent } from "../../components/Admin/GenericListComponent";
 import { rowSelectionHandler } from "../../components/Admin/RowSelectionHandler";
@@ -16,7 +19,7 @@ function CandidateManagement() {
 			password: "",
 			type: ""
 		},
-		full_name: "", 
+		fullName: "", 
 		email: "", 
 		address: "", 
 		phone: "", 
@@ -29,29 +32,9 @@ function CandidateManagement() {
 	let mode = formObject.id === -1 ? "Add" : "Update";
 
 	useEffect(() => {
-		getCandidates();
-        getAllUsers();
+		getAllCandidates(setCandidates);
+        getAllUsers(setUsers);
 	}, [formObject]);
-
-    const getAllUsers = function () {
-        console.log("in getAllUsers()");
-        fetch("http://localhost:8080/users")
-            .then((response) => response.json())
-            .then((data) => {
-                setUsers(data); // Store users data in state
-            })
-            .catch((error) => console.error("Error fetching users:", error));
-    };
-
-	const getCandidates = function () {
-		console.log("in getCandidates()");
-		fetch("http://localhost:8080/candidates")
-            .then((response) => response.json())
-            .then((data) => {
-                setCandidates(data);
-            }
-        );
-	};
 
 	let onDeleteClick = function () {
 		console.log("in onDeleteClick()");
@@ -59,11 +42,11 @@ function CandidateManagement() {
 			setFormObject(blankItem);
 		};
 
-		// if (formObject.id >= 0) {
-		// 	deleteById(formObject.id, postOpCallback);
-		// } else {
-		// 	setFormObject(blankItem);
-		// }
+		if (formObject.id >= 0) {
+			deleteById(formObject.id, postOpCallback);
+		} else {
+			setFormObject(blankItem);
+		}
 
 		rowSelectionHandler();
 	};
@@ -75,11 +58,11 @@ function CandidateManagement() {
 			setFormObject(blankItem);
 		};
 
-		// if (formObject.id === -1) {
-		// 	post(formObject, postOpCallback);
-		// } else {
-		// 	put(formObject, postOpCallback);
-		// }
+		if (formObject.id === -1) {
+			post(formObject, postOpCallback);
+		} else {
+			put(formObject, postOpCallback);
+		}
 
 		rowSelectionHandler();
 	};

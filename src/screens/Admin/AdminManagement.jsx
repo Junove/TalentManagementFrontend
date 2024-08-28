@@ -3,6 +3,9 @@ import "../../components/Admin/AdminStyles.css";
 import { Box, Grid2 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
+import { getAllAdministrators, post, put, deleteById } from "../../handlers/AdminAPIHandler";
+import { getAllUsers } from "../../handlers/UserAPIHandler";
+
 import { GenericEditorForm } from "../../components/Admin/GenericEditorForm";
 import { GenericListComponent } from "../../components/Admin/GenericListComponent";
 import { rowSelectionHandler } from "../../components/Admin/RowSelectionHandler";
@@ -16,7 +19,7 @@ function AdminManagement() {
 			password: "",
 			type: ""
 		}, 
-		full_name: "", 
+		name: "", 
 		email: ""
 	};
 
@@ -26,29 +29,9 @@ function AdminManagement() {
 	let mode = formObject.id === -1 ? "Add" : "Update";
 
 	useEffect(() => {
-		getAdministrators();
-        getAllUsers();
+		getAllAdministrators(setAdministrators);
+        getAllUsers(setUsers);
 	}, [formObject]);
-
-    const getAllUsers = function () {
-        console.log("in getAllUsers()");
-        fetch("http://localhost:8080/users")
-            .then((response) => response.json())
-            .then((data) => {
-                setUsers(data); // Store users data in state
-            })
-            .catch((error) => console.error("Error fetching users:", error));
-    };
-
-	const getAdministrators = function () {
-		console.log("in getAdministrators()");
-		fetch("http://localhost:8080/admins")
-            .then((response) => response.json())
-            .then((data) => {
-                setAdministrators(data);
-            })
-            .catch((error) => console.error("Error fetching administrators:", error));
-	};
 
 	let onDeleteClick = function () {
 		console.log("in onDeleteClick()");
@@ -56,11 +39,11 @@ function AdminManagement() {
 			setFormObject(blankItem);
 		};
 
-		// if (formObject.id >= 0) {
-		// 	deleteById(formObject.id, postOpCallback);
-		// } else {
-		// 	setFormObject(blankItem);
-		// }
+		if (formObject.id >= 0) {
+			deleteById(formObject.id, postOpCallback);
+		} else {
+			setFormObject(blankItem);
+		}
 
 		rowSelectionHandler();
 	};
@@ -72,11 +55,11 @@ function AdminManagement() {
 			setFormObject(blankItem);
 		};
 
-		// if (formObject.id === -1) {
-		// 	post(formObject, postOpCallback);
-		// } else {
-		// 	put(formObject, postOpCallback);
-		// }
+		if (formObject.id === -1) {
+			post(formObject, postOpCallback);
+		} else {
+			put(formObject, postOpCallback);
+		}
 
 		rowSelectionHandler();
 	};
@@ -109,6 +92,7 @@ function AdminManagement() {
 		}
 
         setFormObject({ ...formObject, [name]: value });
+		console.log(formObject);
 	};
 
 	return (

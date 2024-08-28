@@ -1,6 +1,8 @@
 import { Box, Grid2 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
+import { getAllUsers, post, put, deleteById } from "../../handlers/UserAPIHandler";
+
 import { GenericEditorForm } from "../../components/Admin/GenericEditorForm";
 import { GenericListComponent } from "../../components/Admin/GenericListComponent";
 import { rowSelectionHandler } from "../../components/Admin/RowSelectionHandler";
@@ -12,17 +14,8 @@ function UserManagement() {
 	let mode = formObject.id === -1 ? "Add" : "Update";
 
 	useEffect(() => {
-		getUsers();
+		getAllUsers(setUsers);
 	}, [formObject]);
-
-	const getUsers = function () {
-		console.log("in getUsers()");
-		fetch("http://localhost:8080/users")
-			.then((response) => response.json())
-			.then((data) => {
-				setUsers(data);
-			});
-	};
 
 	let onDeleteClick = function () {
 		console.log("in onDeleteClick()");
@@ -30,13 +23,13 @@ function UserManagement() {
 			setFormObject(blankItem);
 		};
 
-		// if (formObject.id >= 0) {
-		// 	deleteById(formObject.id, postOpCallback);
-		// } else {
-		// 	setFormObject(blankItem);
-		// }
+		if (formObject.id >= 0) {
+			deleteById(formObject.id, postOpCallback);
+		} else {
+			setFormObject(blankItem);
+		}
 
-		rowSelectionHandler("username");
+		rowSelectionHandler();
 	};
 
 	let onSaveClick = function () {
@@ -55,20 +48,20 @@ function UserManagement() {
 			setFormObject(blankItem);
 		};
 
-		// if (formObject.id === -1) {
-		// 	post(formObject, postOpCallback);
-		// } else {
-		// 	put(formObject, postOpCallback);
-		// }
+		if (formObject.id === -1) {
+			post(formObject, postOpCallback);
+		} else {
+			put(formObject, postOpCallback);
+		}
 
-		rowSelectionHandler("username");
+		rowSelectionHandler();
 	};
 
 	let onCancelClick = function () {
 		console.log("in onCancelClick()");
 
 		setFormObject(blankItem);
-		rowSelectionHandler("username");
+		rowSelectionHandler();
 	};
 
 	const handleListClick = function (item) {
@@ -77,7 +70,7 @@ function UserManagement() {
 		const isAlreadySelected = formObject.id === item.id;
 
 		setFormObject(isAlreadySelected ? blankItem : item);
-		rowSelectionHandler("username", isAlreadySelected ? null : item);
+		rowSelectionHandler(isAlreadySelected ? null : item);
 	};
 
 	const handleInputChange = function (event) {
