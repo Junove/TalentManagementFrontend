@@ -7,6 +7,7 @@ import './index.css';
 const JobDetails = () => {
     const { jid } = useParams(); // Extract job ID from URL
     const [job, setJob] = useState(null);
+    const { isLoggedIn, username, logout } = useContext(LoginContext);
 
     useEffect(() => {
         const fetchJobDetails = async () => {
@@ -40,9 +41,17 @@ const JobDetails = () => {
 
                 </div>
                 <div className="col-3 d-flex flex-column align-items-start">
+                {isLoggedIn ? 
+                (
                         <Link to={`../apply`} className="btn btn-dark override-blue mt-2" 
-                                >Apply Here</Link>
-                        
+                                >Apply Here
+                        </Link>
+                ) : (
+                    <Link to="/login" className="btn btn-dark override-blue mt-2"  onClick={function handleClick() { alert ('Login first to apply')}}>
+                        Apply
+                    </Link>
+                )
+                }
 
                     </div>
 

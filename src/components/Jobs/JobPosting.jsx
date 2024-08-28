@@ -40,10 +40,13 @@ const JobPosting = ( {job}
                             </div>) : 
                             (
                                 <div>
-                                        <button className="btn btn-dark override-blue mt-2" 
+                                        {/* <button className="btn btn-dark override-blue mt-2" 
                                             onClick={function handleClick() { alert ('Login first to apply')}}>
                                             Apply
-                                        </button>
+                                        </button> */}
+                                        <Link to="/login" className="btn btn-dark override-blue mt-2"  onClick={function handleClick() { alert ('Login first to apply')}}>
+                                                Apply
+                                        </Link>
                                 </div>
                             )
                             }
