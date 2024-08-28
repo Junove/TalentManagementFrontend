@@ -31,7 +31,7 @@ function AdminManagement() {
 
 	useEffect(() => {
 		getAllAdministrators(setAdministrators);
-        getAllUsers(setUsers);
+        getAllUsers(setUsers, "admin");
 	}, [formObject]);
 
 	let onDeleteClick = function () {

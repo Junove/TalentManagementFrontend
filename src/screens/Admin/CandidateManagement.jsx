@@ -34,7 +34,7 @@ function CandidateManagement() {
 
 	useEffect(() => {
 		getAllCandidates(setCandidates);
-        getAllUsers(setUsers);
+        getAllUsers(setUsers, "candidate");
 	}, [formObject]);
 
 	let onDeleteClick = function () {

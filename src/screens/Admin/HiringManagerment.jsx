@@ -33,7 +33,7 @@ function HiringManagerment() {
 
 	useEffect(() => {
 		getAllHiringManagers(setHiringManagers);
-        getAllUsers(setUsers);
+        getAllUsers(setUsers, "hiring_manager");
 	}, [formObject]);
 
 	let onDeleteClick = function () {
