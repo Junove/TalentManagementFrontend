@@ -1,27 +1,42 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { Container, Box, Typography, Button, Grid, IconButton, Pagination, Paper, TextField } from '@mui/material';
-import { Link } from 'react-router-dom';  // Import Link component
+import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import SortIcon from '@mui/icons-material/Sort';
 import axios from 'axios';
 
 function ManagerDashboard() {
+  const userId = JSON.parse(localStorage.getItem('user')).id;
   const [jobs, setJobs] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [sortByDate, setSortByDate] = useState('asc');
   const [sortByStatus, setSortByStatus] = useState('asc');
+  const [manager_id, setManagerId] = useState(null);
   const jobsPerPage = 5;
 
   useEffect(() => {
-    fetchJobs();
+    findManagerId();
   }, []);
+
+  useEffect(() => {
+    if (manager_id !== null) {
+      fetchJobs();
+    }
+  }, [manager_id]);
+
+  const findManagerId = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/managers/userId/${userId}`);
+      setManagerId(response.data.id);
+    } catch (error) {
+      console.error('Error fetching manager ID', error);
+    }
+  };
 
   const fetchJobs = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/jobs/managerspec/1'); // Replace with actual manager ID
+      const response = await axios.get(`http://localhost:8080/jobs/managerspec/${manager_id}`);
       setJobs(response.data);
     } catch (error) {
       console.error('Error fetching jobs', error);
@@ -56,8 +71,8 @@ function ManagerDashboard() {
 
   const handleSortByStatus = () => {
     const sortedJobs = [...jobs].sort((a, b) => {
-      const statusA = a.listing_status || ''; // Fallback to empty string if null
-      const statusB = b.listing_status || ''; // Fallback to empty string if null
+      const statusA = a.listing_status || '';
+      const statusB = b.listing_status || '';
   
       return sortByStatus === 'asc'
         ? statusA.localeCompare(statusB)
@@ -66,7 +81,6 @@ function ManagerDashboard() {
     setJobs(sortedJobs);
     setSortByStatus(sortByStatus === 'asc' ? 'desc' : 'asc');
   };
-  
 
   const filteredJobs = jobs.filter(job => 
     job.job_title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -90,7 +104,12 @@ function ManagerDashboard() {
 
       <Box display="flex" justifyContent="space-between" alignItems="center" marginBottom={2}>
         <Typography variant="h6">Job Listings</Typography>
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          component={Link}
+          to="/createJobPosting"  // Link to the Create Job page
+        >
           Create Job
         </Button>
       </Box>
@@ -132,8 +151,13 @@ function ManagerDashboard() {
           <Grid item xs={12} key={job.id}>
             <Paper elevation={1} style={{ padding: '10px', display: 'flex', alignItems: 'center' }}>
               <Box flexGrow={1}>
-                {/* Wrap the job title in a Link component */}
-                <Typography variant="subtitle1" fontWeight="bold" component={Link} to={`/job/${job.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Typography
+                  variant="subtitle1"
+                  fontWeight="bold"
+                  component={Link}
+                  to={`/job/${job.id}`}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
                   {job.job_title}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
@@ -153,7 +177,7 @@ function ManagerDashboard() {
                 >
                   {job.listing_status === 'Open' ? 'Close Listing' : 'Reopen Listing'}
                 </Button>
-                <IconButton color="primary" onClick={() => console.log('Edit job', job.id)}>
+                <IconButton color="primary" component={Link} to={`/editJobPosting/${job.id}`}>
                   <EditIcon />
                 </IconButton>
               </Box>
@@ -175,4 +199,3 @@ function ManagerDashboard() {
 }
 
 export default ManagerDashboard;
-

@@ -15,8 +15,8 @@ const CandidateProfile = () => {
         address: '',
         phone: '',
         user: {
-            id: userId, // Assuming `userId` is the ID of the user
-        },// Add user object here
+            id: userId,
+        },
     });
 
     const [credentials, setCredentials] = useState({
