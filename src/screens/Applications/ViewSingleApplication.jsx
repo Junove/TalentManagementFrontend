@@ -40,7 +40,7 @@ const ViewSingleApplication = () => {
           <strong>Application ID:</strong> {application.id}
         </Typography>
         <Typography variant="body1" paragraph>
-          <strong>Candidate Name:</strong> {candidate.full_name}
+          <strong>Candidate Name:</strong> {candidate.fullName}
         </Typography>
         <Typography variant="body1" paragraph>
           <strong>Date Applied:</strong> {new Date(application.date_applied).toLocaleDateString()}
