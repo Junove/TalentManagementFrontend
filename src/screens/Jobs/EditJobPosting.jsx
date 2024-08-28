@@ -5,6 +5,10 @@ import { useContext } from 'react';
 import { LoginContext } from '../../components/Login/LoginContext';
 import { getAllHiringManagers, getHiringManagerByUserId } from '../../handlers/HiringManagerAPIHandler';
 import { getJobById } from '../../handlers/JobAPIHandler';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import { Button } from '@mui/material';
+
 
 const EditJobPosting = () => {
   const { jobid } = useParams();
@@ -18,6 +22,22 @@ const EditJobPosting = () => {
     getHiringManagerByUserId(setHiringManager,user.id);
     getJobById(setJob, jobid);
   }, []);  
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
+  const action = (
+    <React.Fragment>
+      <Button onClick={handleClose} color='inherit'>X</Button>
+    </React.Fragment>
+  );
 
 
   return (
@@ -33,7 +53,15 @@ const EditJobPosting = () => {
             </div>  
         </div>
         
-        <JobEditingForm jobId={jobid}/>
+        <JobEditingForm jobId={jobid} snackBarOpenHandler={handleClick}/>
+        
+        <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="Job Posting Edited"
+        action={action}
+      />
     </>
     )
     : (
