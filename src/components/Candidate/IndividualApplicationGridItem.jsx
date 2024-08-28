@@ -15,29 +15,27 @@ const IndividualApplicationGridItem = (props) => {
     }, []);
 
   return (
-    <Grid item xs={12} sm={12} md={6} lg={4} key={jobApp.id}>
-            <Card 
-                sx={{
-                    minWidth: 300, // Minimum width for each card
-                    maxWidth: 400, // Maximum width for each card
-                  }}>
-              <CardContent>
-                <Typography variant="h5" component="div">
-                  {job.listing_title}
-                </Typography>
-                <Typography color="text.secondary">
-                  {job.department}
-                </Typography>
-                <Typography variant="body2">
-                  Applied on: {new Date(jobApp.date_applied).toLocaleDateString()}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Link to={`/application/${jobApp.id}`}><Button size="small">View Details</Button></Link>
-                <Button size="small">Edit</Button>
-              </CardActions>
-            </Card>
-          </Grid>
+    <Grid item xs={12} key={job.id}>
+      <Paper elevation={1} style={{ padding: '10px', display: 'flex', alignItems: 'center' }}>
+        <Box flexGrow={1}>
+          {/* Wrap the job title in a Link component */}
+          <Typography variant="subtitle1" fontWeight="bold" component={Link} to={`/job/${job.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+            {job.listing_title}
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            {job.department} - Posted on {new Date(job.date_listed).toLocaleDateString()}
+          </Typography>
+          <Typography variant="body2" color={job.listing_status === 'Open' ? 'green' : 'red'}>
+            Status: {job.listing_status}
+          </Typography>
+          <Typography variant="body2">
+            Applied on: {new Date(jobApp.date_applied).toLocaleDateString()}
+          </Typography>
+          <Link to={`/application/${jobApp.id}`}><Button size="small">View Details</Button></Link>
+          <Button size="small">Edit</Button>
+        </Box>
+      </Paper>
+    </Grid>
   )
 }
 

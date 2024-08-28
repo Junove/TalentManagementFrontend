@@ -24,7 +24,7 @@ const ViewApplications = () => {
         minHeight: '100vh',
       }}
     >
-      <Grid container spacing={30} justifyContent="center">
+      <Grid container spacing={2} justifyContent="center">
         {jobApplications.map((jobApp) => (
           <IndividualApplicationGridItem jobApp={jobApp}/>
         ))}
