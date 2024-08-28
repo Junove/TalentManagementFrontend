@@ -6,6 +6,9 @@ import { LoginContext } from '../../components/Login/LoginContext';
 import { getAllHiringManagers, getHiringManagerByUserId } from '../../handlers/HiringManagerAPIHandler';
 import { getJobById } from '../../handlers/JobAPIHandler';
 import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import { Button } from '@mui/material';
+
 
 const EditJobPosting = () => {
   const { jobid } = useParams();
@@ -32,14 +35,7 @@ const EditJobPosting = () => {
 
   const action = (
     <React.Fragment>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
+      <Button onClick={handleClose} color='inherit'>X</Button>
     </React.Fragment>
   );
 
