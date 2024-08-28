@@ -1,5 +1,8 @@
+
+
 import React, { useState, useEffect } from 'react';
 import { Container, Box, Typography, Button, Grid, IconButton, Pagination, Paper, TextField } from '@mui/material';
+import { Link } from 'react-router-dom';  // Import Link component
 import EditIcon from '@mui/icons-material/Edit';
 import SortIcon from '@mui/icons-material/Sort';
 import axios from 'axios';
@@ -74,7 +77,7 @@ function ManagerDashboard() {
   };
 
   return (
-    <Container component="main" maxWidth="md" sx={{ mt: 1}} >
+    <Container component="main" maxWidth="lg" sx={{ mt: 1 }} >
       <Box marginBottom={3}>
         <Typography variant="h4" component="h1">
           Manager Dashboard
@@ -125,7 +128,8 @@ function ManagerDashboard() {
           <Grid item xs={12} key={job.id}>
             <Paper elevation={1} style={{ padding: '10px', display: 'flex', alignItems: 'center' }}>
               <Box flexGrow={1}>
-                <Typography variant="subtitle1" fontWeight="bold">
+                {/* Wrap the job title in a Link component */}
+                <Typography variant="subtitle1" fontWeight="bold" component={Link} to={`/job/${job.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                   {job.job_title}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
@@ -167,3 +171,4 @@ function ManagerDashboard() {
 }
 
 export default ManagerDashboard;
+

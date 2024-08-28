@@ -70,7 +70,7 @@ export default function Login() {
                     required
                   />
                 </div>
-                <button type="submit" className="btn btn-primary w-100">Login</button>
+                <button type="submit" className="btn btn-dark override-blue w-100">Login</button>
                 {error && <p className="text-danger mt-3">{error}</p>}
               </form>
             </div>

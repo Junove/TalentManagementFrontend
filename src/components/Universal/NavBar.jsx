@@ -51,11 +51,15 @@ const NavBar = () => {
                         
                         {isLoggedIn ? (
                             <>
+                            {user.type === "candidate" && (
                                 <li className="nav-item">
                                     <Link to={dashboardUrl()} className="nav-link">
                                         {user.username}
                                     </Link>
                                 </li>
+                                )
+                            }
+                            
                                 <li className="nav-item">
                                     <span className="nav-link" onClick={handleLogout}>
                                         Logout
