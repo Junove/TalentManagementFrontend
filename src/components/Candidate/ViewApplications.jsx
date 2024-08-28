@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { Card, CardContent, Typography, CardActions, Button, Grid, Container } from '@mui/material';
-import { getAllApplications } from '../../handlers/JobApplicationAPIHandler';
+import { LoginContext } from '../../components/Login/LoginContext';
 import IndividualApplicationGridItem from './IndividualApplicationGridItem';
 
 const ViewApplications = () => {
     const [jobApplications, setJobApplications] = useState([]);
+    const { isLoggedIn, user, username, login, logout } = useContext(LoginContext);
 
-    useEffect(()=>{
-        getAllApplications(setJobApplications);
-    }, []);
-
+    useEffect(() => {
+      console.log(`user id: ${user.id}`)
+      getApplicationByUserID(setJobApplications,user.id);
+    }, []);  
 
   return (
     <Container
