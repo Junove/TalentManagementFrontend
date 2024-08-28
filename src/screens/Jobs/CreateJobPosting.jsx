@@ -1,8 +1,10 @@
 import React from 'react'
 import JobPostingForm from '../../components/Jobs/JobPostingForm'
+import { useContext } from 'react';
+import { LoginContext } from '../../components/Login/LoginContext';
 
 const CreateJobPosting = () => {
-
+  const { isLoggedIn, user, username, login, logout } = useContext(LoginContext);
 
   return (
     <>
