@@ -1,5 +1,5 @@
+import { Box, Grid2 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import "../../components/Admin/AdminStyles.css";
 
 import { GenericEditorForm } from "../../components/Admin/GenericEditorForm";
 import { GenericListComponent } from "../../components/Admin/GenericListComponent";
@@ -18,11 +18,10 @@ function UserManagement() {
 	const getUsers = function () {
 		console.log("in getUsers()");
 		fetch("http://localhost:8080/users")
-            .then((response) => response.json())
-            .then((data) => {
-                setUsers(data);
-            }
-        );
+			.then((response) => response.json())
+			.then((data) => {
+				setUsers(data);
+			});
 	};
 
 	let onDeleteClick = function () {
@@ -43,14 +42,12 @@ function UserManagement() {
 	let onSaveClick = function () {
 		console.log("in onSaveClick()");
 
-		// Default to "user" type, so inputting data in this field isn't required
-		// user, admin, candidate, hiring_manager
 		if (
-			formObject.type !== "user" && 
-			formObject.type !== "admin" && 
-			formObject.type !== "candidate" && 
-			formObject.type !== "hiring_manager") 
-		{
+			formObject.type !== "user" &&
+			formObject.type !== "admin" &&
+			formObject.type !== "candidate" &&
+			formObject.type !== "hiring_manager"
+		) {
 			formObject.type = "user";
 		}
 
@@ -86,28 +83,33 @@ function UserManagement() {
 	const handleInputChange = function (event) {
 		console.log("in handleInputChange()");
 		const { name, value } = event.target;
-		
+
 		setFormObject({ ...formObject, [name]: value });
 	};
 
 	return (
-		<div className="App">
-			<GenericListComponent
-				data={items}
-				handleListClick={handleListClick}
-			/>
+        <Box sx={{ p: 2 }}>
+            <Grid2 container spacing={2}>
+                <Grid2 item xs={12} md={9}>
+                    <GenericListComponent
+                        data={items}
+                        handleListClick={handleListClick}
+                        sx={{ width: '100%' }}
+                    />
+                </Grid2>
 
-			<br />
-
-			<GenericEditorForm
-				mode={mode}
-				handleInputChange={handleInputChange}
-				formObject={formObject}
-				onDeleteClick={onDeleteClick}
-				onSaveClick={onSaveClick}
-				onCancelClick={onCancelClick}
-			/>
-		</div>
+                <Grid2 item xs={12} md={3}>
+                    <GenericEditorForm
+                        mode={mode}
+                        handleInputChange={handleInputChange}
+                        formObject={formObject}
+                        onDeleteClick={onDeleteClick}
+                        onSaveClick={onSaveClick}
+                        onCancelClick={onCancelClick}
+                    />
+                </Grid2>
+            </Grid2>
+        </Box>
 	);
 }
 

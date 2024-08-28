@@ -1,7 +1,4 @@
 export function rowSelectionHandler(field, item = null) {
-    console.log("in rowSelectionHandler()");
-    console.log("field: ", field);
-    console.log("item: ", item);
     // find entries by user-row class and set font weight to normal
     // for (
     //     let i = 0;

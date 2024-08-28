@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Pagination } from './Pagination';
+import Tooltip from '@mui/material/Tooltip';
 
 export function GenericListComponent(parameters) {
     const [currentPage, setCurrentPage] = useState(1);
@@ -22,7 +23,6 @@ export function GenericListComponent(parameters) {
     }
 
     const itemFields = Object.keys(parameters.data[0]);
-    console.log(itemFields);
 
     const currentItems = parameters.data.slice(startIndex, startIndex + itemsPerPage);
 
@@ -55,9 +55,33 @@ export function GenericListComponent(parameters) {
                         >
                             {itemFields.map((field) => (
                                 <td key={field}>
-                                    {isUserObject(item[field])
-                                        ? item[field].username 
-                                        : item[field]}
+                                    {isUserObject(item[field]) ? (
+                                        <Tooltip
+                                            placement="right"
+                                            title={
+                                                <div 
+                                                    style={{ 
+                                                        display: 'block',
+                                                        lineHeight: '1.3',
+                                                        borderRadius: '3px',
+                                                        fontSize: '13px',
+                                                        fontWeight: '400',
+                                                        padding: '12px 21px',
+                                                        textAlign: 'left'
+                                                    }}>
+                                                    <h6><strong>User Details</strong></h6>
+                                                    {Object.keys(item[field]).map((key) => (
+                                                        <div key={key}><strong>{key.toUpperCase()}:</strong> {item[field][key]}</div>
+                                                    ))}
+                                                </div>
+                                            }
+                                            arrow
+                                        >
+                                            <span>{item[field].username}</span>
+                                        </Tooltip>
+                                    ) : (
+                                        item[field]
+                                    )}
                                 </td>
                             ))}
                         </tr>

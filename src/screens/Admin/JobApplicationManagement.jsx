@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
 import "../../components/Admin/AdminStyles.css";
+
+import { Box, Grid2 } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
 import { GenericEditorForm } from "../../components/Admin/GenericEditorForm";
 import { GenericListComponent } from "../../components/Admin/GenericListComponent";
@@ -89,23 +91,28 @@ function JobApplicationManagement() {
 	};
 
 	return (
-		<div className="App">
-			<GenericListComponent
-				data={items}
-				handleListClick={handleListClick}
-			/>
+        <Box sx={{ p: 2 }}>
+            <Grid2 container spacing={2}>
+                <Grid2 item xs={12} md={9}>
+                    <GenericListComponent
+                        data={items}
+                        handleListClick={handleListClick}
+                        sx={{ width: '100%' }}
+                    />
+                </Grid2>
 
-			<br />
-
-			<GenericEditorForm
-				mode={mode}
-				handleInputChange={handleInputChange}
-				formObject={formObject}
-				onDeleteClick={onDeleteClick}
-				onSaveClick={onSaveClick}
-				onCancelClick={onCancelClick}
-			/>
-		</div>
+                <Grid2 item xs={12} md={3}>
+                    <GenericEditorForm
+                        mode={mode}
+                        handleInputChange={handleInputChange}
+                        formObject={formObject}
+                        onDeleteClick={onDeleteClick}
+                        onSaveClick={onSaveClick}
+                        onCancelClick={onCancelClick}
+                    />
+                </Grid2>
+            </Grid2>
+        </Box>
 	);
 }
 
