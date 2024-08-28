@@ -95,14 +95,16 @@ function AdminManagement() {
         setFormObject({ ...formObject, [name]: value });
 		console.log(formObject);
 	};
-
+	
 	return (
         <Box sx={{ p: 2, width: '100%' }}>
             <Grid2 container spacing={2}>
                 <Grid2 item xs={12} md={9}>
 					<div style={{ 
 						marginBottom: "15px", 
-						float: "left"
+						float: "left",
+						width: '100%',
+						display: 'flex'
 					}}>
 						<GoBackButton />
 					</div>
@@ -112,7 +114,7 @@ function AdminManagement() {
                         handleListClick={handleListClick}
                     />
                 </Grid2>
-
+				
                 <Grid2 item xs={12} md={3}>
                     <GenericEditorForm
                         mode={mode}

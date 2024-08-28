@@ -89,7 +89,9 @@ function JobApplicationManagement() {
                 <Grid2 item xs={12} md={9}>
 					<div style={{ 
 						marginBottom: "15px", 
-						float: "left"
+						float: "left",
+						width: '100%',
+						display: 'flex'
 					}}>
 						<GoBackButton />
 					</div>

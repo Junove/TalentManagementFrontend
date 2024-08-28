@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { Pagination } from './Pagination';
 import Tooltip from '@mui/material/Tooltip';
+import { Alert } from '@mui/material';
 
 export function GenericListComponent(parameters) {
     const [currentPage, setCurrentPage] = useState(1);
@@ -19,7 +20,7 @@ export function GenericListComponent(parameters) {
     const startIndex = (currentPage - 1) * itemsPerPage;
 
     if (parameters.data.length === 0) {
-        return <p>No data available</p>;
+        return <Alert severity="error">No Items to Display</Alert>;
     }
 
     const itemFields = Object.keys(parameters.data[0]);
