@@ -12,3 +12,8 @@ export const getApplicationByUserID = (setApplications, userID) => {
         .then((response) => setApplications(response.data))
         .catch((error) => console.error(error))
 };
+export const getApplicationByID = (setApplication, id) => {
+    axios.get(`${baseURL}/jobapps/${id}`)
+        .then((response) => {setApplication(response.data); console.log(response.data)})
+        .catch((error) => console.error(error))
+};

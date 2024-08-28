@@ -10,6 +10,7 @@ function CandidateRegister() {
   const [userId, setUserId] = useState(null);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [resume, setResume] = useState(null);
