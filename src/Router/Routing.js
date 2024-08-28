@@ -25,6 +25,7 @@ import Login from './screens/Login';
 import CreateJobPosting from './screens/Jobs/CreateJobPosting';
 import EditJobPosting from './screens/Jobs/EditJobPosting';
 import UserRegister from './components/Register/UserRegister.jsx';
+import { Navigate } from 'react-router-dom';
 
 const Routing = (props) => {
     const {
@@ -34,6 +35,7 @@ const Routing = (props) => {
     if (userType === 'admin'){
         return (
             <Routes>
+                <Route exact path="/" element={<Navigate to="/admin" />}/>
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/admin/administrator" element={<AdminManagement />} />
                 <Route path="/admin/candidates" element={<CandidateManagement />} />
@@ -42,6 +44,7 @@ const Routing = (props) => {
                 <Route path="/admin/jobListings" element={<JobListingManagement />} />
                 <Route path="/admin/users" element={<UserManagement />} />
                 <Route path='/error' element={<PageNotFound/>}/>
+                <Route path="*" element={<Navigate to="/error" />}/>
             </Routes>
         )
     }
@@ -49,13 +52,16 @@ const Routing = (props) => {
     if (userType === 'candidate'){
         return (
             <Routes>
+                <Route exact path="/" element={<Navigate to="/candidateDashboard" />}/>
                 <Route path="/profile" element={<ProfileWrapper />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/jobpost/:jid" element = {<JobDetails/>}/>
                 <Route path="/apply/:jid" element={<JobApplication />} />
+                <Route path='/candidateDashboard' element={<CandidateDashboard/>}/>
                 <Route path='/candidateDashboard/:id' element={<CandidateDashboard/>}/>
                 <Route path='/application/:applicationid' element={<ViewSingleApplication/>}/>
                 <Route path='/error' element={<PageNotFound/>}/>
+                <Route path="*" element={<Navigate to="/error" />}/>
             </Routes>
         )
     }
@@ -63,6 +69,7 @@ const Routing = (props) => {
     if (userType === 'hiring_manager'){
         return (
             <Routes>
+                <Route exact path="/" element={<Navigate to="/managerDashboard" />}/>
                 <Route path="/profile" element={<ProfileWrapper />} />
                 <Route path="/createJobPosting" element={<CreateJobPosting/>}/>
                 <Route path='/editJobPosting/:jobid' element={<EditJobPosting/>}/>
@@ -70,6 +77,7 @@ const Routing = (props) => {
                 <Route path='/managerDashboard' element={<ManagerDashboard />} />
                 <Route path="/job/:jobId" element={<JobDetailView/>} />
                 <Route path='/error' element={<PageNotFound/>}/>
+                <Route path="*" element={<Navigate to="/error" />}/>
             </Routes>
         )
     }
@@ -83,6 +91,7 @@ const Routing = (props) => {
             <Route path='/manager/register' element={<HiringManagerRegister />} />  
             <Route path="/jobpost/:jid" element = {<JobDetails/>}/>
             <Route path='/error' element={<PageNotFound/>}/>
+            <Route path="*" element={<Navigate to="/error" />}/>
         </Routes>
     )
 }
