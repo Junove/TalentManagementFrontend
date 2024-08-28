@@ -3,7 +3,7 @@ import JobEditingForm from '../../components/Jobs/JobEditingForm'
 import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { LoginContext } from '../../components/Login/LoginContext';
-import { getHiringManagerByUserId } from '../../handlers/HiringManagerAPIHandler';
+import { getAllHiringManagers, getHiringManagerByUserId } from '../../handlers/HiringManagerAPIHandler';
 import { getJobById } from '../../handlers/JobAPIHandler';
 
 const EditJobPosting = () => {
@@ -14,7 +14,8 @@ const EditJobPosting = () => {
   const [job, setJob] = useState({});
 
   useEffect(() => {
-    getHiringManagerByUserId(setHiringManager, user.id);
+    console.log(`user id: ${user.id}`)
+    getHiringManagerByUserId(setHiringManager,user.id);
     getJobById(setJob, jobid);
   }, []);  
 
@@ -41,7 +42,7 @@ const EditJobPosting = () => {
 
       </div>  
       <div className = "col-6">
-        <h1 className='mx-auto text-center mt-10'>You do not have edit access for this hob posting</h1>
+        <h1 className='mx-auto text-center mt-10'>You do not have edit access for this job posting</h1>
       </div>  
     </div>
     )
