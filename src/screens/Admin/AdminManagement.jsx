@@ -35,6 +35,22 @@ function AdminManagement() {
         getAllUsers(setUsers, "admin");
 	}, [formObject]);
 
+	const validateFormObject = (formObject) => {
+		const errors = [];
+	
+		if (!formObject.user.username) errors.push("User Username cannot be null.");
+		if (!["admin", "candidate", "hiring_manager"].includes(formObject.user.type)) {
+			errors.push("User type must be either 'admin', 'candidate', or 'hiring_manager'.");
+		}
+	
+		if (!formObject.user.password) errors.push("User Password cannot be empty.");
+		
+		if (!formObject.name) errors.push("Name cannot be empty.");
+		if (!formObject.email || !/\S+@\S+\.\S+/.test(formObject.email)) errors.push("Email must be a valid email address.");
+	
+		return errors;
+	};
+
 	let onDeleteClick = function () {
 		console.log("in onDeleteClick()");
 		let postOpCallback = () => {
@@ -56,6 +72,15 @@ function AdminManagement() {
 		let postOpCallback = () => {
 			setFormObject(blankItem);
 		};
+
+		// add validation ofr formObject to fit the schema
+		const validationErrors = validateFormObject(formObject);
+
+		if (validationErrors.length > 0) {
+			// console.log("Validation Errors:", validationErrors);
+			alert("Validation Errors:\n" + validationErrors.join("\n"));
+			return; 
+		}
 
 		if (items.some(item => item.user.id === formObject.user.id && item.id !== formObject.id)) {
 			alert("An administrator with the same user id already exists!");
@@ -113,7 +138,7 @@ function AdminManagement() {
 						display: 'flex'
 					}}>
 						<GoBackButton />
-						<Typography variant="h6" style={{ marginLeft: "15px" }}>Administrator Management Page</Typography>
+						<Typography variant="h6" style={{ marginLeft: "15px" }}>Admin Management Page</Typography>
 					</div>
 
                     <GenericListComponent
