@@ -25,6 +25,7 @@ import Login from '../screens/Login';
 import CreateJobPosting from '../screens/Jobs/CreateJobPosting';
 import EditJobPosting from '../screens/Jobs/EditJobPosting';
 import UserRegister from '../components/Register/UserRegister.jsx';
+import EditApplication from '../components/Candidate/EditApplication.jsx';
 import Home from '../screens/Home.jsx';
 import { Navigate } from 'react-router-dom';
 
@@ -62,6 +63,7 @@ const Routing = (props) => {
                 <Route path='/candidateDashboard' element={<CandidateDashboard/>}/>
                 <Route path='/candidateDashboard/:id' element={<CandidateDashboard/>}/>
                 <Route path='/application/:applicationid' element={<ViewSingleApplication/>}/>
+                <Route path="/application/:jobAppId/edit" element={<EditApplication />} />
                 <Route path='/error' element={<PageNotFound/>}/>
                 <Route path="*" element={<Navigate to="/error" />}/>
                 <Route path='/home' element={<Home/>}/>
