@@ -1,7 +1,7 @@
 import "../../components/Admin/AdminStyles.css";
 import withAdminAuth from "../../components/Admin/AdminAuthentication";
 
-import { Box, Grid2 } from "@mui/material";
+import { Box, Grid2, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import { getAllCandidates, post, put, deleteById } from "../../handlers/CandidateAPIHandler";

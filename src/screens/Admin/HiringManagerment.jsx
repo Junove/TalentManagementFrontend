@@ -1,7 +1,7 @@
 import "../../components/Admin/AdminStyles.css";
 import withAdminAuth from "../../components/Admin/AdminAuthentication";
 
-import { Box, Grid2 } from "@mui/material";
+import { Box, Grid2, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import { getAllHiringManagers, post, put, deleteById } from "../../handlers/HiringManagerAPIHandler";
@@ -78,7 +78,7 @@ function HiringManagerment() {
 			setFormObject(blankItem);
 		};
 
-		// add validation ofr formObject to fit the schema
+		// add validation for formObject to fit the schema
 		const validationErrors = validateFormObject(formObject);
 
 		if (validationErrors.length > 0) {

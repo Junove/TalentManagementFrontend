@@ -28,6 +28,14 @@ function UserManagement() {
 		}
 	
 		if (!formObject.password) errors.push("User Password cannot be empty.");
+
+		let usernameExists = false;
+		items.forEach((item) => {
+			if (item.username === formObject.username) {
+				usernameExists = true;
+			}
+		});
+		if (usernameExists) errors.push("Username already exists.");
 		
 		return errors;
 	};
