@@ -3,11 +3,23 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import JobDetails from "./JobDetails.jsx";
 import { LoginContext } from '../Login/LoginContext.jsx';
 import React, { useContext } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 const JobPosting = ( {job}
 
 ) => {
+
+    const navigate = useNavigate();
+
+    const handleApplyClick = () => {
+        if (isLoggedIn) {
+            if (job.listing_status === 'Open') {
+                navigate(`../apply/${job.id}`);
+            }
+        } else {
+            navigate('/login');
+        }
+    };
 
     const { isLoggedIn, username, logout } = useContext(LoginContext);
 
@@ -26,27 +38,21 @@ const JobPosting = ( {job}
                     <div className = "col-9">
                         <div className="fw-bold"> {job.job_title} </div>
                         <div>Date Listed: {formatDate(job.date_listed) || "N/A"}</div>
-                        <div>Job Description: {job.job_decription || "N/A"}</div>
+                        <div>Job Description: {job.job_description || "N/A"}</div>
                         <div>Listing Status: {job.listing_status || "N/A"}</div>
 
 
                     </div>
                     <div className="col-3 d-flex flex-column align-items-start">
-                        {isLoggedIn ? (
+                        {(job.listing_status === 'Open') ? (
                             <div>
-                                <Link to={`../apply/${job.id}`} className="btn btn-dark override-blue mt-2" 
+                                <button className="btn btn-dark override-blue mt-2" onClick={handleApplyClick}
                                 >Apply Here
-                                </Link>
+                                </button>
                             </div>) : 
                             (
                                 <div>
-                                        {/* <button className="btn btn-dark override-blue mt-2" 
-                                            onClick={function handleClick() { alert ('Login first to apply')}}>
-                                            Apply
-                                        </button> */}
-                                        <Link to="/login" className="btn btn-dark override-blue mt-2"  onClick={function handleClick() { alert ('Login first to apply')}}>
-                                                Apply
-                                        </Link>
+                                        Posting closed
                                 </div>
                             )
                             }
