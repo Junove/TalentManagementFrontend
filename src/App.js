@@ -7,7 +7,6 @@ import JobDetails from './components/Jobs/JobDetails';
 import CandidateDashboard from './screens/CandidateDashboard';
 import ViewSingleApplication from './screens/Applications/ViewSingleApplication';
 import JobApplication from './screens/Applications/JobApplication';
-import EditProfile from './components/Manager/EditProfile.jsx';
 import CandidateRegister from './components/Register/CandidateRegister';
 import HiringManagerRegister from "./components/Register/HiringManagerRegister";
 import ManagerDashboard from './components/Manager/ManagerDashboard';
