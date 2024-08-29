@@ -1,7 +1,7 @@
 import "../../components/Admin/AdminStyles.css";
 import withAdminAuth from "../../components/Admin/AdminAuthentication";
 
-import { Box, Grid2 } from "@mui/material";
+import { Box, Grid2, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import { getAllHiringManagers, post, put, deleteById } from "../../handlers/HiringManagerAPIHandler";
@@ -59,6 +59,11 @@ function HiringManagerment() {
 			setFormObject(blankItem);
 		};
 
+		if (items.some(item => item.user.id === formObject.user.id && item.id !== formObject.id)) {
+			alert("Hiring manager with the same user id already exists!");
+			return;
+		}
+
 		if (formObject.id === -1) {
 			post(formObject, postOpCallback);
 		} else {
@@ -109,6 +114,7 @@ function HiringManagerment() {
 						display: 'flex'
 					}}>
 						<GoBackButton />
+						<Typography variant="h6" style={{ marginLeft: "15px" }}>Hiring Manager Management Page</Typography>
 					</div>
 
                     <GenericListComponent

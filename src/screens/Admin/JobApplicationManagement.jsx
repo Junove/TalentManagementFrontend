@@ -1,10 +1,13 @@
 import "../../components/Admin/AdminStyles.css";
 import withAdminAuth from "../../components/Admin/AdminAuthentication";
 
-import { Box, Grid2 } from "@mui/material";
+import dayjs from "dayjs";
+import { Box, Grid2, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import { getAllApplications, post, put, deleteById } from "../../handlers/JobApplicationAPIHandler";
+import { getAllCandidates } from "../../handlers/CandidateAPIHandler"
+import { getAllJobs } from "../../handlers/JobAPIHandler"
 
 import { GenericEditorForm } from "../../components/Admin/GenericEditorForm";
 import { GenericListComponent } from "../../components/Admin/GenericListComponent";
@@ -16,7 +19,7 @@ function JobApplicationManagement() {
 		id: -1, 
 		candidate_id: "", 
 		job_id: "", 
-		date_applied: "", 
+		date_applied: null, 
 		cover_letter: "", 
 		custom_resume: "", 
 		application_status: "" 
@@ -24,10 +27,14 @@ function JobApplicationManagement() {
 
 	const [items, setApplications] = useState([]);
 	const [formObject, setFormObject] = useState(blankItem);
+	const [users, setUsers] = useState([]);
+	const [jobs, setJobs] = useState([]);
 	let mode = formObject.id === -1 ? "Add" : "Update";
 
 	useEffect(() => {
 		getAllApplications(setApplications);
+		getAllCandidates(setUsers);
+		getAllJobs(setJobs);
 	}, [formObject]);
 
 	let onDeleteClick = function () {
@@ -80,8 +87,11 @@ function JobApplicationManagement() {
 	const handleInputChange = function (event) {
 		console.log("in handleInputChange()");
 		const { name, value } = event.target;
-		
-		setFormObject({ ...formObject, [name]: value });
+	
+		// Handle the case where the value might be a dayjs object (for date fields)
+		const processedValue = dayjs.isDayjs(value) ? value.format("YYYY-MM-DD HH:mm:ss") : value;
+	
+		setFormObject({ ...formObject, [name]: processedValue });
 	};
 
 	return (
@@ -95,6 +105,7 @@ function JobApplicationManagement() {
 						display: 'flex'
 					}}>
 						<GoBackButton />
+						<Typography variant="h6" style={{ marginLeft: "15px" }}>Job Application Management Page</Typography>
 					</div>
 
                     <GenericListComponent
@@ -112,6 +123,8 @@ function JobApplicationManagement() {
                         onDeleteClick={onDeleteClick}
                         onSaveClick={onSaveClick}
                         onCancelClick={onCancelClick}
+						users={users}
+						jobs={jobs}
                     />
                 </Grid2>
             </Grid2>

@@ -1,10 +1,11 @@
 import "../../components/Admin/AdminStyles.css";
 import withAdminAuth from "../../components/Admin/AdminAuthentication";
 
-import { Box, Grid2 } from "@mui/material";
+import dayjs from "dayjs";
+import { Box, Grid2, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import { getAllJobs, post, put, deleteById } from "../../handlers/JobAPIHandler";
+import { getAllJobs, post, putAdmin, deleteById } from "../../handlers/JobAPIHandler";
 import { getAllHiringManagers } from "../../handlers/HiringManagerAPIHandler"
 
 import { GenericEditorForm } from "../../components/Admin/GenericEditorForm";
@@ -18,8 +19,8 @@ function JobListingManagement() {
 		manager_id: "", 
 		department: "", 
 		listing_title: "", 
-		date_listed: "", 
-		date_closed: "", 
+		date_listed: null, 
+		date_closed: null, 
 		job_title: "", 
 		job_description: "", 
 		additional_information: "", 
@@ -61,7 +62,7 @@ function JobListingManagement() {
 		if (formObject.id === -1) {
 			post(formObject, postOpCallback);
 		} else {
-			put(formObject, postOpCallback);
+			putAdmin(formObject, postOpCallback);
 		}
 
 		rowSelectionHandler();
@@ -86,8 +87,11 @@ function JobListingManagement() {
 	const handleInputChange = function (event) {
 		console.log("in handleInputChange()");
 		const { name, value } = event.target;
-		
-		setFormObject({ ...formObject, [name]: value });
+	
+		// Handle the case where the value might be a dayjs object (for date fields)
+		const processedValue = dayjs.isDayjs(value) ? value.format("YYYY-MM-DD HH:mm:ss") : value;
+	
+		setFormObject({ ...formObject, [name]: processedValue });
 	};
 
 	return (
@@ -101,6 +105,7 @@ function JobListingManagement() {
 						display: 'flex'
 					}}>
 						<GoBackButton />
+						<Typography variant="h6" style={{ marginLeft: "15px" }}>Job Listing Management Page</Typography>
 					</div>
 
                     <GenericListComponent
