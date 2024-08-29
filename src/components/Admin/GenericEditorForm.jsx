@@ -145,7 +145,7 @@ export function GenericEditorForm({
                                     name="candidate_id"
                                     labelId="select-candidate_id-label"
                                     id="select-candidate_id"
-                                    onChange={handleInputChange}
+                                    onChange={handleUserChange}
                                     value={formObject.candidate_id || ""}
                                     defaultValue=""
                                     sx={{ textAlign: 'left' }}
@@ -186,7 +186,7 @@ export function GenericEditorForm({
                                     name="manager_id"
                                     labelId="select-manager_id-label"
                                     id="select-manager_id"
-                                    onChange={handleInputChange}
+                                    onChange={handleUserChange}
                                     value={formObject.manager_id || ""}
                                     defaultValue=""
                                     sx={{ textAlign: 'left' }}
