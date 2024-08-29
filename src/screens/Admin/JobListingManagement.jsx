@@ -52,12 +52,36 @@ function JobListingManagement() {
 		rowSelectionHandler();
 	};
 
+	const validateFormObject = (formObject) => {
+		const errors = [];
+	
+		if (!formObject.department) errors.push("Department cannot be empty.");
+		if (!formObject.listing_title) errors.push("Listing Title cannot be empty.");
+		if (!formObject.date_listed || !/\d{4}-\d{2}-\d{2}/.test(formObject.date_listed)) errors.push("Date Listed must be in YYYY-MM-DD format.");
+		if (formObject.date_closed && !/\d{4}-\d{2}-\d{2}/.test(formObject.date_closed)) errors.push("Date Closed must be in YYYY-MM-DD format if provided.");
+		if (!formObject.job_title) errors.push("Job Title cannot be empty.");
+		if (!formObject.job_description) errors.push("Job Description cannot be empty.");
+		if (!formObject.listing_status) errors.push("Listing Status cannot be empty.");
+	
+		return errors;
+	};
+
+
 	let onSaveClick = function () {
 		console.log("in onSaveClick()");
 
 		let postOpCallback = () => {
 			setFormObject(blankItem);
 		};
+
+		// add validation ofr formObject to fit the schema
+		const validationErrors = validateFormObject(formObject);
+
+		if (validationErrors.length > 0) {
+			// console.log("Validation Errors:", validationErrors);
+			alert("Validation Errors:\n" + validationErrors.join("\n"));
+			return; 
+		}
 
 		if (formObject.id === -1) {
 			post(formObject, postOpCallback);

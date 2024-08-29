@@ -52,12 +52,32 @@ function JobApplicationManagement() {
 		rowSelectionHandler();
 	};
 
+	const validateFormObject = (formObject) => {
+		const errors = [];
+	
+		if (!formObject.date_applied || !/\d{4}-\d{2}-\d{2}/.test(formObject.date_applied)) errors.push("Date Applied must be in YYYY-MM-DD format.");
+		if (!formObject.cover_letter) errors.push("Cover Letter cannot be empty.");
+		if (!formObject.custom_resume) errors.push("Custom Resume cannot be empty.");
+		if (!formObject.application_status) errors.push("Application Status cannot be empty.");
+	
+		return errors;
+	};
+
 	let onSaveClick = function () {
 		console.log("in onSaveClick()");
 
 		let postOpCallback = () => {
 			setFormObject(blankItem);
 		};
+
+		// add validation ofr formObject to fit the schema
+		const validationErrors = validateFormObject(formObject);
+
+		if (validationErrors.length > 0) {
+			// console.log("Validation Errors:", validationErrors);
+			alert("Validation Errors:\n" + validationErrors.join("\n"));
+			return; 
+		}
 
 		if (formObject.id === -1) {
 			post(formObject, postOpCallback);

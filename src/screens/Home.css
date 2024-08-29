@@ -1,0 +1,31 @@
+/* Home.css */
+
+.custom-text-color {
+    color: rgb(18, 28, 78);
+}
+
+
+/* Home.css */
+
+.feature-img {
+    width: 600px; /* General size for feature images */
+    height: 350px; /* General size for feature images */
+    object-fit: cover; /* Ensures images cover the dimensions without distortion */
+    border-radius: 8px; /* Optional: rounds the corners of the images */
+}
+
+.smaller-img {
+    width: 600px; /* Smaller size for the first image */
+    height: 350px; /* Smaller size for the first image */
+}
+
+.feature-title {
+    font-size: 1.8em;
+    margin: 10px 0;
+    color: rgb(18, 28, 78);
+}
+
+.feature-description {
+    font-size: 1em;
+    color: #666;
+}
