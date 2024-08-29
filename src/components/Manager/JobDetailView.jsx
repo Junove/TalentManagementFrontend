@@ -9,7 +9,7 @@ function JobDetailView() {
   const [applications, setApplications] = useState([]);
   const [candidatesMap, setCandidatesMap] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState('All'); // State for status filter
+  const [statusFilter, setStatusFilter] = useState('All');
   const [editingStatusId, setEditingStatusId] = useState(null);
 
   useEffect(() => {
@@ -66,10 +66,28 @@ function JobDetailView() {
     }
   };
 
+  const handleDownload = (filePath) => {
+    if (!filePath) {
+      console.error('File path is undefined or null');
+      return;
+    }
+
+    const fileName = filePath.split('/').pop();
+    console.log('Downloading file:', fileName);
+    const url = `http://localhost:8080/uploads/${fileName}`;
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const filteredApplications = applications.filter(application => {
     const candidate = candidatesMap[application.candidate_id];
-    const fullName = candidate?.fullName || '';
-    const email = candidate?.email || '';
+    const fullName = candidate?.fullName || `Candidate ${application.candidate_id}`;
+    const email = candidate?.email || `candidate${application.candidate_id}@example.com`;
     const applicationStatus = application.application_status || '';
 
     const matchesSearchQuery = fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -140,19 +158,35 @@ function JobDetailView() {
           <TableBody>
             {filteredApplications.map((application) => {
               const candidate = candidatesMap[application.candidate_id];
+              const fullName = candidate?.fullName || `Candidate ${application.candidate_id}`;
+              const email = candidate?.email || `candidate${application.candidate_id}@example.com`;
               const isEditingStatus = editingStatusId === application.id;
 
               return (
                 <TableRow key={application.id}>
-                  <TableCell>{candidate ? candidate.fullName : 'N/A'}</TableCell>
-                  <TableCell>{candidate ? candidate.email : 'N/A'}</TableCell>
+                  <TableCell>{fullName}</TableCell>
+                  <TableCell>{email}</TableCell>
                   <TableCell>{new Date(application.date_applied).toLocaleDateString()}</TableCell>
                   <TableCell>
-                    <a href={candidate ? candidate.resume : '#'} target="_blank" rel="noopener noreferrer">
-                      View Resume
-                    </a>
+                    <Button
+                      onClick={() => handleDownload(application.custom_resume)}
+                      variant="outlined"
+                      size="small"
+                      disabled={!application.custom_resume} // Disable if no resume
+                    >
+                      Download Resume
+                    </Button>
                   </TableCell>
-                  <TableCell>{application.cover_letter}</TableCell>
+                  <TableCell>
+                    <Button
+                      onClick={() => handleDownload(application.cover_letter)}
+                      variant="outlined"
+                      size="small"
+                      disabled={!application.cover_letter} // Disable if no cover letter
+                    >
+                      Download Cover Letter
+                    </Button>
+                  </TableCell>
                   <TableCell>
                     {isEditingStatus ? (
                       <Select
