@@ -71,7 +71,7 @@ import { Container, Card, CardContent, Typography, CardActions, Button, Divider 
 import { getApplicationByID } from '../../handlers/JobApplicationAPIHandler';
 import { getJobById } from '../../handlers/JobAPIHandler';
 import { getCandidateById } from '../../handlers/CandidateAPIHandler';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const ViewSingleApplication = () => {
     const navigate = useNavigate();
@@ -125,9 +125,7 @@ const ViewSingleApplication = () => {
         </Typography>
       </CardContent>
       <CardActions>
-        
-        <Link to={`/application/${jobApp.id}/edit`}><Button variant="outlined" color="primary">Edit Application</Button></Link>
-                
+        <Link to={`/application/${application.id}/edit`}><Button variant="outlined" color="primary">Edit Application</Button></Link>
       </CardActions>
     </Card>
   </Container>
