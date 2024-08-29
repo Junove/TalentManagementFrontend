@@ -1,0 +1,48 @@
+.error-photo {
+    
+    display: block;
+    max-width: 100%;
+    margin: 20px auto;
+    transition: opacity 2s ease-in-out;
+    cursor: pointer;
+  }
+  
+  @keyframes bounce {
+    0% {
+      transform: translateX(0) translateY(0);
+    }
+    20% {
+      transform: translateX(-75%) translateY(-75%) rotate(-45deg);
+    }
+    40% {
+      transform: translateX(75%) translateY(75%) rotate(45deg);
+    }
+    60% {
+      transform: translateX(-75%) translateY(75%);
+    }
+    80% {
+      transform: translateX(75%) translateY(-75%) rotate(66deg);
+    }
+    100% {
+      transform: translateX(150vw) translateY(-150vh);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .bounce {
+    animation: bounce 9s ease forwards;
+  }
+  
+  .fade-in {
+    animation: fadeIn 2s ease-in-out forwards;
+  }
+  
