@@ -17,6 +17,14 @@ const JobPosting = ( {job}
         return date.toLocaleDateString(undefined, options);
     };
 
+    const formatDescription = (str) => {
+        if (str.length < 260 || !str) {
+            return str
+        }
+
+        return str.substring(0,250) + "..."
+    }
+
     return (
 
         <div>
@@ -26,7 +34,7 @@ const JobPosting = ( {job}
                     <div className = "col-9">
                         <div className="fw-bold"> {job.job_title} </div>
                         <div>Date Listed: {formatDate(job.date_listed) || "N/A"}</div>
-                        <div>Job Description: {job.job_decription || "N/A"}</div>
+                        <div>Job Description: {formatDescription(job.job_description) || "N/A"}</div>
                         <div>Listing Status: {job.listing_status || "N/A"}</div>
 
 
