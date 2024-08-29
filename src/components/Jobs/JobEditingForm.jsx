@@ -60,14 +60,16 @@ const JobEditingForm = (props) => {
     const handlePutClick = () => {
         const updatedJob = {
             ...job,
-            listing_title: jobTitle,
+            job_title: jobTitle,
             department: department,
             job_description: jobDescription,
             additional_information: additionalInfo,
             listing_status: status,
-            date_closed: date
+            date_closed: (date === '' ? null : date)
         }
 
+        console.log(`Updated Job:`)
+        console.log(updatedJob)
         put(updatedJob, snackBarOpenHandler, jobId);
     }
 

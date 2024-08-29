@@ -9,6 +9,12 @@ export const getJobById = (setJob, jobID) => {
     .catch((error) => console.error(error))
 };
 
+export const getJobAndAddToList = (setJob, jobID) => {
+    axios.get(`${baseURL}/jobs/${jobID}`)
+    .then((response) => {setJob((prev) => [...prev, response.data]);; console.log(response.data)})
+    .catch((error) => console.error(error))
+};
+
 export const getAllJobs = (setJobs) => {
     axios.get(`${baseURL}/jobs`)
     .then((response) => {setJobs(response.data)})
