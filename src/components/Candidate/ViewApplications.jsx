@@ -4,6 +4,7 @@ import { getApplicationByUserID } from '../../handlers/JobApplicationAPIHandler'
 import { useContext } from 'react';
 import { LoginContext } from '../../components/Login/LoginContext';
 import IndividualApplicationGridItem from './IndividualApplicationGridItem';
+import EditApplication from './EditApplication';
 
 const ViewApplications = () => {
     const [jobApplications, setJobApplications] = useState([]);
@@ -27,10 +28,13 @@ const ViewApplications = () => {
       <Grid container spacing={30} justifyContent="center">
         {jobApplications.map((jobApp) => (
           <IndividualApplicationGridItem jobApp={jobApp}/>
+          
         ))}
       </Grid>
-    </Container>
-  )
+     
+      </Container>
+    );
+   
 }
 
 export default ViewApplications

@@ -18,6 +18,9 @@ import CandidateRegister from './components/Register/CandidateRegister';
 import HiringManagerRegister from "./components/Register/HiringManagerRegister";
 import ManagerDashboard from './components/Manager/ManagerDashboard';
 import JobDetailView from './components/Manager/JobDetailView.jsx';
+import IndividualApplicationGridItem from './components/Candidate/IndividualApplicationGridItem.jsx';
+import EditApplication from './components/Candidate/EditApplication.jsx';// Adjust the path as needed
+
 
 function App() {
   return (
@@ -42,6 +45,8 @@ function App() {
             <Route path="/profile" element={<EditProfile />} />
             <Route path='/managerDashboard' element={<ManagerDashboard />} />
             <Route path="/job/:jobId" element={<JobDetailView/>} />
+            <Route path="/application/:jobAppId" element={<IndividualApplicationGridItem />} />
+            <Route path="/application/:jobAppId/edit" element={<EditApplication />} />
           </Routes>
         </div>
       </Router>
