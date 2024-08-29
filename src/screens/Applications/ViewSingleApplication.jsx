@@ -30,7 +30,7 @@ const ViewSingleApplication = () => {
 
   return (
     <Container maxWidth="md" sx={{ marginTop: 4 }}>
-      <button className='btn btn-primary' style={{marginRight: '48.5rem', marginBottom: '4rem'}} onClick={() => navigate('/')}> {'< Back'}</button>
+      <button className='btn btn-dark override-blue' style={{marginRight: '48.5rem', marginBottom: '4rem'}} onClick={() => navigate('/')}> {'< Back'}</button>
 
     <Card sx={{ padding: 2 }}>
       <CardContent>
