@@ -9,8 +9,14 @@ export const getJobById = (setJob, jobID) => {
     .catch((error) => console.error(error))
 };
 
-export const post = (job) => {
-    axios.post(`${baseURL}/jobs`, job)
+export const getAllJobs = (setJobs) => {
+    axios.get(`${baseURL}/jobs`)
+    .then((response) => {setJobs(response.data)})
+    .catch((error) => console.error(error))
+}
+
+export const postApp = (app) => {
+    axios.post(`${baseURL}/jobapps`, app)
         .then((response) => console.log(response))
         .catch((error) => console.error(error))
 };
@@ -20,4 +26,21 @@ export const put = (job,snackBarOpenHandler,id) => {
         .then((response) => {console.log(response); snackBarOpenHandler()})
         .catch((error) => console.error(error))
 };
+export const deleteById = (id, postOpCallback) => {
+    axios.delete(`${baseURL}/jobs/${id}`)
+    .then((response) => postOpCallback())
+    .catch((error) => console.error(error))
+}
 
+export const post = (item, postOpCallback) => {
+    delete item.id;
+    axios.post(`${baseURL}/jobs`, item)
+    .then((response) => postOpCallback())
+    .catch((error) => console.error(error))
+}
+
+export const putAdmin = (item, postOpCallback) => {
+    axios.put(`${baseURL}/jobs/${item.id}`, item)
+    .then((response) => postOpCallback())
+    .catch((error) => console.error(error))
+}

@@ -5,12 +5,18 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import axios from 'axios';
 import './index.css';
 
-const EditProfile = () => {
+const ManagerProfile = () => {
+
+    const userId = JSON.parse(localStorage.getItem('user')).id;
+
     const [profile, setProfile] = useState({
         name: '',
         email: '',
         department: '',
         phone: '',
+        user: {
+            id: userId,
+        }
     });
 
     const [credentials, setCredentials] = useState({
@@ -19,18 +25,20 @@ const EditProfile = () => {
     });
 
     const [showPassword, setShowPassword] = useState(false);
-    const userId = '3'; // Replace with actual user ID from context or state
-    const managerId = '1';
+    const [managerId, setManagerId] = useState(null);
 
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/managers/${managerId}`);
+                console.log(userId);
+                const response = await axios.get(`http://localhost:8080/managers/userId/${userId}`);
+                setManagerId(response.data.id);
                 setProfile({
                     name: response.data.name,
                     email: response.data.email,
                     department: response.data.department,
                     phone: response.data.phone,
+                    user: JSON.parse(localStorage.getItem('user'))
                 });
                 setCredentials({
                     username: response.data.user.username,
@@ -57,6 +65,7 @@ const EditProfile = () => {
 
     const handleProfileSubmit = async () => {
         try {
+            console.log(profile);
             await axios.put(`http://localhost:8080/managers/${managerId}`, profile);
             alert('Profile updated successfully');
         } catch (error) {
@@ -184,4 +193,4 @@ const EditProfile = () => {
     );
 };
 
-export default EditProfile;
+export default ManagerProfile;

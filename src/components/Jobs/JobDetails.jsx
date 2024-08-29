@@ -1,12 +1,14 @@
 // JobDetails.jsx
 import { useParams, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { LoginContext } from "../Login/LoginContext";
 import axios from 'axios';
 import './index.css';
 
 const JobDetails = () => {
     const { jid } = useParams(); // Extract job ID from URL
     const [job, setJob] = useState(null);
+    const { isLoggedIn, username, logout } = useContext(LoginContext);
 
     useEffect(() => {
         const fetchJobDetails = async () => {
@@ -40,9 +42,17 @@ const JobDetails = () => {
 
                 </div>
                 <div className="col-3 d-flex flex-column align-items-start">
-                        <Link to={`../apply`} className="btn btn-dark override-blue mt-2" 
-                                >Apply Here</Link>
-                        
+                {isLoggedIn ? 
+                (
+                        <Link to={`/apply/${jid}`} className="btn btn-dark override-blue mt-2" 
+                                >Apply Here
+                        </Link>
+                ) : (
+                    <Link to="/login" className="btn btn-dark override-blue mt-2"  onClick={function handleClick() { alert ('Login first to apply')}}>
+                        Apply
+                    </Link>
+                )
+                }
 
                     </div>
 

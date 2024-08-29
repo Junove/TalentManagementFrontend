@@ -27,7 +27,7 @@ const SearchBar = ( {onSearch}
 
     useEffect(() => {
         onSearch(filters);
-    },[filters, onSearch]);
+    },[filters]);
 
     return (
 

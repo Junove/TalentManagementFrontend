@@ -20,7 +20,8 @@ const JobEditingForm = (props) => {
     }, []);
 
     useEffect(() => {
-        setJobTitle(job.listing_title);
+        //con
+        setJobTitle(job.job_title);
         setDepartment(job.department);
         setJobDescription(job.job_description);
         setAdditionalInfo(job.additionl_info);
@@ -104,7 +105,7 @@ const JobEditingForm = (props) => {
                     <label htmlFor="inputListingStatus">Status</label>
                     <select className="form-select" id="inputListingStatus" aria-describedby="emailHelp" placeholder="Enter additional information"
                         value={status} onChange={onStatusChange}>
-                            <option value="active">Active</option>
+                            <option value="open">Open</option>
                             <option value="closed">Closed</option>
                     </select>
                 </div>
