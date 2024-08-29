@@ -7,8 +7,8 @@ import { getCandidateByUserId } from '../../handlers/CandidateAPIHandler';
 import { LoginContext } from "../../components/Login/LoginContext";
 
 const JobApplication = () => {
-    //const location = useLocation();
-    //const navigate = useNavigate();
+    const [redirect, setRedirect] = useState(false);
+    const navigate = useNavigate();
 
     const { user } = useContext(LoginContext);
     const { jid } = useParams(); 
@@ -19,6 +19,10 @@ const JobApplication = () => {
     const [submissionStatus, setSubmissionStatus] = useState('');
 
     useEffect(() => {
+
+        if(redirect){
+            navigate("/candidateDashboard")
+        }
 
         const fetchJobDetails = async () => {
             try {
@@ -33,7 +37,7 @@ const JobApplication = () => {
 
         fetchJobDetails();
         getCandidateByUserId(setCandId, user.id);
-    }, [jid]);
+    }, [redirect, jid]);
 
     // const [jobTitle, setJobTitle] = useState('');
     // const onJobTitleChange = (e) => setJobTitle(e.target.value);
@@ -55,7 +59,7 @@ const JobApplication = () => {
     // };
 
     const formSubmissionHandler = async () => {
-        
+
         const formData = new FormData();
         formData.append('cover_letter', coverLetter);
         formData.append('custom_resume', resume);
@@ -78,6 +82,8 @@ const JobApplication = () => {
             console.error("Error submitting application:", error);
             alert('Error submitting application.');
         }
+
+        setRedirect(true);
     }
 
 
@@ -140,3 +146,6 @@ const JobApplication = () => {
 };
 
 export default JobApplication;
+
+
+

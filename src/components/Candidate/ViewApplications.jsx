@@ -5,6 +5,7 @@ import { getCandidateByUserId } from '../../handlers/CandidateAPIHandler';
 import { useContext } from 'react';
 import { LoginContext } from '../../components/Login/LoginContext';
 import IndividualApplicationGridItem from './IndividualApplicationGridItem';
+import EditApplication from './EditApplication';
 import CandidateDashboardChart from './CandidateDashboardChart';
 
 const ViewApplications = () => {
@@ -38,8 +39,10 @@ const ViewApplications = () => {
           <IndividualApplicationGridItem key={jobApp.id} jobApp={jobApp} userID={user.id} getApplicationByUserID={getApplicationByUserID} setJobApplications={setJobApplications}/>
         ))}
       </Grid>
-    </Container>
-  )
+     
+      </Container>
+    );
+   
 }
 
 export default ViewApplications
