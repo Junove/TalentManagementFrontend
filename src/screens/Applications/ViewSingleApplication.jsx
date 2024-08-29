@@ -66,7 +66,7 @@
 // export default ViewSingleApplication
 
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Container, Card, CardContent, Typography, CardActions, Button, Divider } from '@mui/material';
 import { getApplicationByID } from '../../handlers/JobApplicationAPIHandler';
 import { getJobById } from '../../handlers/JobAPIHandler';
@@ -124,9 +124,9 @@ const ViewSingleApplication = () => {
           <strong>Application Status:</strong> {application.application_status}
         </Typography>
       </CardContent>
-      <CardActions>
+      {/* <CardActions>
         <Link to={`/application/${application.id}/edit`}><Button variant="outlined" color="primary">Edit Application</Button></Link>
-      </CardActions>
+      </CardActions> */}
     </Card>
   </Container>
 

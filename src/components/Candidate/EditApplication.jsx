@@ -191,7 +191,7 @@ const EditApplication = () => {
     
             if (response.status === 200) {
                 alert('Application updated successfully!');
-                navigate(`/application/${jobAppId}`);
+                navigate(`/candidatedashboard`);
             } else {
                 alert(`Please upload your resume and cover letter to submit.`);
             }
@@ -202,7 +202,7 @@ const EditApplication = () => {
     };
 
     const handleCancel = () => {
-        navigate(`/application/${jobAppId}`);
+        navigate(`/candidateDashboard`);
     };
 
     if (!application.job_id) return <div>Loading...</div>;
