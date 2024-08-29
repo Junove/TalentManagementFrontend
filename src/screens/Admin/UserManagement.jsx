@@ -19,6 +19,27 @@ function UserManagement() {
 		getAllUsers(setUsers);
 	}, [formObject]);
 
+	const validateFormObject = (formObject) => {
+		const errors = [];
+	
+		if (!formObject.username) errors.push("User Username cannot be null.");
+		if (!["admin", "candidate", "hiring_manager"].includes(formObject.type)) {
+			errors.push("User type must be either 'admin', 'candidate', or 'hiring_manager'.");
+		}
+	
+		if (!formObject.password) errors.push("User Password cannot be empty.");
+
+		let usernameExists = false;
+		items.forEach((item) => {
+			if (item.username === formObject.username) {
+				usernameExists = true;
+			}
+		});
+		if (usernameExists) errors.push("Username already exists.");
+		
+		return errors;
+	};
+
 	let onDeleteClick = function () {
 		console.log("in onDeleteClick()");
 		let postOpCallback = () => {
@@ -49,6 +70,15 @@ function UserManagement() {
 		let postOpCallback = () => {
 			setFormObject(blankItem);
 		};
+
+		// add validation ofr formObject to fit the schema
+		const validationErrors = validateFormObject(formObject);
+
+		if (validationErrors.length > 0) {
+			// console.log("Validation Errors:", validationErrors);
+			alert("Validation Errors:\n" + validationErrors.join("\n"));
+			return; 
+		}
 
 		if (formObject.id === -1) {
 			post(formObject, postOpCallback);

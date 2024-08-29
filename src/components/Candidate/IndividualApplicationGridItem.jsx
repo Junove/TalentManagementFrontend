@@ -82,7 +82,7 @@ const IndividualApplicationGridItem = (props) => {
           <Link to={`/application/${jobApp.id}`}>
             <Button size="small">View Details</Button>
           </Link>
-          <Button size="small">Edit</Button>
+          <Link to={`/application/${jobApp.id}/edit`}><Button size="small">Edit</Button></Link>
           <Button size="small" onClick={handleDelete}>Delete</Button>
           </div>
         </Box>
