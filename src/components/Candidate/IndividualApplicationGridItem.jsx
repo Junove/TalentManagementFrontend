@@ -62,7 +62,7 @@ const IndividualApplicationGridItem = (props) => {
       <Box flexGrow={1}>
         {/* Wrap the job title in a Link component */}
         <Typography variant="subtitle1" fontWeight="bold"  sx={{ textDecoration: 'none', color: 'inherit' }}>
-          {job.listing_title}
+          {job.job_title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {job.department} - Posted on {new Date(job.date_listed).toLocaleDateString()}
