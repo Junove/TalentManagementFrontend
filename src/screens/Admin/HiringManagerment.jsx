@@ -54,19 +54,15 @@ function HiringManagerment() {
 
 	const validateFormObject = (formObject) => {
 		const errors = [];
-	
-		if (!formObject.user.username) errors.push("User Username cannot be null.");
-		if (!["admin", "candidate", "hiring_manager"].includes(formObject.user.type)) {
-			errors.push("User type must be either 'admin', 'candidate', or 'hiring_manager'.");
-		}
-	
-		if (!formObject.user.password) errors.push("User Password cannot be empty.");
 		
-		if (!formObject.fullName) errors.push("Full Name cannot be empty.");
+		if (!formObject.name) errors.push("Full Name cannot be empty.");
     	if (!formObject.email || !/\S+@\S+\.\S+/.test(formObject.email)) errors.push("Email must be a valid email address.");
-    	if (!formObject.address) errors.push("Address cannot be empty.");
 		if (!formObject.department) errors.push("Department cannot be empty.");
-    	if (!formObject.resume) errors.push("Resume cannot be empty.");
+		if (!formObject.phone) errors.push("Phone cannot be empty.");
+		
+		if (!/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(formObject.phone)) {
+			errors.push("Phone must be a valid phone number.");
+		}		
 	
 		return errors;
 	};

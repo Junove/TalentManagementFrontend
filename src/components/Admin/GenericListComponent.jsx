@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Pagination } from './Pagination';
 import Tooltip from '@mui/material/Tooltip';
 import { Alert } from '@mui/material';
+import { rowSelectionHandler } from './RowSelectionHandler';
 
 export function GenericListComponent(parameters) {
     const [currentPage, setCurrentPage] = useState(1);
@@ -10,6 +11,7 @@ export function GenericListComponent(parameters) {
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
+        rowSelectionHandler();
     };
 
     const onItemsPerPageChange = (newItemsPerPage) => {

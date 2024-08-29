@@ -37,13 +37,6 @@ function AdminManagement() {
 
 	const validateFormObject = (formObject) => {
 		const errors = [];
-	
-		if (!formObject.user.username) errors.push("User Username cannot be null.");
-		if (!["admin", "candidate", "hiring_manager"].includes(formObject.user.type)) {
-			errors.push("User type must be either 'admin', 'candidate', or 'hiring_manager'.");
-		}
-	
-		if (!formObject.user.password) errors.push("User Password cannot be empty.");
 		
 		if (!formObject.name) errors.push("Name cannot be empty.");
 		if (!formObject.email || !/\S+@\S+\.\S+/.test(formObject.email)) errors.push("Email must be a valid email address.");
