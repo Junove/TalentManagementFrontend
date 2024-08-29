@@ -68,7 +68,7 @@ const IndividualApplicationGridItem = (props) => {
           {job.department} - Posted on {new Date(job.date_listed).toLocaleDateString()}
         </Typography>
         <Typography variant="body2" sx={{ color: jobApp.application_status === 'Hired' ? 'green' : 'black' }}>
-          { jobApp.application_status === 'Hired' ? <strong>Application: {jobApp.application_status}</strong> : `Application: ${jobApp.application_status}`}
+          { jobApp.application_status === 'Hired' ? <strong>Application Status: {jobApp.application_status}</strong> : `Application: ${jobApp.application_status}`}
         </Typography>
         <Typography variant="body2">
           Applied on: {new Date(jobApp.date_applied).toLocaleDateString()}
