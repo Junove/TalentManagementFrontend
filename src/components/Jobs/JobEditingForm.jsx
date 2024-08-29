@@ -20,7 +20,7 @@ const JobEditingForm = (props) => {
     }, []);
 
     useEffect(() => {
-        con
+        //con
         setJobTitle(job.job_title);
         setDepartment(job.department);
         setJobDescription(job.job_description);
