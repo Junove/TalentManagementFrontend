@@ -4,9 +4,12 @@ import { Container, Card, CardContent, Typography, CardActions, Button, Divider,
 import { getApplicationByID } from '../../handlers/JobApplicationAPIHandler';
 import { getJobById } from '../../handlers/JobAPIHandler';
 import { getCandidateById } from '../../handlers/CandidateAPIHandler';
+import { useNavigate } from 'react-router-dom';
 
 
 const ViewSingleApplication = () => {
+    const navigate = useNavigate();
+
     const { applicationid } = useParams();
 
     const [application, setApplication] = useState([]);
@@ -27,6 +30,8 @@ const ViewSingleApplication = () => {
 
   return (
     <Container maxWidth="md" sx={{ marginTop: 4 }}>
+      <button className='btn btn-primary' style={{marginRight: '48.5rem', marginBottom: '4rem'}} onClick={() => navigate('/')}> {'< Back'}</button>
+
     <Card sx={{ padding: 2 }}>
       <CardContent>
         <Typography variant="h5" component="div" gutterBottom>

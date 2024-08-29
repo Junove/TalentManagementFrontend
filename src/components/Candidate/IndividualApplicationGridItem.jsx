@@ -67,20 +67,24 @@ const IndividualApplicationGridItem = (props) => {
         <Typography variant="body2" color="text.secondary">
           {job.department} - Posted on {new Date(job.date_listed).toLocaleDateString()}
         </Typography>
-        <Typography variant="body2" sx={{ color: job.listing_status === 'Open' ? 'green' : 'red' }}>
-          Status: {job.listing_status}
+        <Typography variant="body2" sx={{ color: jobApp.application_status === 'Hired' ? 'green' : 'black' }}>
+          { jobApp.application_status === 'Hired' ? <strong>Application Status: {jobApp.application_status}</strong> : `Application: ${jobApp.application_status}`}
         </Typography>
         <Typography variant="body2">
           Applied on: {new Date(jobApp.date_applied).toLocaleDateString()}
         </Typography>
+        <Typography variant="body2" sx={{ color: job.listing_status === 'Open' ? 'green' : 'red' }}>
+          Job Listing Status: {job.listing_status}
+        </Typography>
         
-        <Box sx={{ display: 'flex', gap: 1, marginTop: 1 }}>
+        <Box sx={{ display: 'flex', gap: 1, marginTop: 1, justifyContent: 'content' }}>
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
           <Link to={`/application/${jobApp.id}`}>
             <Button size="small">View Details</Button>
           </Link>
           <Button size="small">Edit</Button>
           <Button size="small" onClick={handleDelete}>Delete</Button>
-
+          </div>
         </Box>
       </Box>
     </Paper>

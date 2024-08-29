@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import JobEditingForm from '../../components/Jobs/JobEditingForm'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { LoginContext } from '../../components/Login/LoginContext';
 import { getAllHiringManagers, getHiringManagerByUserId } from '../../handlers/HiringManagerAPIHandler';
@@ -11,6 +11,8 @@ import { Button } from '@mui/material';
 
 
 const EditJobPosting = () => {
+  const navigate = useNavigate();
+
   const { jobid } = useParams();
   const { isLoggedIn, user, username, login, logout } = useContext(LoginContext);
 
@@ -27,6 +29,7 @@ const EditJobPosting = () => {
 
   const handleClick = () => {
     setOpen(true);
+    navigate('/');
   };
 
   const handleClose = () => {
