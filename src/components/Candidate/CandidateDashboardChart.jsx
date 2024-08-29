@@ -25,7 +25,7 @@ const CandidateDashboardChart = (props) => {
     const COLORS = ['#FFBB28', '#0088FE', '#D10000', '#00BF00'];
 
   return (
-        <PieChart width={500} height={300}>
+        <PieChart width={800} height={300}>
           <Pie
             dataKey="value"
             isAnimationActive={false}
