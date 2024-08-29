@@ -150,7 +150,7 @@ function ManagerDashboard() {
         {currentJobs.map((job) => (
           <Grid item xs={12} key={job.id}>
             <Paper elevation={1} style={{ padding: '10px', display: 'flex', alignItems: 'center' }}>
-              <Box flexGrow={1}>
+              <Box textAlign={'left'} flexGrow={1}>
                 <Typography
                   variant="subtitle1"
                   fontWeight="bold"
