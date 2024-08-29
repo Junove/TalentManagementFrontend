@@ -143,6 +143,7 @@ function CandidateManagement() {
 						display: 'flex'
 					}}>
 						<GoBackButton />
+						<Typography variant="h6" style={{ marginLeft: "15px" }}>Candidate Management Page</Typography>
 					</div>
 
                     <GenericListComponent

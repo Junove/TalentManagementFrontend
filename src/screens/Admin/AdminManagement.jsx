@@ -138,6 +138,7 @@ function AdminManagement() {
 						display: 'flex'
 					}}>
 						<GoBackButton />
+						<Typography variant="h6" style={{ marginLeft: "15px" }}>Admin Management Page</Typography>
 					</div>
 
                     <GenericListComponent

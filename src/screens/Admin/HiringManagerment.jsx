@@ -142,6 +142,7 @@ function HiringManagerment() {
 						display: 'flex'
 					}}>
 						<GoBackButton />
+						<Typography variant="h6" style={{ marginLeft: "15px" }}>Hiring Manager Management Page</Typography>
 					</div>
 
                     <GenericListComponent
