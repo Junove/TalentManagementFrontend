@@ -14,6 +14,9 @@ const ManagerProfile = () => {
         email: '',
         department: '',
         phone: '',
+        user: {
+            id: userId,
+        }
     });
 
     const [credentials, setCredentials] = useState({
@@ -35,6 +38,7 @@ const ManagerProfile = () => {
                     email: response.data.email,
                     department: response.data.department,
                     phone: response.data.phone,
+                    user: JSON.parse(localStorage.getItem('user'))
                 });
                 setCredentials({
                     username: response.data.user.username,

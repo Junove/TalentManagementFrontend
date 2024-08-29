@@ -1,4 +1,4 @@
-import { Box, Grid2 } from "@mui/material";
+import { Box, Grid2, Typography } from "@mui/material";
 import withAdminAuth from "../../components/Admin/AdminAuthentication";
 import React, { useEffect, useState } from "react";
 
@@ -115,6 +115,7 @@ function UserManagement() {
 						display: 'flex'
 					}}>
 						<GoBackButton />
+						<Typography variant="h6" style={{ marginLeft: "15px" }}>User Management Page</Typography>
 					</div>
 					
                     <GenericListComponent
