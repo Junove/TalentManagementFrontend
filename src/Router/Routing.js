@@ -25,6 +25,7 @@ import Login from '../screens/Login';
 import CreateJobPosting from '../screens/Jobs/CreateJobPosting';
 import EditJobPosting from '../screens/Jobs/EditJobPosting';
 import UserRegister from '../components/Register/UserRegister.jsx';
+import Home from '../screens/Home.jsx';
 import { Navigate } from 'react-router-dom';
 
 const Routing = (props) => {
@@ -44,6 +45,7 @@ const Routing = (props) => {
                 <Route path="/admin/jobListings" element={<JobListingManagement />} />
                 <Route path="/admin/users" element={<UserManagement />} />
                 <Route path='/error' element={<PageNotFound/>}/>
+                <Route path='/home' element={<Home/>}/>
                 <Route path="*" element={<Navigate to="/error" />}/>
             </Routes>
         )
@@ -62,6 +64,7 @@ const Routing = (props) => {
                 <Route path='/application/:applicationid' element={<ViewSingleApplication/>}/>
                 <Route path='/error' element={<PageNotFound/>}/>
                 <Route path="*" element={<Navigate to="/error" />}/>
+                <Route path='/home' element={<Home/>}/>
             </Routes>
         )
     }
@@ -78,13 +81,15 @@ const Routing = (props) => {
                 <Route path="/job/:jobId" element={<JobDetailView/>} />
                 <Route path='/error' element={<PageNotFound/>}/>
                 <Route path="*" element={<Navigate to="/error" />}/>
+                <Route path='/home' element={<Home/>}/>
             </Routes>
         )
     }
 
     return (
         <Routes>
-            <Route exact path="/" element={<Navigate to="/search" />}/>
+            <Route exact path="/" element={<Navigate to="/home" />}/>
+            <Route path="/home" element={<Home />}/>
             <Route path="/search" element={<Search />} />
             <Route path="/login" element={<Login />} />
             <Route path='/register' element={<UserRegister />} />

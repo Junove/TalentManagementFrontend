@@ -4,13 +4,16 @@ import { useContext } from 'react';
 import { LoginContext } from '../../components/Login/LoginContext';
 import Snackbar from '@mui/material/Snackbar';
 import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const CreateJobPosting = () => {
+  const navigate = useNavigate();
 
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(true);
+    navigate('/');
   };
 
   const handleClose = () => {
